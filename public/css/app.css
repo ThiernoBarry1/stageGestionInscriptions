@@ -1,0 +1,53 @@
+#registration_typeAideDoc >.required,#registration_typeAideLm >.required,#registration_genre >.required,
+#registration_auteurRealisateurs_0_typePersonne>.required,#registration_typeFilm>.required,
+#registration_financementAcquis>.required,#registration_depotProjetCollectivite>.required,
+#registration_adaptationOeuvre >.required,#registration_deposant>.required,
+#registration_projetDejaPresenteFondsAide >.required,
+div[id^="registration_auteurRealisateurs"] >.required
+{
+    margin-right: 20px;
+}
+
+
+div[id^="registration_liensEligibilite"]>label[for^="registration_liensEligibilite"]{ 
+  display: flex;
+}
+
+input[id^="registration_projetDejaPresenteFondsAide"],
+input[id^="registration_depotProjetCollectivite"],
+input[id^="registration_auteurRealisateurs"],
+input[id^="registration_financementAcquis"],
+input[id^="registration_adaptationOeuvre"],
+input[id^="registration_liensEligibilite"],
+input[id^="registration_typeAideDoc"],
+input[id^="registration_typeAideLm"],
+input[id^="registration_deposant"],
+input[id^="registration_genre"],
+input[id^="registration_typeFilm"]
+{
+    margin-right:5px;
+}
+
+
+
+#registration_producteurs_0_codePostaleBureau,#registration_producteurs_0_villeBureau,
+#registration_producteurs_0_codePostal,#registration_producteurs_0_ville,
+.decalageCodeVille,.genrePrecisionAutre,.decalageLabel,.decalageCodeVille,
+.droitArtistique
+{
+    margin-top:30px;
+}
+
+hr
+{
+    background-color:navy;
+}
+.enregistrer >button
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.decalageLabelProduction{
+    margin-top: 15px;
+}

@@ -1,0 +1,44 @@
+{% block _registration_documentAudioVisuels_entry_widget %}
+ <div class="form-group" id="documentAudioVisuels_block_{{id}}">
+     <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <label>Titre</label>
+                    {{form_row(form.titre,{'label':false,'attr':{'class':'form-control-sm '}})}}
+                </div>
+                <div class="col">
+                    <label> Réalisateur </label>
+                    {{ form_row(form.realisateur,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                </div>
+                <div class="col">
+                    <label>Genre</label>
+                    {{ form_row(form.genre,{'label':false,'attr':{'class':'form-control-sm'}})}} 
+                </div>
+                <div class="col">
+                    <label>Année</label>
+                    {{ form_row(form.annee,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                </div>
+                <div class="col">
+                    <label>Durée</label>
+                    {{ form_row(form.duree,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="lien">Lien</label>
+                    {{ form_row(form.lien,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                </div>
+                <div class="col">
+                    <label for="mot-passe">Mot de passe </label>
+                    {{ form_row(form.motDePasse,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                </div>
+            </div>
+        </div>
+        <div class="col-2 mt-4">
+            <button type="button" class="btn btn-danger" data-action="delete-documentAudioVisuels" data-target="#documentAudioVisuels_block_{{id}}"> Supprimer</button>
+         </div>
+    </div>
+   <hr>
+ </div>
+{% endblock %}
