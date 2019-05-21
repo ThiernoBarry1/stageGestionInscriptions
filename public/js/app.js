@@ -15,7 +15,7 @@ $(document).ready(function()
       // j'effectue la suppressesion du formulaire auteur réalisateur 
       supFormAuteurRealisateur('button[data-action="delete"]');
       //counterForm('#auteurRealisateurs div.form-group','#widget-counter');
-      // car je n'est pas compris pourquoi il récupère 3 sur le 1er clique sur le boutton
+     
      
       
       
@@ -71,18 +71,13 @@ $(document).ready(function()
       // je recupère le numero des forms !, je le met en comment pour tester avec counter
      // let index  = +$(widget_counter).val();
       // je remplace tous les __name__ par ce numero
-      const str = '<div class="row my-3" id="blockPourcentage_registration_auteurRealisateurs___name__"><div class="col"><p id="para_registration_auteurRealisateurs___name__"></p></div><div class="col"><div class="row"><div><input type="text" id="registration_auteurRealisateurs___name___pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][__name__][pourcentageAuteurRealisateur]" required="required" class="form-control-sm w-100" /></div><span>%</span></div></div></div>';
-      //const templates = $(selecteurDiv).data('prototype').replace(str,'').replace(/__name__/g,index);
+      const str = '<div class="row my-3" id="blockPourcentage_registration_auteurRealisateurs___name__"><div class="col"><p id="para_registration_auteurRealisateurs___name__"></p></div><div class="col"><div class="row"><div><input type="text" id="registration_auteurRealisateurs___name___pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][__name__][pourcentageAuteurRealisateur]" class="form-control-sm w-100" /></div><span>%</span></div></div></div>';
       const templates = $(selecteurDiv).data('prototype').replace(str,'').replace(/__name__/g,counter);
-      //const newStr = str.replace(/__name__/g,index);
       const newStr = str.replace(/__name__/g,counter);
       // j'injecte ce code au sein de la div 
       $(selecteurDiv).append(templates);
 
       $('.pourcentageAuteurRealisateur').append(newStr);
-      // compter le nombre de form  
-      //$(widget_counter).val(index+1);
-      
       const count = +$('#documentAudioVisuels div.form-group').length;
       if(count >= 2)
       {
@@ -95,7 +90,7 @@ $(document).ready(function()
          
          // je récupère le nombre correspondant à l'id dans ce input
         var valAttId = $(this).attr('id').match(/\d+/g).join('');
-        var scan = $(this).val();
+        var scan = $(this).val()+"   "+$('.nom').val()+" a";
          $('.pourcentageAuteurRealisateur p').each(function(){
             var valAttIdPourc = $(this).attr('id').match(/\d+/g).join('');
             if( valAttId == valAttIdPourc )
@@ -108,15 +103,14 @@ $(document).ready(function()
      });
   
      $('.nom').on('change',function(){
-         
-      // je récupère le nombre correspondant à l'id dans ce input
-     var valAttId = $(this).attr('id').match(/\d+/g).join('');
-     var scan = "   "+$(this).val().toUpperCase()+"  a ";
+        // je récupère le nombre correspondant à l'id dans ce input
+       var valAttId = $(this).attr('id').match(/\d+/g).join('');
+       var scan = $('.prenom').val() +"   "+$(this).val().toUpperCase()+"  a ";
       $('.pourcentageAuteurRealisateur p').each(function(){
          var valAttIdPourc = $(this).attr('id').match(/\d+/g).join('');
          if( valAttId == valAttIdPourc )
          {
-            $(this).append(scan);
+            $(this).html(scan);
             return false;
          }
       });

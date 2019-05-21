@@ -13,26 +13,34 @@ class AuteurRealisateurType extends ConfigurationFildsType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom',TextType::class)
-            ->add('prenom',TextType::class,[ 
-                                             'attr'=>['id'=>'prenom-input']
-                                            ]
+            ->add('nom',TextType::class,$this->getConfiguration()
+                                        
+                )
+            ->add('prenom',TextType::class,$this->getConfiguration()
+                                           
                  )
-            ->add('pseudonyme',TextType::class)
-            ->add('adresse',TextType::class)
-            ->add('codePostal',TextType::class)
-            ->add('ville',TextType::class)
-            ->add('telephoneMobile',TextType::class)
-            ->add('courriel',TextType::class)
+            ->add('pseudonyme',TextType::class,$this->getConfiguration()
+                )
+            ->add('adresse',TextType::class,$this->getConfiguration()
+                )
+            ->add('codePostal',TextType::class,$this->getConfiguration()
+                )
+            ->add('ville',TextType::class,$this->getConfiguration()
+                )
+            ->add('telephoneMobile',TextType::class,$this->getConfiguration()
+                )
+            ->add('courriel',TextType::class,$this->getConfiguration()
+                )
             ->add('typePersonne',ChoiceType::class,$this->getArrayChoice(
                                                                             [
                                                                                 'Auteur réalisateur'=>true,
                                                                                 'Scénariste'=>false,
                                                                                 'Réalisateur'=>false,
-                                                                            ]
+                                                                            ],false,true
                                                                         )
                 )
-            ->add('pourcentageAuteurRealisateur',TextType::class)
+            ->add('pourcentageAuteurRealisateur',TextType::class, $this->getConfiguration()
+                 )
         ;
     }
 

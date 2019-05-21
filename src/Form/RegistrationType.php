@@ -13,6 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -24,7 +25,7 @@ class RegistrationType extends ConfigurationFildsType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre',TextType::class)
+            ->add('titre',TextType::class,$this->getConfiguration())
             ->add('duree',ChoiceType::class,
                                          [
                                             'choices'=>
@@ -46,8 +47,8 @@ class RegistrationType extends ConfigurationFildsType
                                                      ],
                                                    ]
                   )
-            ->add('formatTournage',TextType::class)
-            ->add('formatDefinitif',TextType::class)
+            ->add('formatTournage',TextType::class,$this->getConfiguration())
+            ->add('formatDefinitif',TextType::class,$this->getConfiguration())
             ->add('genre',ChoiceType::class,
                 $this->getArrayChoice(
                                        [
@@ -58,9 +59,9 @@ class RegistrationType extends ConfigurationFildsType
                                        ]
                                       )
                    )
-              ->add('typeOeuvre',TextType::class)
-             ->add('genrePrecisionAutre',TextType::class)
-            ->add('synopsis',TextareaType::class)
+              ->add('typeOeuvre',TextType::class,$this->getConfiguration())
+             ->add('genrePrecisionAutre',TextType::class,$this->getConfiguration())
+            ->add('synopsis',TextareaType::class,$this->getConfiguration())
             ->add('adaptationOeuvre',ChoiceType::class,
                         $this->getArrayChoice(
                                                ['Oui' => true, 
@@ -68,27 +69,26 @@ class RegistrationType extends ConfigurationFildsType
                                                ]
                                              )
                   )
-            ->add('adaptationOeuvreToa',TextType::class)
-            ->add('adaptationOeuvreDacp',TextType::class)
+            ->add('adaptationOeuvreToa',TextType::class,$this->getConfiguration())
+            ->add('adaptationOeuvreDacp',TextType::class,$this->getConfiguration())
             ->add('adaptationOeuvreDfc',DateType::class,
                                                         [
                                                           'widget' => 'single_text',
                                                           'attr' => ['class' => 'w-75']
                                                         ]
                   )
-            ->add('deposant',ChoiceType::class,
-                $this->getArrayChoice(
-                                  [ 
-                                    'Le producteur' => true, 
-                                    'L\'auteur/le réalisateur ' => false,
-                                  ]
-                                  )
-                  )
+            ->add('deposant',ChoiceType::class, $this->getArrayChoice(
+                                                                [ 
+                                                                  'Le producteur' => true, 
+                                                                  'L\'auteur/le réalisateur ' => false,
+                                                                ]
+                                                                )
+                )
                ->add('producteurs',CollectionType::class,
                                                            [
                                                             'entry_type'=>ProducteurType::class
                                                            ]
-            )
+                    )
               ->add('auteurRealisateurs',CollectionType::class,
                                                                 [
                                                                   'entry_type'=>AuteurRealisateurType::class,
@@ -103,23 +103,21 @@ class RegistrationType extends ConfigurationFildsType
                                                                       'allow_delete'=>true,
                                                                     ]
                       )
-               ->add('typeAideLm',ChoiceType::class,
-                      $this->getArrayChoice(
-                                             [
-                                               'Écriture' => true,
-                                               'Réécriture' => false,
-                                             ]
-                                           )
+               ->add('typeAideLm',ChoiceType::class,$this->getArrayChoice(
+                                                                          [
+                                                                            'Écriture' => true,
+                                                                            'Réécriture' => false,
+                                                                          ]
+                                                                        )
                     )
-            ->add('typeAideDoc',ChoiceType::class,
-                    $this->getArrayChoice(
-                                          [
-                                            'Écriture' => true,
-                                            'Développement' => false,
-                                          ]
-                                        )
+            ->add('typeAideDoc',ChoiceType::class, $this->getArrayChoice(
+                                                                          [
+                                                                            'Écriture' => true,
+                                                                            'Développement' => false,
+                                                                          ]
+                                                                        )
                   )
-            ->add('mtBudget',TextType::class)
+            ->add('mtBudget',TextType::class,$this->getConfiguration())
             ->add('liensEligibilite',ChoiceType::class,$this->getArrayChoice(
                                                                               ['Un auteur réalisateur domicilié en région Normandie'=>true,
                                                                                'Une société de production disposant d’un établissement stable en région Normandie'=>false,
@@ -129,39 +127,39 @@ class RegistrationType extends ConfigurationFildsType
                                                                              ],true
                                                                             )
                   )
-            ->add('datePreparation',TextType::class)
-            ->add('dateTournage',TextType::class)
-            ->add('dateDiffusion',TextType::class)
-            ->add('castingEnvisage',TextType::class)
-            ->add('listeLieuxTournage',TextareaType::class)
-            ->add('nombreJoursTournage',TextType::class)
-            ->add('nombreJoursTotal',TextType::class)
-            ->add('droitArtistiqueTotalHt',TextType::class)
-            ->add('droitArtistiqueTotalHtNormandie',TextType::class)
-            ->add('personnelTotalHt',TextType::class)
-            ->add('personnelTotalHtNormandie')
-            ->add('interpretationTotalHt',TextType::class)
-            ->add('interpretationTotalHtNormandie',TextType::class)
-            ->add('totalChargeSocialesTotalHt',TextType::class)
-            ->add('totalChargeSocialesTotalHtNormandie',TextType::class)
-            ->add('decoEtCostumesTotalHt',TextType::class)
-            ->add('decoEtCostumesTotalHtNormandie',TextType::class)
-            ->add('transportTotalHt',TextType::class)
-            ->add('transportTotalHtNormandie',TextType::class)
-            ->add('moyenTechniqueTournageTotalHt',TextType::class)
-            ->add('postProdTotalHt',TextType::class)
-            ->add('moyenTechniqueTournageTotalHtNormandie',TextType::class)
-            ->add('postProdTotalHtNormandie',TextType::class)
-            ->add('assuranceEtFraisTotalHt',TextType::class)
-            ->add('assuranceEtFraisTotalHtNormandie',TextType::class)
-            ->add('fraisFinanciersTotalHt',TextType::class)
-            ->add('fraisFinanciersTotalHtNormandie',TextType::class)
-            ->add('fraisGenerauxTotalHt',TextType::class)
-            ->add('fraisGenerauxTotalHtNormandie',TextType::class)
-            ->add('imprevusTotalHt',TextType::class)
-            ->add('imprevusTotalHtNormandie',TextType::class)
-            ->add('totalGeneralTotalHt',TextType::class,['disabled'=>true])
-            ->add('totalGeneralTotalHtNormandie',TextType::class,['disabled'=>true])
+            ->add('datePreparation',TextType::class,$this->getConfiguration())
+            ->add('dateTournage',TextType::class,$this->getConfiguration())
+            ->add('dateDiffusion',TextType::class,$this->getConfiguration())
+            ->add('castingEnvisage',TextType::class,$this->getConfiguration())
+            ->add('listeLieuxTournage',TextareaType::class,$this->getConfiguration())
+            ->add('nombreJoursTournage',TextType::class,$this->getConfiguration())
+            ->add('nombreJoursTotal',TextType::class,$this->getConfiguration())
+            ->add('droitArtistiqueTotalHt',TextType::class,$this->getConfiguration())
+            ->add('droitArtistiqueTotalHtNormandie',TextType::class,$this->getConfiguration())
+            ->add('personnelTotalHt',TextType::class,$this->getConfiguration())
+            ->add('personnelTotalHtNormandie',TextType::class,$this->getConfiguration())
+            ->add('interpretationTotalHt',TextType::class,$this->getConfiguration())
+            ->add('interpretationTotalHtNormandie',TextType::class,$this->getConfiguration())
+            ->add('totalChargeSocialesTotalHt',TextType::class,$this->getConfiguration())
+            ->add('totalChargeSocialesTotalHtNormandie',TextType::class,$this->getConfiguration())
+            ->add('decoEtCostumesTotalHt',TextType::class,$this->getConfiguration())
+            ->add('decoEtCostumesTotalHtNormandie',TextType::class,$this->getConfiguration())
+            ->add('transportTotalHt',TextType::class,$this->getConfiguration())
+            ->add('transportTotalHtNormandie',TextType::class,$this->getConfiguration())
+            ->add('moyenTechniqueTournageTotalHt',TextType::class,$this->getConfiguration())
+            ->add('postProdTotalHt',TextType::class,$this->getConfiguration())
+            ->add('moyenTechniqueTournageTotalHtNormandie',TextType::class,$this->getConfiguration())
+            ->add('postProdTotalHtNormandie',TextType::class,$this->getConfiguration())
+            ->add('assuranceEtFraisTotalHt',TextType::class,$this->getConfiguration())
+            ->add('assuranceEtFraisTotalHtNormandie',TextType::class,$this->getConfiguration())
+            ->add('fraisFinanciersTotalHt',TextType::class,$this->getConfiguration())
+            ->add('fraisFinanciersTotalHtNormandie',TextType::class,$this->getConfiguration())
+            ->add('fraisGenerauxTotalHt',TextType::class,$this->getConfiguration())
+            ->add('fraisGenerauxTotalHtNormandie',TextType::class,$this->getConfiguration())
+            ->add('imprevusTotalHt',TextType::class,$this->getConfiguration())
+            ->add('imprevusTotalHtNormandie',TextType::class,$this->getConfiguration())
+            ->add('totalGeneralTotalHt',TextType::class,['disabled'=>true,'required'=>false])
+            ->add('totalGeneralTotalHtNormandie',TextType::class,['disabled'=>true,'required'=>false])
             ->add('financementAcquis',ChoiceType::class,
                      $this->getArrayChoice(
                                              [
@@ -170,8 +168,8 @@ class RegistrationType extends ConfigurationFildsType
                                               ]
                                            )
                   )
-            ->add('financementAcquisPrecision',TextType::class)
-            ->add('montantSollicite',TextType::class)
+            ->add('financementAcquisPrecision',TextType::class,$this->getConfiguration())
+            ->add('montantSollicite',TextType::class,$this->getConfiguration())
             ->add('depotProjetCollectivite',ChoiceType::class,
                    $this->getArrayChoice(
                                           [
@@ -180,7 +178,7 @@ class RegistrationType extends ConfigurationFildsType
                                           ]
                                        )
                  )
-            ->add('depotProjetCollectivitePrecision',TextType::class)
+            ->add('depotProjetCollectivitePrecision',TextType::class,$this->getConfiguration())
             ->add('projetDejaPresenteFondsAide',ChoiceType::class,$this->getArrayChoice(
                                                                                           [
                                                                                             'Oui'=>true,
@@ -188,8 +186,9 @@ class RegistrationType extends ConfigurationFildsType
                                                                                           ]
                                                                                        )
                  )
-            ->add('projetDejaPresenteFondsAideDate',TextType::class)
-            ->add('projetDejaPresenteFondsAideTypeAide',TextType::class)  
+            ->add('projetDejaPresenteFondsAideDate',TextType::class,$this->getConfiguration())
+            ->add('projetDejaPresenteFondsAideTypeAide',TextType::class,$this->getConfiguration())
+            ->add('file',FileType::class,$this->getConfiguration())  
             ;
     }
 

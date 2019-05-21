@@ -83,8 +83,11 @@ class AllFieldsFormController extends AbstractController
         $allFieldsForm =  $this->createForm(RegistrationType::class,$projet);
         $allFieldsForm->handleRequest($request);
         if($allFieldsForm->isSubmitted() && $allFieldsForm->isValid()) {
-          $manager->persist($proje);
+            dump($projet);
+            die();
+          $manager->persist($projet);
           $manager->flush();
+          $this->redirectToRoute('home');
         }
         return $this->render('all_fields_form/displayAllFields.html.twig', [
             'allFieldsForm' => $allFieldsForm->createView(),

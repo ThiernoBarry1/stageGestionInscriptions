@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjetRepository")
+ * @Vich\Uploadable
  */
 class Projet
 {
@@ -351,9 +354,22 @@ class Projet
     private $dureeEpisode;
 
     /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichier")
+     * @var File|null
+     */
+    private $file;
+    /**
+     * @var  string|null
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $fileName;
+    private $nomFihcier;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -1213,14 +1229,41 @@ class Projet
         return $this;
     }
 
-    public function getFileName(): ?string
+    public function getNomFichier()
     {
-        return $this->fileName;
+        return $this->nomFichier;
     }
 
-    public function setFileName(?string $fileName): self
+    public function setNomFichier( $nomFichier): self
     {
-        $this->fileName = $fileName;
+        $this->nomFichier = $nomFichier;
+
+        return $this;
+    }
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile( $file): self
+    {
+        $this->file = $file;
+        if (null !== $file) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

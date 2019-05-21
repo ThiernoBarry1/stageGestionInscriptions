@@ -15,8 +15,8 @@ class DocumentsAudioVisuelsType extends ConfigurationFildsType
     {   
         
         $builder
-            ->add('titre',TextType::class)
-            ->add('realisateur',TextType::class)
+            ->add('titre',TextType::class,$this->getConfiguration())
+            ->add('realisateur',TextType::class,$this->getConfiguration())
             ->add('genre',ChoiceType::class,$this->getArrayChoice(
                                                                     [
                                                                         'Fiction'=>true,
@@ -29,10 +29,14 @@ class DocumentsAudioVisuelsType extends ConfigurationFildsType
             ->add('annee',ChoiceType::class,
                 ['choices'  => 
                    $this->getArrayDuration(1950,2100),
+                   'required'=>false
                 ])
-            ->add('duree',TextType::class)
-            ->add('lien',TextType::class)
-            ->add('motDePasse',PasswordType::class)
+            ->add('duree',TextType::class,$this->getConfiguration()
+                 )
+            ->add('lien',TextType::class,$this->getConfiguration()
+                )
+            ->add('motDePasse',PasswordType::class,$this->getConfiguration()
+                )
         ;
     }
 

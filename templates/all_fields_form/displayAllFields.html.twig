@@ -591,6 +591,7 @@
              {{ form_row(allFieldsForm.montantSollicite,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }} 
          </div>
       </div>
+      {# c'est dans cette div qui sera ajoutée les inputs des pourcentages auteursRealisateur #}
       <div class="pourcentageAuteurRealisateur">
       
       </div>
@@ -617,7 +618,18 @@
          </div>
       </div>
       <hr>
-      <div class="form-group enregistrer">
+
+      <h4>Téléchargement du document</h4>
+         <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupFileAddon01">une image</span>
+            </div>
+            <div class="custom-file">
+                {{ form_row(allFieldsForm.file, {'label':false,'attr':{'class':'custom-file-input'}}) }}
+              <label class="custom-file-label" for="inputGroupFile01">en cliquant ici vous pouver télecharger votre fichier</label>
+            </div>
+       </div>
+      <div class="form-group enregistrer mt-4">
          <button  class="btn btn-success">Enregistrer</button>
       </div>
       {{ form_end(allFieldsForm,{'render_rest':false}) }}

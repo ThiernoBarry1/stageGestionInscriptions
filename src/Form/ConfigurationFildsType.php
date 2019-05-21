@@ -12,12 +12,11 @@ class ConfigurationFildsType extends AbstractType {
      * @param array $option
      * @return Array
      */
-    protected function getConfiguration($label='',$placeholder='',$option=[])
+    
+    protected function getConfiguration()
     {
-      return array_merge(['label'=>$label,'attr'=>['placeholder'=>$placeholder]
-                 ],$option);
+      return ['required'=>false];
     }
-
     /**
     * Permet de remplir un tableau de nombres
     *@return Array
@@ -38,11 +37,12 @@ class ConfigurationFildsType extends AbstractType {
      * @param boolean $isExpanded
      * @return Array
      */
-    protected function getArrayChoice($array,$isMultiple=false,$isExpanded=true)
+    protected function getArrayChoice($array,$isMultiple=false,$isExpanded=true,$isRequired=false)
     {
      return [ 'choices'  => $array,
               'expanded' => $isExpanded,
               'multiple'=>  $isMultiple,
+              'required'=> $isRequired,
            ]; 
     }
     
