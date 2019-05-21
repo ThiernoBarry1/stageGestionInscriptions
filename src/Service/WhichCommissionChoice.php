@@ -61,6 +61,8 @@ class WhichCommissionChoice
             $TYPEFOND = 8;
          }else if($fondsAide->getNom() === "Programme de développement des structures de production"){
             $TYPEFOND = 9;
+         }else if($fondsAide->getNom() === "Production court métrage documentaire"){
+           $TYPEFOND = 10;
          }else{
             throw new Exception("Aucun type d'aide ne corresponds à ce choix", 1); 
          }

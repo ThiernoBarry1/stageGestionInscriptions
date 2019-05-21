@@ -2,36 +2,38 @@
  <div class="form-group" id="documentAudioVisuels_block_{{id}}">
      <div class="row">
         <div class="col">
-            <div class="row">
+            <div class="row mt-2">
                 <div class="col">
                     <label>Titre</label>
-                    {{form_row(form.titre,{'label':false,'attr':{'class':'form-control-sm '}})}}
+                    {{form_row(form.titre,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
                 </div>
                 <div class="col">
                     <label> Réalisateur </label>
-                    {{ form_row(form.realisateur,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(form.realisateur,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
                 </div>
+            </div>
+            <div class="row mt-2">
                 <div class="col">
                     <label>Genre</label>
-                    {{ form_row(form.genre,{'label':false,'attr':{'class':'form-control-sm'}})}} 
+                    {{ form_row(form.genre,{'label':false,'attr':{'class':'form-control-sm w-100'}})}} 
                 </div>
                 <div class="col">
                     <label>Année</label>
-                    {{ form_row(form.annee,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                    {{ form_row(form.annee,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
                 </div>
                 <div class="col">
                     <label>Durée</label>
-                    {{ form_row(form.duree,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                    {{ form_row(form.duree,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-2">
                 <div class="col">
                     <label for="lien">Lien</label>
-                    {{ form_row(form.lien,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                    {{ form_row(form.lien,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
                 </div>
                 <div class="col">
                     <label for="mot-passe">Mot de passe </label>
-                    {{ form_row(form.motDePasse,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                    {{ form_row(form.motDePasse,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
                 </div>
             </div>
         </div>

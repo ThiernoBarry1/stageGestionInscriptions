@@ -2,8 +2,16 @@ $(document).ready(function()
 {     
    "use strict";
    // gerer l'ajout d'un auteur ou/et d'un réalisateur lors qu'on clique sur le button
+   let estimeDiv = +$('#auteurRealisateurs div.form-group').length
+   // je récupère la partie entière de la division.
+   let count = Math.floor(estimeDiv/2);
+   if( count == 0 ) {
+      traitementEvenClicksAuteurRealisateur('#auteurRealisateurs',count,'#ajoutAuteur-realisateur');
+      // j'effectue la suppressesion du formulaire auteur réalisateur 
+      supFormAuteurRealisateur('button[data-action="delete"]');
+   }
 
-  
+
    $('#ajoutAuteur-realisateur').click(function()
    { 
       let estimeDiv = +$('#auteurRealisateurs div.form-group').length
@@ -221,7 +229,8 @@ verifieNonSelectionne('#registration_genre_2','.genrePrecisionAutre');
 
  $('#registration_genre_0,#registration_genre_1,#registration_genre_2').click( function()
   {
-   cacher('.genrePrecisionAutre');     
+   cacher('.genrePrecisionAutre'); 
+   effacerDonneeInput('.genrePrecisionAutre input','#registration_genre_3'); 
   });                 
  $('#registration_genre_3').click(function(){
    voir('.genrePrecisionAutre');
@@ -232,6 +241,7 @@ verifieNonSelectionne('#registration_genre_2','.genrePrecisionAutre');
 
  $('#registration_adaptationOeuvre_1').click(function(){
    cacher('.adaptationOeuvrePrecision');
+   effacerDonneeInput('.adaptationOeuvrePrecision input','#registration_adaptationOeuvre_0');
  });
  $('#registration_adaptationOeuvre_0').click(function(){
    voir('.adaptationOeuvrePrecision');
@@ -247,6 +257,7 @@ verifierSelectionnePorjetDeposeMbudget('#registration_deposant_0','.montant-budg
  });
  $('#registration_deposant_1').click(function(){
    cacher('.production');
+   effacerDonneeInput('.production input','#registration_deposant_0');
    voir('.auteurRealisateurs');
    // il faut cacher le champ montant budget pour le cas de auteur/realisateur
    cacher('.montant-budget');
@@ -260,6 +271,7 @@ verifierSelectionnePorjetDeposeMbudget('#registration_deposant_0','.montant-budg
  });
  $('#registration_financementAcquis_1').click(function(){
    cacher('.financementAcquisPrecision');
+   effacerDonneeInput('.financementAcquisPrecision input','#registration_financementAcquis_0');
  });
 
  // traiement dépôt collectivité 
@@ -270,6 +282,7 @@ verifierSelectionnePorjetDeposeMbudget('#registration_deposant_0','.montant-budg
  });
  $('#registration_depotProjetCollectivite_1').click(function(){
    cacher('.depotProjetCollectivitePrecision');
+   effacerDonneeInput('.depotProjetCollectivitePrecision input','#registration_depotProjetCollectivite_0');
  });
  
 // traitement Projet Déjà presenté au fonds d'aide
@@ -280,6 +293,7 @@ verifieSelectionne('#registration_projetDejaPresenteFondsAide_0','.projetDejaPre
  });
  $('#registration_projetDejaPresenteFondsAide_1').click(function(){
    cacher('.projetDejaPresenteFondsAidePrecision');
+   effacerDonneeInput('.projetDejaPresenteFondsAidePrecision input','#registration_projetDejaPresenteFondsAide_0');
  });
 
 // traitement autorisationtype d'aide développement
@@ -308,6 +322,22 @@ $('#registration_typeAideDoc_1').click(function(){
          voir('.auteurRealisateurs');
       }
    }
+ }
+ function effacerDonneeInput(selecteur,selecteuChecked)
+ {
+    $(selecteur).each(function(){  
+         if( $(this).val() != ''){
+            if( confirm(" En pousuivant votre action les données que vous avez saisie seront perdues, êtes vous sûr de vouloir continuer?"))
+            {
+               $(selecteur).val('');
+            }else{
+               $(selecteuChecked).click();
+               //voir(selecteurVoir);
+            }
+            return false;
+         }
+       
+      });
  }
  /**
   * Partie concerne tous les traitement où un clique sur le checkbox "oui" permet
@@ -341,7 +371,7 @@ $('#registration_typeAideDoc_1').click(function(){
   * @param {String} selecteur 
   */
  function  cacher(selecteur)
- {
+ {   
      $(selecteur).hide();  
  }
  /**
@@ -429,6 +459,19 @@ $('#registration_typeAideDoc_1').click(function(){
    $('label[for="montant-budget"]').html('montant du budget développement HT');
 });
 
+// gestion nombre de caractère synopsis
+
+$('#registration_synopsis').keypress(function(){
+      longMax(this,600);
+})
+function longMax(element, max){
+	var value = element.value;
+	var max = parseInt(max);
+	if(value.length > max){
+      element.value = value.substr(0, max);
+      $('label[for="synopsis"]').css('color','red');
+	}
+}
 });
 
 

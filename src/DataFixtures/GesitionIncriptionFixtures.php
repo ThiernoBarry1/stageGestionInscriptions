@@ -185,7 +185,7 @@ class GesitionIncriptionFixtures extends Fixture
         $manager->persist($session1);
         $manager->persist($session2);
         $manager->persist($session3);
-        $productionCdAudio->setNom("Production documentaire audiovisuel et court métrage documentaire")
+        $productionCdAudio->setNom("Production documentaire audiovisuel")
                        ->addSession($session1)
                        ->addSession($session2)
                       ->addSession($session3);
@@ -210,6 +210,34 @@ class GesitionIncriptionFixtures extends Fixture
                        ->addSession($session2);
         $manager->persist($productionFicAudio);
       
+        $productionCmd = new FondsAide();
+        $session1 = new Session();
+        $session1->setNom('session 1')
+                 ->setDateDebut(new DateTime('2018-09-27'))
+                 ->setDateFin(new DateTime('2018-10-16'))
+                 ->setPleniere(new DateTime('2018-12-18'))
+                 ->setFondsAide($productionCmd);
+        $session2 = new Session();
+        $session2->setNom('session 2')
+                 ->setDateDebut(new DateTime('2019-01-04'))
+                 ->setDateFin(new DateTime('2019-01-18'))
+                 ->setPleniere(new DateTime('2019-03-19'))
+                 ->setFondsAide($productionCmd);
+        $session3 = new Session();
+        $session3->setNom('session 3')
+                 ->setDateDebut(new DateTime('2019-04-19'))
+                 ->setDateFin(new DateTime('2019-05-03'))
+                 ->setPleniere(new DateTime('2019-07-11'))
+                 ->setFondsAide($productionCmd);
+        $manager->persist($session1);
+        $manager->persist($session2);
+        $manager->persist($session3);
+        $productionCmd->setNom("Production court métrage documentaire")
+                       ->addSession($session1)
+                       ->addSession($session2)
+                      ->addSession($session3);
+        $manager->persist($productionCmd);
+
         $programmeDeveloppementSp = new FondsAide();
         $session1 = new Session();
         $session1->setNom('session 1')

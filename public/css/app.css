@@ -10,7 +10,7 @@ div[id^="registration_auteurRealisateurs"] >.required
 
 
 div[id^="registration_liensEligibilite"]>label[for^="registration_liensEligibilite"]{ 
-  display: flex;
+    display: flex;
 }
 
 input[id^="registration_projetDejaPresenteFondsAide"],
@@ -18,7 +18,6 @@ input[id^="registration_depotProjetCollectivite"],
 input[id^="registration_auteurRealisateurs"],
 input[id^="registration_financementAcquis"],
 input[id^="registration_adaptationOeuvre"],
-input[id^="registration_liensEligibilite"],
 input[id^="registration_typeAideDoc"],
 input[id^="registration_typeAideLm"],
 input[id^="registration_deposant"],

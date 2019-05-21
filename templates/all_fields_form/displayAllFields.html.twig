@@ -33,7 +33,7 @@
          </div>
          {% if whichChoice != 2  and whichChoice != 8  and whichChoice  != 3 %}
             <div class="row genreProjet">
-               <div class="col-6">
+               <div class="col-6 custom-control custom-radio">
                   <label for="genre"> Genre</label>
                   {{ form_row(allFieldsForm.genre,{'label':false}) }} 
                </div>
@@ -56,9 +56,9 @@
                </div>
             {% endif %}
             <div class="col-6">
-               <div class="row ml-3">
+               <div class="row ml-2">
                   <div class="col-4">
-                     <div class="row ml-3">
+                     <div class="row">
                         <label for="duree" class="dureeEnvisagee"></label>
                         {{ form_row(allFieldsForm.duree,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}<span>minutes</span>
                      </div>
@@ -180,7 +180,7 @@
                     <div class="row">
                         <div class="col-6">
                            <label for="adresse">Adresse siège social</label>
-                            {{ form_row(producteur.adresse,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                            {{ form_row(producteur.adresse,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Numero et nom de la rue'}}) }}
                         </div>
                         <div class="col-3">
                            {{ form_row(producteur.codePostal,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Code postal'}}) }}
@@ -192,7 +192,7 @@
                     <div class="row">
                         <div class="col-6">
                            <label for="adresseBureau">Adresse bureau (si differente du siège social)</label>
-                            {{ form_row(producteur.adresseBureau,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                            {{ form_row(producteur.adresseBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Numero et nom de la rue'}}) }}
                         </div>
                         <div class="col-3">
                            {{ form_row(producteur.codePostaleBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Code postal'}}) }}
@@ -208,52 +208,11 @@
      <fieldset class="border p-3 auteurRealisateurs">
         <legend class="w-auto">Auteurs/réalisateurs </legend>
         <div id="auteurRealisateurs"  data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
-         {% for auteurRealisateurs in allFieldsForm.auteurRealisateurs %}
-               <div class="form-group">
-                  {{ form_row(auteurRealisateurs.typePersonne,{'label':false})}}
-               </div>
-               <div class="row my-3">
-                   <div class="col-4">
-                       <label> Prénom </label>
-                       {{ form_row(auteurRealisateurs.prenom,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Prénom'}}) }}
-                    </div>
-                   <div class="col-4">
-                       <label> Nom  de l'état civil</label>
-                        {{ form_row(auteurRealisateurs.nom,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Nom'}}) }}
-                   </div>
-                   <div class="col-4">
-                      <label> Pseudonyme </label>
-                      {{ form_row(auteurRealisateurs.pseudonyme,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Pseudonyme'}}) }}
-                   </div>
-               </div>
-               <div class="row my-3">
-                   <div class="col-6">
-                       <label> Adresse</label>
-                       {{ form_row(auteurRealisateurs.adresse,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'adresse'}}) }}
-                   </div>
-                   <div class="col-3">
-                       {{ form_row(auteurRealisateurs.codePostal,{'label':false,'attr':{'class':'form-control-sm w-100 decalageCodeVille','placeholder':'Code postal'}}) }}
-                   </div>
-                   <div class="col-3">
-                       {{ form_row(auteurRealisateurs.ville,{'label':false,'attr':{'class':'form-control-sm w-100 decalageCodeVille','placeholder':'Ville'}}) }}
-                   </div>
-               </div>
-               <div class="row my-3">
-                   <div class="col-6">
-                       <label>Téléphone</label>
-                       {{ form_row(auteurRealisateurs.telephoneMobile,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                   </div>
-                   <div class="col-6">
-                       <label>Courriel</label>
-                       {{ form_row(auteurRealisateurs.courriel,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                   </div>
-               </div>  
-         </div>   
-         <input type="hidden" id="widget-counter" value="0">
-         <div class="form-group">
+        </div>
+        <input type="hidden" id="widget-counter" value="0">
+        <div class="form-group">
            <button type="button" id="ajoutAuteur-realisateur" class="btn btn-primary my-4" > Ajouter un auteur réalisateur</button>
-         </div>
-      {% endfor %}
+        </div>
       </fieldset>
       <hr>
       <fieldset class="border p-3">
