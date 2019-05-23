@@ -39,6 +39,7 @@ class RegistrationType extends ConfigurationFildsType
                                             [
                                               $this->getArrayDuration(1,300)
                                             ],
+                                            'required'=>false,
                                          ]
                   )
             ->add('typeFilm',ChoiceType::class,$this->getArrayChoice(
@@ -51,7 +52,7 @@ class RegistrationType extends ConfigurationFildsType
                                                      'choices'=>
                                                      [
                                                        $this->getArrayDuration(1,300)
-                                                     ],
+                                                     ],'required'=>false,
                                                    ]
                   )
             ->add('formatTournage',TextType::class,$this->getConfiguration())
@@ -81,7 +82,8 @@ class RegistrationType extends ConfigurationFildsType
             ->add('adaptationOeuvreDfc',DateType::class,
                                                         [
                                                           'widget' => 'single_text',
-                                                          'attr' => ['class' => 'w-75']
+                                                          'attr' => ['class' => 'w-75'],
+                                                          'required'=>false,
                                                         ]
                   )
             ->add('deposant',ChoiceType::class, $this->getArrayChoice(
@@ -199,6 +201,7 @@ class RegistrationType extends ConfigurationFildsType
             ->add('file',FileType::class,$this->getConfiguration())  
             ->add('enregistrer',SubmitType::class)
             ;
+            // pour la transforamtion de la date au format français en datetime
             //$builder->get('adaptationOeuvreDfc')->addModelTransformer($this->dateTransformeur);
     }
 

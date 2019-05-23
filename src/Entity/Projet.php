@@ -93,7 +93,7 @@ class Projet
     private $mtBudget;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="array", nullable=true)
      */
     private $liensEligibilite;
 
@@ -590,12 +590,12 @@ class Projet
         return $this;
     }
 
-    public function getLiensEligibilite(): ?string
+    public function getLiensEligibilite(): ?array
     {
         return $this->liensEligibilite;
     }
 
-    public function setLiensEligibilite(?string $liensEligibilite): self
+    public function setLiensEligibilite(?array $liensEligibilite): self
     {
         $this->liensEligibilite = $liensEligibilite;
 

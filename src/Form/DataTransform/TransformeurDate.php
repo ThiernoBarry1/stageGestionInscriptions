@@ -5,7 +5,12 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class TransformeurDate implements DataTransformerInterface{
-
+   /**
+    * permet de transformer une date au format français.
+    *
+    * @param Date $date
+    * @return Date
+    */
     public function transform($date)
     {
       if($date === null){
@@ -13,6 +18,12 @@ class TransformeurDate implements DataTransformerInterface{
       }
       return $date->format('d/m/Y');
     }
+    /**
+     * transform une date au format dateTime
+     *
+     * @param Date $frenchDate
+     * @return Date
+     */
     public function reverseTransform($frenchDate)
     {
        if($frenchDate === null)
