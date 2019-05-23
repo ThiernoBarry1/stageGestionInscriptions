@@ -36,55 +36,10 @@ class AllFieldsFormController extends AbstractController
         $whichChoice = $choice->getCorrectIdCommision();
         $projet  = $choice->getInstanceProjet();
         $fondsAide = $choice->getFondsAide();
-        $producteur = new Producteur();
-        $producteur->setNom("BA")
-                   ->setNature('entreprise')
-                   ->setSiret('0000000000000000000000000000')
-                   ->setNomGerant('BARRY')
-                   ->setPrenomGerant('Thierno')
-                   ->setNomProducteur('le nom producteur ')
-                   ->setPrenomProducteur('le prenom producteur ')
-                   ->setAdresse('10 rue lkddkdkk')
-                   ->setCodePostal('14000')
-                   ->setVille('caen')
-                   ->setProjet($projet);
-        $projet->addProducteur($producteur);
-    
-        $auteurRealisateurs = new AuteurRealisateur();
-        $auteurRealisateurs->setNom('BARRY')
-                           ->setPrenom('Abdoulaye')
-                           ->setPseudonyme('eeeeeee')
-                           ->setAdresse('dkkkkkkkk')
-                           ->setVille('caen')
-                           ->setCodePostal('14000')
-                           ->setTelephoneMobile('0633333')
-                           ->setTypePersonne('auteur')
-                           ->setProjet($projet);
-        $auteurRealisateurs2 = new AuteurRealisateur();
-        $auteurRealisateurs2->setNom('BARRY')
-                           ->setPrenom('Abdoulaye')
-                           ->setPseudonyme('eeeeeee')
-                           ->setAdresse('dkkkkkkkk')
-                           ->setVille('caen')
-                           ->setCodePostal('14000')
-                           ->setTelephoneMobile('0633333')
-                           ->setTypePersonne('auteur')
-                           ->setProjet($projet);
-        $projet->addAuteurRealisateur($auteurRealisateurs2);
-        $documentAudioVisuels = new DocumentAudioVisuels();
-        $documentAudioVisuels->setTitre('eeeeeeeeeeeee')
-                             ->setRealisateur('dkkkkkkkkkkkdk')
-                             ->setGenre('ekkkkkkkkkkkkkk')
-                             ->setAnnee(2014)
-                             ->setDuree(20)
-                             ->setLien('http://127.0.0.1:8000/fonds-d-aide/51')
-                             ->setMotDePasse("ddddddddddd");
-        $projet->addDocumentAudioVisuel($documentAudioVisuels);
         $allFieldsForm =  $this->createForm(RegistrationType::class,$projet);
         $allFieldsForm->handleRequest($request);
+        dump($request);
         if($allFieldsForm->isSubmitted() && $allFieldsForm->isValid()) {
-            dump($projet);
-            die();
           $manager->persist($projet);
           $manager->flush();
           $this->redirectToRoute('home');

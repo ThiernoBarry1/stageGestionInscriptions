@@ -9,9 +9,6 @@ div[id^="registration_auteurRealisateurs"] >.required
 }
 
 
-div[id^="registration_liensEligibilite"]>label[for^="registration_liensEligibilite"]{ 
-    display: flex;
-}
 
 input[id^="registration_projetDejaPresenteFondsAide"],
 input[id^="registration_depotProjetCollectivite"],
@@ -49,4 +46,11 @@ hr
 }
 .decalageLabelProduction{
     margin-top: 15px;
+}
+.labelLiens{
+    width: 970px;
+}
+#registration_liensEligibilite_3,#registration_liensEligibilite_4{
+    vertical-align: top;
+    margin-top: 8px;
 }

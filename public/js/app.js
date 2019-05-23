@@ -1,42 +1,37 @@
 $(document).ready(function()
 {     
    "use strict";
-   // gerer l'ajout d'un auteur ou/et d'un réalisateur lors qu'on clique sur le button
-   let estimeDiv = +$('#auteurRealisateurs div.form-group').length
-   // je récupère la partie entière de la division.
-   let count = Math.floor(estimeDiv/2);
+   // simuler l'ajout d'un auteursRealisateur
+   var count = counterForm('#widget-counter');
    if( count == 0 ) {
       traitementEvenClicksAuteurRealisateur('#auteurRealisateurs',count,'#ajoutAuteur-realisateur');
       // j'effectue la suppressesion du formulaire auteur réalisateur 
       supFormAuteurRealisateur('button[data-action="delete"]');
    }
+   //simuler l'ajout d'un producteur
+   const templates = $('#producteurs').data('prototype').replace(/__name__/g,0);
+   // j'injecte ce code au sein de la div 
+   $('#producteurs').append(templates);
 
-
+   // gerer l'ajout d'un auteur ou/et d'un réalisateur lors qu'on clique sur le button
    $('#ajoutAuteur-realisateur').click(function()
    { 
-      let estimeDiv = +$('#auteurRealisateurs div.form-group').length
-      // je récupère la partie entière de la division.
-      let count = Math.floor(estimeDiv/2);
+      var count = counterForm('#widget-counter');
 
       //traitementEvenClicks('#auteurRealisateurs','#widget-counter','#ajoutAuteur-realisateur');
-      traitementEvenClicksAuteurRealisateur('#auteurRealisateurs',count,'#ajoutAuteur-realisateur');
+      traitementEvenClicksAuteurRealisateur('#auteurRealisateurs',count);
       // j'effectue la suppressesion du formulaire auteur réalisateur 
       supFormAuteurRealisateur('button[data-action="delete"]');
       //counterForm('#auteurRealisateurs div.form-group','#widget-counter');
-     
-     
-      
-      
+       
    });
    $('#ajoutDocumentAudioVisuels').click(function(){
-      let estimeDiv = +$('#documentAudioVisuels div.form-group').length
-      // je récupère la partie entière de la division.
-      let countAudio = Math.floor(estimeDiv/2);
+      var countAudio = counterForm('#widget-counter-documentAudioVisuels');
       //traitementEvenClicks('#documentAudioVisuels','#widget-counter-documentAudioVisuels','#ajoutDocumentAudioVisuels');
       traitementEvenClicksDocumetAudio('#documentAudioVisuels',countAudio,'#ajoutDocumentAudioVisuels');
       
       // j'effectue la suppressesion du formulaire auteur réalisateur 
-      supFormAuteurRealisateur('button[data-action="delete-documentAudioVisuels"]');
+       supFormAuteurDocumentAudio('button[data-action="delete-documentAudioVisuels"]');
      // counterForm('#documentAudioVisuels div.form-group','#widget-counter-documentAudioVisuels');
    });
 
@@ -48,34 +43,48 @@ $(document).ready(function()
    function supFormAuteurRealisateur(boutton) {
       $(boutton).click(function(){
       const target = this.dataset.target;
-      alert(target);
       $(target).remove();
-      // je rend le button ajout visible à chaque suppression
-      $('#ajoutDocumentAudioVisuels').show(); 
       });
    }
 
+  
    /**
-    * compte le nombre de fois qu'on a ajouté le formulaire auteur réalisateur
+    * supprime le formulaire auteur documentAudio
     * 
-    * @param {String} div 
-    * @param {String} widget_counter 
+    * @param {String} boutton 
     */
-   function counterForm(div,widget_counter)
-   {  const count = +$(div).length;
-      $(widget_counter).val(count);
+   function supFormAuteurDocumentAudio(boutton) {
+      $(boutton).click(function(){
+         const target = this.dataset.target;
+         $(target).remove();
+         // je rend le button ajout visible à chaque suppression
+         $('#ajoutDocumentAudioVisuels').show(); 
+      });
    }
 
 
-
-/**
+   /**
+    * compte le nombre de fois qu'on a ajouté un formulaire 
     * 
-    * @param {String} selecteurClass 
-    * @param {boolean} isAuteurRealisateur 
     * @param {String} widget_counter 
-    * @param {String} selecteurButton 
     */
-   function traitementEvenClicksAuteurRealisateur(selecteurDiv,counter,selecteurButton){
+   function counterForm(widget_counter)
+   {  
+      var estimeDiv = +$(widget_counter).val();
+      return estimeDiv;
+   }
+
+   function miseAjourCounter(selectDivForm, widget){
+      const count = +$(selectDivForm).length;
+      $(widget).val(count);
+   }
+
+   /**
+    * 
+    * @param {String} selecteurDiv 
+    *  @param {String} counter
+    */
+   function traitementEvenClicksAuteurRealisateur(selecteurDiv,counter){
       // je recupère le numero des forms !, je le met en comment pour tester avec counter
      // let index  = +$(widget_counter).val();
       // je remplace tous les __name__ par ce numero
@@ -84,18 +93,11 @@ $(document).ready(function()
       const newStr = str.replace(/__name__/g,counter);
       // j'injecte ce code au sein de la div 
       $(selecteurDiv).append(templates);
-
       $('.pourcentageAuteurRealisateur').append(newStr);
-      const count = +$('#documentAudioVisuels div.form-group').length;
-      if(count >= 2)
-      {
-         $(selecteurButton).hide();
-      }
+      $('#widget-counter').val(counter+1);
 
       // gestion des labels pourcentage auteurs réalisateur
-
       $('.prenom').on('change',function(){
-         
          // je récupère le nombre correspondant à l'id dans ce input
         var valAttId = $(this).attr('id').match(/\d+/g).join('');
         var scan = $(this).val()+"   "+$('.nom').val()+" a";
@@ -132,35 +134,23 @@ $(document).ready(function()
     * @param {String} selecteurButton 
     */
    function traitementEvenClicksDocumetAudio(selecteurDiv,counter,selecteurButton){
-      // je recupère le numero des forms !, je le met en comment pour tester avec counter
-     // let index  = +$(widget_counter).val();
       // je remplace tous les __name__ par ce numero
-      //const templates = $(selecteurDiv).data('prototype').replace(str,'').replace(/__name__/g,index);
       const templates = $(selecteurDiv).data('prototype').replace(/__name__/g,counter);
-      //const newStr = str.replace(/__name__/g,index);
-     
       // j'injecte ce code au sein de la div 
       $(selecteurDiv).append(templates);
-
-      // compter le nombre de form  
-      //$(widget_counter).val(index+1);
-      
-      const count = +$('#documentAudioVisuels div.form-group').length;
+      let count = +$('#documentAudioVisuels div.form-group').length;
       if(count >= 2)
       {
          $(selecteurButton).hide();
       }
-
+      $('#widget-counter-documentAudioVisuels').val(counter+1);
    }
-
-
-
   
-   //counterForm('#auteurRealisateurs div.form-group','#widget-counter');
+   miseAjourCounter('#auteurRealisateurs div.form-group','#widget-counter');
    supFormAuteurRealisateur('button[data-action="delete"]');
-
-   supFormAuteurRealisateur('button[data-action="delete-documentAudioVisuels"]');
-   //counterForm('#documentAudioVisuels div.form-group','#widget-counter-documentsAudioVisuels');
+   miseAjourCounter('#documentAudioVisuels div.form-group','#widget-counter-documentAudioVisuels');
+   supFormAuteurDocumentAudio('button[data-action="delete-documentAudioVisuels"]');
+   
    
   
   calculDevisPrevisionnel('.ht input','.input-totalHtTotalGeneral');
@@ -472,6 +462,8 @@ function longMax(element, max){
       $('label[for="synopsis"]').css('color','red');
 	}
 }
+
+
 });
 
 

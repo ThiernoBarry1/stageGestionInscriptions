@@ -4,7 +4,8 @@
 {% form_theme allFieldsForm  with
    [
      'all_fields_form/_auteurRealisateursForm.html.twig', 
-     'all_fields_form/_documentsAudioVisuelsForm.html.twig'
+     'all_fields_form/_documentsAudioVisuelsForm.html.twig',
+     'all_fields_form/_producteurForm.html.twig'
    ] 
 %}
 
@@ -100,129 +101,28 @@
       <hr class="production">
       <fieldset class="border p-3 production">
          <legend class="w-auto"> Production </legend>   
-            {% for producteur in allFieldsForm.producteurs %}
-               <div class="form-group">
-                  <div class="row">
-                     <div class="col-6">
-                        <label for="nom">Nom de la structure</label>
-                           {{ form_row(producteur.nom,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                     </div>
-                  </div>
-                  <div class="row my-2">
-                    <div class="col-6">
-                       <label for="nature">Nature juridique</label>
-                        {{ form_row(producteur.nature,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                     </div>
-                     <div class="col-6">
-                        <label for="siret">SIRET</label>
-                        {{ form_row(producteur.siret,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                     </div>
-                  </div>
-                  <div class="row my-2">
-                     <div class="col-6">
-                        <label for="prenomGerant">Gérant/Président</label>
-                         {{ form_row(producteur.prenomGerant,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Prénom'}}) }}
-                      </div>
-                      <div class="col-6">
-                         {{ form_row(producteur.nomGerant,{'label':false,'attr':{'class':'form-control-sm w-100 decalageLabel','placeholder':'Nom'}}) }}
-                      </div>
-                  </div>
-                   <fieldset class="border p-2">
-                        <legend class="w-auto h6">Producteur</legend>
-                         <div class="row my-2">
-                           <div class="col-6">
-                               {{ form_row(producteur.prenomProducteur,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Prénom'}}) }}
-                            </div>
-                            <div class="col-6">
-                               {{ form_row(producteur.nomProducteur,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Nom'}}) }}
-                            </div>
-                         </div>
-                         <div class="row">
-                              <div class="col-4">
-                                 <label for="telephoneFixe">Téléphone fixe</label>
-                                  {{ form_row(producteur.telephoneFixeProducteur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                              </div>
-                              <div class="col-4">
-                                 <label for="telephoneMobile">Téléphone Mobile</label>
-                                  {{ form_row(producteur.telephoneMobileProducteur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                              </div>
-                              <div class="col-4">
-                                 <label for="corriel">Courriel</label>
-                                 {{ form_row(producteur.courrielProducteur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                              </div>
-                         </div>
-                      </fieldset>
-                      <fieldset class="border p-2">
-                         <legend class="w-auto h6" >Personne Chargée (si differente)</legend>
-                         <div class="row my-2">
-                            <div class="col-6">
-                                {{ form_row(producteur.prenomPersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Prénom'}}) }}
-                             </div>
-                             <div class="col-6">
-                                {{ form_row(producteur.nomPersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Nom'}}) }}
-                             </div>
-                         </div>
-                         <div class="row">
-                            <div class="col-4">
-                               <label for="telephoneFixe">Téléphone fixe</label>
-                                {{ form_row(producteur.telephoneFixePersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                            </div>
-                            <div class="col-4">
-                               <label for="telephoneMobile">Téléphone Mobile</label>
-                                {{ form_row(producteur.telephoneMobilePersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                            </div>
-                            <div class="col-4">
-                               <label for="corriel">Courriel</label>
-                               {{ form_row(producteur.courrielPersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                            </div>
-                         </div>
-                     </fieldset>
-                    <div class="row">
-                        <div class="col-6">
-                           <label for="adresse">Adresse siège social</label>
-                            {{ form_row(producteur.adresse,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Numero et nom de la rue'}}) }}
-                        </div>
-                        <div class="col-3">
-                           {{ form_row(producteur.codePostal,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Code postal'}}) }}
-                        </div>
-                        <div class="col-3">
-                           {{ form_row(producteur.ville,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Ville'}}) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                           <label for="adresseBureau">Adresse bureau (si differente du siège social)</label>
-                            {{ form_row(producteur.adresseBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Numero et nom de la rue'}}) }}
-                        </div>
-                        <div class="col-3">
-                           {{ form_row(producteur.codePostaleBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Code postal'}}) }}
-                       </div>
-                       <div class="col-3">
-                           {{ form_row(producteur.villeBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Ville'}}) }}
-                       </div>
-                    </div>
-                  </div>
-               {% endfor %}
+         <div id="producteurs"  data-prototype="{{ form_widget(allFieldsForm.producteurs.vars.prototype)|e('html_attr') }}">
+         </div>
       </fieldset>
      <hr class="auteurRealisateurs">
      <fieldset class="border p-3 auteurRealisateurs">
-        <legend class="w-auto">Auteurs/réalisateurs </legend>
+        <legend class="w-auto">Auteur(s)/réalisateur(s) </legend>
         <div id="auteurRealisateurs"  data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
         </div>
         <input type="hidden" id="widget-counter" value="0">
-        <div class="form-group">
+        <div>
            <button type="button" id="ajoutAuteur-realisateur" class="btn btn-primary my-4" > Ajouter un auteur réalisateur</button>
         </div>
       </fieldset>
       <hr>
       <fieldset class="border p-3">
-         <legend class="w-auto">Documents audiovisuels joints</legend>
+         <legend class="w-auto">Document(s) audiovisuel(s) joint(s)</legend>
          <small class="form-text text-muted">Vous pouvez joindre de un à deux documents audiovisuels ou films précédents de l'auteur/réalisateur (images de repérages, tests, teasers, extraits, photos, musiques...)</small>
          <div id="documentAudioVisuels" class="mt-3" data-prototype="{{ form_widget(allFieldsForm.documentAudioVisuels.vars.prototype)|e('html_attr') }}">
          </div>
          <input type="hidden" id="widget-counter-documentAudioVisuels" value="0">
-         <div class="form-group">
-            <button type="button" id="ajoutDocumentAudioVisuels" class="btn btn-primary my-4">Ajouter un documents audiovisuels</button>
+         <div>
+            <button type="button" id="ajoutDocumentAudioVisuels" class="btn btn-primary my-4">Ajouter un document audiovisuel</button>
          </div>
       </fieldset>
       {% if whichChoice == 1 %}
@@ -249,16 +149,24 @@
          </div>
       {% endif %}
       {% if whichChoice == 1  %}
-         <div class="form-group my-2">
-            <label for="liensEligibilite">Liens avec la Région Normandie</label>
-            <small class="form-text text-muted">Veuillez cocher au moins un critère</small>
-            {{ form_row(allFieldsForm.liensEligibilite,{'label':false})}}
-         </div>
+         <fieldset class="border p-2">
+            <legend class="w-auto h6 my-2">Lien(s) avec la Région Normandie</legend>
+            <small class="form-text text-muted my-2">Veuillez cocher au moins un critère repondant à votre projet</small>
+            {% for lien in allFieldsForm.liensEligibilite %}
+               <div class="liensEligibilite">
+                  {{form_widget(lien)}} {{form_label(lien,null,{'label_attr':{'class':'labelLiens'}})}}
+               </div>
+            {% endfor %}
+         </fieldset>
       {% elseif whichChoice == 2 or whichChoice == 3 or whichChoice == 5 %}
         <fieldset class="border p-2">
-            <legend class="w-auto h6 my-2">Liens avec la Région Normandie</legend>
-            <small class="form-text text-muted">Veuillez cocher au moins un critère repondant à votre projet</small>
-            {{ form_row(allFieldsForm.liensEligibilite,{'label':false,'attr':{'class':'liensEligibiliteReste'}})}}
+            <legend class="w-auto h6 my-2">Lien(s) avec la Région Normandie</legend>
+            <small class="form-text text-muted my-2">Veuillez cocher au moins un critère repondant à votre projet</small>
+            {% for lien in allFieldsForm.liensEligibilite %}
+               <div class="liensEligibilite">
+                  {{ form_widget(lien,{'attr':{'class':'liensEligibiliteReste'}}) }} {{form_label(lien,null,{'label_attr':{'class':'labelLiens'}})}}
+               </div>
+            {% endfor %}
         </fieldset>
       {% endif %}
       {% if whichChoice != 1 and whichChoice != 2 %}
@@ -540,7 +448,7 @@
             {{ form_row(allFieldsForm.financementAcquis,{'label':false}) }} 
          </div>
          <div class="col-6 financementAcquisPrecision">
-            <label for="financementAcquisPrecision"> Lesquels ?</label>
+            <label for="financementAcquisPrecision"> Le(s)quel(s) ?</label>
             {{ form_row(allFieldsForm.financementAcquisPrecision,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }} 
          </div>
       </div>
@@ -560,7 +468,7 @@
             {{ form_row(allFieldsForm.depotProjetCollectivite,{'label':false}) }} 
          </div>
          <div class="col-6 depotProjetCollectivitePrecision">
-            <label for="depotProjetCollectivitePrecision"> Lesquelles ?</label>
+            <label for="depotProjetCollectivitePrecision"> Le(s)quelle(s) ?</label>
             {{ form_row(allFieldsForm.depotProjetCollectivitePrecision,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }} 
          </div>
       </div>
@@ -579,7 +487,7 @@
       <hr>
 
       <h4>Téléchargement du document</h4>
-         <div class="input-group">
+         <div class="input-group mt-4">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroupFileAddon01">une image</span>
             </div>
@@ -589,7 +497,7 @@
             </div>
        </div>
       <div class="form-group enregistrer mt-4">
-         <button  class="btn btn-success">Enregistrer</button>
+         {{form_widget(allFieldsForm.enregistrer,{'label':'Enregistrer','attr':{'class':'btn btn-success'}})}}
       </div>
       {{ form_end(allFieldsForm,{'render_rest':false}) }}
    </div>

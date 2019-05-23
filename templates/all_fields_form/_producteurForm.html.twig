@@ -1,0 +1,103 @@
+{% block _registration_producteurs_entry_widget %}
+    <div class="form-group" id="producteur_block_{{id}}">
+        <div class="row">
+           <div class="col-6">
+              <label for="nom">Nom de la structure</label>
+                 {{ form_row(form.nom,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+           </div>
+        </div>
+        <div class="row my-2">
+          <div class="col-6">
+             <label for="nature">Nature juridique</label>
+              {{ form_row(form.nature,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+           </div>
+           <div class="col-6">
+              <label for="siret">SIRET</label>
+              {{ form_row(form.siret,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+           </div>
+        </div>
+        <div class="row my-2">
+           <div class="col-6">
+              <label for="prenomGerant">Gérant/Président</label>
+               {{ form_row(form.prenomGerant,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Prénom'}}) }}
+            </div>
+            <div class="col-6">
+               {{ form_row(form.nomGerant,{'label':false,'attr':{'class':'form-control-sm w-100 decalageLabel','placeholder':'Nom'}}) }}
+            </div>
+        </div>
+     <fieldset class="border p-2">
+            <legend class="w-auto h6">Producteur</legend>
+            <div class="row my-2">
+                  <div class="col-6">
+                      {{ form_row(form.prenomProducteur,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Prénom'}}) }}
+                   </div>
+                   <div class="col-6">
+                      {{ form_row(form.nomProducteur,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Nom'}}) }}
+                   </div>
+            </div>
+            <div class="row">
+                 <div class="col-4">
+                    <label for="telephoneFixe">Téléphone fixe</label>
+                     {{ form_row(form.telephoneFixeProducteur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                 </div>
+                 <div class="col-4">
+                    <label for="telephoneMobile">Téléphone Mobile</label>
+                     {{ form_row(form.telephoneMobileProducteur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                 </div>
+                 <div class="col-4">
+                    <label for="corriel">Courriel</label>
+                    {{ form_row(form.courrielProducteur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                 </div>
+          </div>
+     </fieldset>
+     <fieldset class="border p-2">
+        <legend class="w-auto h6" >Personne Chargée (si differente)</legend>
+        <div class="row my-2">
+           <div class="col-6">
+               {{ form_row(form.prenomPersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Prénom'}}) }}
+            </div>
+            <div class="col-6">
+               {{ form_row(form.nomPersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Nom'}}) }}
+            </div>
+        </div>
+        <div class="row">
+           <div class="col-4">
+              <label for="telephoneFixe">Téléphone fixe</label>
+               {{ form_row(form.telephoneFixePersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+           </div>
+           <div class="col-4">
+              <label for="telephoneMobile">Téléphone Mobile</label>
+               {{ form_row(form.telephoneMobilePersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+           </div>
+           <div class="col-4">
+              <label for="corriel">Courriel</label>
+              {{ form_row(form.courrielPersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+           </div>
+        </div>
+    </fieldset>
+    <div class="row">
+        <div class="col-6">
+           <label for="adresse">Adresse siège social</label>
+            {{ form_row(form.adresse,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Numero et nom de la rue'}}) }}
+        </div>
+        <div class="col-3">
+           {{ form_row(form.codePostal,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Code postal'}}) }}
+        </div>
+        <div class="col-3">
+           {{ form_row(form.ville,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Ville'}}) }}
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-6">
+               <label for="adresseBureau">Adresse bureau (si differente du siège social)</label>
+                {{ form_row(form.adresseBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Numero et nom de la rue'}}) }}
+            </div>
+            <div class="col-3">
+               {{ form_row(form.codePostaleBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Code postal'}}) }}
+           </div>
+           <div class="col-3">
+               {{ form_row(form.villeBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Ville'}}) }}
+           </div>
+        </div>
+    </div>
+{% endblock %}

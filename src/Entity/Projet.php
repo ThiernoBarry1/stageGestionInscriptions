@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjetRepository")
  * @Vich\Uploadable
@@ -48,6 +48,7 @@ class Projet
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(max=600,maxMessage="le synopsis ne dois pas dépasser {{ limit }} caractères")
      */
     private $synopsis;
 

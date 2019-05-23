@@ -10,18 +10,25 @@ use App\Entity\DocumentAudioVisuels;
 use App\Form\ConfigurationFildsType;
 use App\Form\DocumentsAudioVisuelsType;
 use Symfony\Component\Form\AbstractType;
+use App\Form\DataTransform\TransformeurDate;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class RegistrationType extends ConfigurationFildsType
-{
+{ 
+   private $dateTransformeur; 
+   public function __construct(TransformeurDate $dateTransformeur)
+    {
+      $this->dateTransformeur = $dateTransformeur;
+    }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -86,7 +93,8 @@ class RegistrationType extends ConfigurationFildsType
                 )
                ->add('producteurs',CollectionType::class,
                                                            [
-                                                            'entry_type'=>ProducteurType::class
+                                                            'entry_type'=>ProducteurType::class,
+                                                            'allow_add'=>true,
                                                            ]
                     )
               ->add('auteurRealisateurs',CollectionType::class,
@@ -189,7 +197,9 @@ class RegistrationType extends ConfigurationFildsType
             ->add('projetDejaPresenteFondsAideDate',TextType::class,$this->getConfiguration())
             ->add('projetDejaPresenteFondsAideTypeAide',TextType::class,$this->getConfiguration())
             ->add('file',FileType::class,$this->getConfiguration())  
+            ->add('enregistrer',SubmitType::class)
             ;
+            //$builder->get('adaptationOeuvreDfc')->addModelTransformer($this->dateTransformeur);
     }
 
     public function configureOptions(OptionsResolver $resolver)
