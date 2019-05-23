@@ -121,7 +121,7 @@ class Projet
      * @ORM\Column(type="text", nullable=true)
      *
      */
-    private $listeLieuxTournage;
+    private $lieuxTournage;
 
     /**
      * @ORM\Column(type="integer",nullable=true)
@@ -365,7 +365,7 @@ class Projet
      * @var  string|null
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $nomFihcier;
+    private $nomFichier;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -650,14 +650,14 @@ class Projet
         return $this;
     }
 
-    public function getListeLieuxTournage(): ?string
+    public function getLieuxTournage(): ?text
     {
-        return $this->listeLieuxTournage;
+        return $this->lieuxTournage;
     }
 
-    public function setlisteLieuxTournage(?string $listeLieuxTournage): self
+    public function setLieuxTournage(?text $lieuxTournage): self
     {
-        $this->listeLieuxTournage = $listeLieuxTournage;
+        $this->lieuxTournage = $lieuxTournage;
 
         return $this;
     }
@@ -705,7 +705,7 @@ class Projet
 
     public function setDroitArtistiqueTotalHtNormandie(?int $droitArtistiqueTotalHtNormandie): self
     {
-        $this->droitArtistiqueTotalHtNormandie = $droitArtistiqueTotalHtNormandi;
+        $this->droitArtistiqueTotalHtNormandie = $droitArtistiqueTotalHtNormandie;
 
         return $this;
     }
@@ -845,7 +845,7 @@ class Projet
         return $this->postProdTotalHt;
     }
 
-    public function setPostProdTotalHt(?float $postProd): self
+    public function setPostProdTotalHt(?float $postProdTotalHt): self
     {
         $this->postProdTotalHt = $postProdTotalHt;
 
@@ -871,7 +871,7 @@ class Projet
 
     public function setPostProdTotalHtNormandie(?float $postProdTotalHtNormandie): self
     {
-        $this->postPostProdTotalHtNormandie = $postProdTotalHtNormandie;
+        $this->postProdTotalHtNormandie = $postProdTotalHtNormandie;
 
         return $this;
     }

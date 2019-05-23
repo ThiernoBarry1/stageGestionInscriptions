@@ -40,6 +40,29 @@ class WhichCommissionChoice
     public function getFondsAide(){
         return $this->fondsAideRepo->find($this->id);
     }
+    /**
+     * permet à partir d'un fonds d'aide de retrouver une la date de fin de session 
+     *
+     * @param string $fondsAide
+     * @return DateTime
+     */
+    public function getDateFin($fondsAide,$idSession)
+    {
+      return $fondsAide->getSessions()->filter(
+         function($session) use ($idSession) {
+         return $session->getId() == $idSession;
+        })->get(0)->getDateFin();
+    }
+   /**
+    * permet de retourne un entier selon la commision choisie
+    *
+    *  /!\  Attention:  le nommage des differentes commisions est important, il faut faire gaff 
+    * à ne pas nommer deux commissions avec le même nom.
+    *
+    * @return Integer
+    */
+
+   
     public function getCorrectIdCommision(){
          $fondsAide = $this->getFondsAide();
 

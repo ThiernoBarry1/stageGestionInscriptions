@@ -54,3 +54,9 @@ hr
     vertical-align: top;
     margin-top: 8px;
 }
+.lienRetourForm{
+    float:left;
+}
+.lienFermer{
+    float:right;
+}

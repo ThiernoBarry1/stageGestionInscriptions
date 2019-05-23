@@ -141,7 +141,7 @@ class RegistrationType extends ConfigurationFildsType
             ->add('dateTournage',TextType::class,$this->getConfiguration())
             ->add('dateDiffusion',TextType::class,$this->getConfiguration())
             ->add('castingEnvisage',TextType::class,$this->getConfiguration())
-            ->add('listeLieuxTournage',TextareaType::class,$this->getConfiguration())
+            ->add('lieuxTournage',TextareaType::class,$this->getConfiguration())
             ->add('nombreJoursTournage',TextType::class,$this->getConfiguration())
             ->add('nombreJoursTotal',TextType::class,$this->getConfiguration())
             ->add('droitArtistiqueTotalHt',TextType::class,$this->getConfiguration())

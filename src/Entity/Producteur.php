@@ -27,7 +27,7 @@ class Producteur
     private $nature;
 
     /**
-     * @ORM\Column(type="string", length=14)
+     * @ORM\Column(type="string", length=14,nullable=true)
      */
     private $siret;
 
@@ -86,7 +86,7 @@ class Producteur
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Projet", inversedBy="producteurs")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $projet;
 

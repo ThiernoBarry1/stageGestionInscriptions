@@ -48,6 +48,7 @@ class DocumentAudioVisuels
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Projet", inversedBy="documentAudioVisuels")
+     * * @ORM\JoinColumn(nullable=true)
      */
     private $projet;
 

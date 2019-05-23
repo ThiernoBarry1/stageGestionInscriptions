@@ -47,23 +47,23 @@ class AuteurRealisateur
     private $ville;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $telephoneMobile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $courriel;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=25,nullable=true)
      */
     private $typePersonne;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Projet", inversedBy="auteurRealisateurs")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $projet;
 
