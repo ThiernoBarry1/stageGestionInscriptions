@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\DocumentAudioVisuels;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,11 +27,15 @@ class DocumentsAudioVisuelsType extends ConfigurationFildsType
                                                                     ],false,false
                                                                 )
                 )
-            ->add('annee',ChoiceType::class,
-                ['choices'  => 
-                   $this->getArrayDuration(1950,2100),
-                   'required'=>false
-                ])
+            ->add('annee',IntegerType::class, [
+                'required' => false,
+                'label' => false,
+                'attr' => [
+                    'min' => 1950,
+                    'max' => 2100,
+                    'step' => 1,
+                ]
+            ])
             ->add('duree',TextType::class,$this->getConfiguration()
                  )
             ->add('lien',TextType::class,$this->getConfiguration()

@@ -17,18 +17,7 @@ class ConfigurationFildsType extends AbstractType {
     {
       return ['required'=>false];
     }
-    /**
-    * Permet de remplir un tableau de nombres
-    *@return Array
-    */
-    protected function getArrayDuration($debut,$fin)
-    {
-        $arrayDate = [$debut=>true];
-        for($i= $debut+1 ;$i <= $fin;  $i++) {
-          $arrayDate[] = false;
-        }
-        return $arrayDate;
-    }
+
     /**
      * return le tableau de choix
      *

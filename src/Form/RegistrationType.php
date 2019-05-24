@@ -21,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class RegistrationType extends ConfigurationFildsType
 { 
@@ -33,40 +34,43 @@ class RegistrationType extends ConfigurationFildsType
     {
         $builder
             ->add('titre',TextType::class,$this->getConfiguration())
-            ->add('duree',ChoiceType::class,
-                                         [
-                                            'choices'=>
-                                            [
-                                              $this->getArrayDuration(1,300)
-                                            ],
-                                            'required'=>false,
-                                         ]
-                  )
+            ->add('duree', IntegerType::class, [
+                'required' => false,
+                'label' => false,
+                'attr' => [
+                    'min' => 0,
+                    'max' => 300,
+                    'step' => 1,
+                ]
+            ])
+
             ->add('typeFilm',ChoiceType::class,$this->getArrayChoice(
                                          ['Unitaire'=>true,
                                            'Serie'=>false
                                          ])
                 )
-            ->add('dureeEpisode',ChoiceType::class,
-                                                   [
-                                                     'choices'=>
-                                                     [
-                                                       $this->getArrayDuration(1,300)
-                                                     ],'required'=>false,
-                                                   ]
-                  )
+            ->add('dureeEpisode',IntegerType::class, [
+                'required' => false,
+                'label' => false,
+                'attr' => [
+                    'min' => 0,
+                    'max' => 300,
+                    'step' => 1,
+                ]
+            ])
             ->add('formatTournage',TextType::class,$this->getConfiguration())
             ->add('formatDefinitif',TextType::class,$this->getConfiguration())
-            ->add('genre',ChoiceType::class,
-                $this->getArrayChoice(
-                                       [
-                                        'Fiction' => true,
-                                        'Animation' => false,
-                                        'Documentaire' => false,
-                                        'Autre'=>false,
-                                       ]
-                                      )
-                   )
+            ->add('genre',ChoiceType::class,[
+                'choices'  => [
+                    'Fiction' => 'fiction',
+                    'Animation' => 'animation',
+                    'Documentaire' => 'documentaire',
+                    'Autre'=>'autre',
+                ],
+                'expanded' => true,
+                'required' => true,
+                'multiple' => false,
+            ])
               ->add('typeOeuvre',TextType::class,$this->getConfiguration())
              ->add('genrePrecisionAutre',TextType::class,$this->getConfiguration())
             ->add('synopsis',TextareaType::class,$this->getConfiguration())
@@ -97,6 +101,7 @@ class RegistrationType extends ConfigurationFildsType
                                                            [
                                                             'entry_type'=>ProducteurType::class,
                                                             'allow_add'=>true,
+                                                               'required' => false,
                                                            ]
                     )
               ->add('auteurRealisateurs',CollectionType::class,
@@ -104,6 +109,7 @@ class RegistrationType extends ConfigurationFildsType
                                                                   'entry_type'=>AuteurRealisateurType::class,
                                                                   'allow_add'=>true,
                                                                   'allow_delete'=>true,
+                                                                    'required' => false,
                                                                 ]
                     )
                  ->add('documentAudioVisuels',CollectionType::class,

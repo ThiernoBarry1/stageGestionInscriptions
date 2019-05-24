@@ -27,30 +27,33 @@ class AllFieldsFormController extends AbstractController
      * @Route("/fonds-d-aide/{idSession}/{idProjet}", name="all_fields_form")
      *
      * @param  integer $idSession
-     * @param  integer $idProjet
      * @param ObjectManager $manager
      * @return Response
      */
 
-    public function registrationnew(ProjetRepository $projetRepo, SessionRepository $sessionRepo, $idSession, $idProjet = "", ObjectManager $manager, Request $request)
+    public function registrationnew(ProjetRepository $projetRepo, SessionRepository $sessionRepo, $idSession, $idProjet = null, ObjectManager $manager, Request $request)
     {
-        if(empty($idProjet)){
-            $projet  = new Projet();
-        }else{
-            $projet = $projetRepo->findOneById($idProjet);
-        }
 
         $session = $sessionRepo->findOneById($idSession);
-        $whichChoice = $session->getFondsAide()->getId();
-        $fondsAide = $session->getFondsAide()->getNom();
+        $projet = $projetRepo->findOneById($idProjet);
+
+        if(empty($projet)){
+            $projet  = new Projet();
+        }
+
+        $fondsAide = $session->getFondsAide();
 
         $allFieldsForm =  $this->createForm(RegistrationType::class,$projet);
         $allFieldsForm->handleRequest($request);
+
         if($allFieldsForm->isSubmitted()) {
+            $projet->setSession($session);
+            $manager->persist($projet);
+
             foreach($projet->getProducteurs() as $producteur)
             {
                 $producteur->setProjet($projet);
-                $manager->persist($producteur);
+                $manager->persist($producteur);;
             }
             foreach($projet->getAuteurRealisateurs() as $auteurRealisateurs)
             {
@@ -62,7 +65,59 @@ class AllFieldsFormController extends AbstractController
                 $documentAudio->setProjet($projet);
                 $manager->persist($documentAudio);
             }
+
+            $manager->flush();
+
+            $idProjet = $projet->getId();
+
+            return $this->redirectToRoute('information_save',['idProjet'=>$idProjet,'idSession'=>$idSession]);
+        }
+        return $this->render('all_fields_form/displayAllFields.html.twig', [
+            'allFieldsForm' => $allFieldsForm->createView(),
+            'fondsAide' => $fondsAide,
+        ]);
+    }
+
+
+    /*
+    public function registration(ProjetRepository $projetRepo, SessionRepository $sessionRepo, $idSession, ObjectManager $manager, Request $request)
+    {
+
+        $session = $sessionRepo->findOneById($idSession);
+
+
+
+        if($session->getProjets()){
+            //$projet  = new Projet();
+            dump($session->getProjets());die;
+        }
+
+
+        $whichChoice = $session->getFondsAide()->getId();
+        $fondsAide = $session->getFondsAide()->getNom();
+
+        $allFieldsForm =  $this->createForm(RegistrationType::class,$projet);
+        $allFieldsForm->handleRequest($request);
+
+        if($allFieldsForm->isSubmitted()) {
             $manager->persist($projet);
+
+            foreach($projet->getProducteurs() as $producteur)
+            {
+                $producteur->setProjet($projet);
+                $manager->persist($producteur);;
+            }
+            foreach($projet->getAuteurRealisateurs() as $auteurRealisateurs)
+            {
+                $auteurRealisateurs->setProjet($projet);
+                $manager->persist($auteurRealisateurs);
+            }
+            foreach($projet->getDocumentAudioVisuels() as $documentAudio)
+            {
+                $documentAudio->setProjet($projet);
+                $manager->persist($documentAudio);
+            }
+
             $manager->flush();
 
             $idProjet = $projet->getId();
@@ -75,8 +130,8 @@ class AllFieldsFormController extends AbstractController
             'fondsAide' => $fondsAide,
         ]);
     }
+     */
 
-    
     /**
      * permet d'afficher un message de confirmations d'enregistement des données
      * à partir d'un formulaire.

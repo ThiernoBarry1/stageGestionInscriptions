@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription à la commission du {{ fondsAide }} {% endblock %}
+{% block title %}Inscription à la commission du {{ fondsAide.nom }} {% endblock %}
 {% form_theme allFieldsForm  with
    [
      'all_fields_form/_auteurRealisateursForm.html.twig', 
@@ -20,7 +20,7 @@
                  <label for="titre">Titre du projet</label>
                  {{ form_row(allFieldsForm.titre,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
               </div>
-              {% if whichChoice == 3 %}
+              {% if fondsAide.id == 3 %}
                   <div class="col-3">
                      <label for="formatDeTournage">Format de tournage</label>
                      {{ form_row(allFieldsForm.formatTournage,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
@@ -32,7 +32,7 @@
               {% endif %}
            </div>
          </div>
-         {% if whichChoice != 2  and whichChoice != 8  and whichChoice  != 3 %}
+         {% if fondsAide.id != 2  and fondsAide.id != 8  and fondsAide.id  != 3 %}
             <div class="row genreProjet">
                <div class="col-6 custom-control custom-radio">
                   <label for="genre"> Genre</label>
@@ -45,12 +45,12 @@
             </div>
          {% endif %}
          <div class="row my-2">
-            {% if whichChoice == 2 or whichChoice == 8 or whichChoice == 9 %}
+            {% if fondsAide.id == 2 or fondsAide.id == 8 or fondsAide.id == 9 %}
                 <div class="col-6 typeFilm">
                    <label for="typeFilm">Le type de film </label>
                    {{ form_row(allFieldsForm.typeFilm,{'label':false})}}
                 </div>
-            {% elseif whichChoice == 3 %}
+            {% elseif fondsAide.id == 3 %}
                <div class="col-6">
                   <label for="typeOuvre">Type d'œuvre</label>
                   {{ form_row(allFieldsForm.typeOeuvre,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
@@ -91,7 +91,7 @@
             {{ form_row(allFieldsForm.adaptationOeuvreDfc,{'label':false}) }}
          </div>
       </div>
-      {% if whichChoice == 1 or whichChoice == 2 %}
+      {% if fondsAide.id == 1 or fondsAide.id == 2 %}
           <div class="my-3">
              <label for="deposant">Projet déposé par</label>
              {{ form_row(allFieldsForm.deposant,{'label':false,'attr':{'class':'form-control-sm'}}) }}
@@ -100,9 +100,14 @@
       </fieldset>
       <hr class="production">
       <fieldset class="border p-3 production">
-         <legend class="w-auto"> Production </legend>   
-         <div id="producteurs"  data-prototype="{{ form_widget(allFieldsForm.producteurs.vars.prototype)|e('html_attr') }}">
-         </div>
+         <legend class="w-auto"> Production </legend>
+          <div id="producteurs"  data-prototype="{{ form_widget(allFieldsForm.producteurs.vars.prototype)|e('html_attr') }}">
+             {% for producteur in allFieldsForm.producteurs %}
+                 {{ form_row(producteur.nom) }}
+
+
+             {% endfor %}
+   </div>
       </fieldset>
      <hr class="auteurRealisateurs">
      <fieldset class="border p-3 auteurRealisateurs">
@@ -125,14 +130,14 @@
             <button type="button" id="ajoutDocumentAudioVisuels" class="btn btn-primary my-4">Ajouter un document audiovisuel</button>
          </div>
       </fieldset>
-      {% if whichChoice == 1 %}
+      {% if fondsAide.id == 1 %}
       <hr>
          <div class="form-group my-2">
             <label for="typeAideLm">Type d'aide demandée</label>
             {{ form_row(allFieldsForm.typeAideLm,{'label':false})}}
          </div>
       {% endif %}
-      {% if whichChoice == 2 %}
+      {% if fondsAide.id == 2 %}
       <hr>
          <div class="form-group  my-2">
             <label for="typeAideDoc">Type d'aide demandée</label>
@@ -142,13 +147,13 @@
 
       {# en attentant de révoir Fanny pour des explications #}
 
-      {% if whichChoice == 1 or whichChoice == 2 %}
+      {% if fondsAide.id == 1 or fondsAide.id == 2 %}
          <div class="form-group my-2 montant-budget">
             <label for="montant-budget"></label>
             {{ form_row(allFieldsForm.mtBudget,{'label':false,'attr':{'class':'form-control-sm '}})}}
          </div>
       {% endif %}
-      {% if whichChoice == 1  %}
+      {% if fondsAide.id == 1  %}
          <fieldset class="border p-2">
             <legend class="w-auto h6 my-2">Lien(s) avec la Région Normandie</legend>
             <small class="form-text text-muted my-2">Veuillez cocher au moins un critère repondant à votre projet</small>
@@ -158,7 +163,7 @@
                </div>
             {% endfor %}
          </fieldset>
-      {% elseif whichChoice == 2 or whichChoice == 3 or whichChoice == 5 %}
+      {% elseif fondsAide.id == 2 or fondsAide.id == 3 or fondsAide.id == 5 %}
         <fieldset class="border p-2">
             <legend class="w-auto h6 my-2">Lien(s) avec la Région Normandie</legend>
             <small class="form-text text-muted my-2">Veuillez cocher au moins un critère repondant à votre projet</small>
@@ -169,7 +174,7 @@
             {% endfor %}
         </fieldset>
       {% endif %}
-      {% if whichChoice != 1 and whichChoice != 2 %}
+      {% if fondsAide.id != 1 and fondsAide.id != 2 %}
             <hr>
             <fieldset class="border p-3">
                  <legend class="w-auto">Elements prévisionnels </legend>
@@ -192,7 +197,7 @@
                         </div>
                      </div>
                  </fieldset>
-                 {% if whichChoice != 7 and whichChoice != 9 %}
+                 {% if fondsAide.id != 7 and fondsAide.id != 9 %}
                      <div class="row">
                         <div class="col">
                            <label for="castingEnvisage">Casting envisagé</label>
@@ -220,7 +225,7 @@
                  </div>
             </fieldset>
           {% endif %}
-          {% if whichChoice != 1 and whichChoice != 2 %}
+          {% if fondsAide.id != 1 and fondsAide.id != 2 %}
             <hr>
             <fieldset class="border p-3"> 
                 <legend class="w-auto">Devis prévisionnel résumé faisant apparaitre la part des dépenses en région</legend>
