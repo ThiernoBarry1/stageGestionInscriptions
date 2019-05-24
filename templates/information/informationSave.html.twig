@@ -10,7 +10,7 @@ information de sauvegarde de données
            Un mail vous a été envoyé à l'adresse que vous avez indiquer dans ... vous pouvez cliquer sur le lien pour revenir et modifier vos informations avant le {{dateFin| date('d/m/Y')}}.
         </p>
     </div>
-    <a href="{{path('all_filds_form',{'id':id,'idSession':idSession})}}" class="btn btn-secondary lienRetourForm"> Revenir au formulaire</a>
+    <a href="{{path('all_fields_form',{'id':idProjet,'idSession':idSession})}}" class="btn btn-secondary lienRetourForm"> Revenir au formulaire</a>
     <a href="#" class="btn btn-secondary lienFermer"> Fermer</a>
 </div>
 {% endblock %}
