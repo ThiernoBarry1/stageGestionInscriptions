@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\FondsAideRepository;
+use App\Repository\ProjetRepository;
+use App\Repository\SessionRepository;
 use DateTime;
 use App\Entity\Projet;
 use App\Entity\FondsAide;
@@ -19,46 +22,52 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class AllFieldsFormController extends AbstractController
 {
     /**
-     * permet d'afficher le formulaire de saisie selon la commision.
-     * la classe WhichCommissionChoice permet d'ameliorer la ligibilité du controller et d'aléger 
-     * son rôle.
-     * @Route("/fonds-d-aide/{id}/{idSession}", name="all_filds_form")
-     * 
+     * permet d'afficher le formulaire de saisie selon la commission.
+     * @Route("/fonds-d-aide/{idSession}", name="all_fields_form_new")
+     * @Route("/fonds-d-aide/{idSession}/{idProjet}", name="all_fields_form")
      *
-     * @param WhichCommissionChoice $choice
-     * @param  integer $id
      * @param  integer $idSession
+     * @param  integer $idProjet
      * @param ObjectManager $manager
      * @return Response
      */
-    public function registration(WhichCommissionChoice $choice,$id,$idSession,ObjectManager $manager, Request $request)
+
+    public function registrationnew(ProjetRepository $projetRepo, SessionRepository $sessionRepo, $idSession, $idProjet = "", ObjectManager $manager, Request $request)
     {
-        
-        $choice->setId($id);
-        $whichChoice = $choice->getCorrectIdCommision();
-        $projet  = $choice->getInstanceProjet();
-        $fondsAide = $choice->getFondsAide();
+        if(empty($idProjet)){
+            $projet  = new Projet();
+        }else{
+            $projet = $projetRepo->findOneById($idProjet);
+        }
+
+        $session = $sessionRepo->findOneById($idSession);
+        $whichChoice = $session->getFondsAide()->getId();
+        $fondsAide = $session->getFondsAide()->getNom();
+
         $allFieldsForm =  $this->createForm(RegistrationType::class,$projet);
         $allFieldsForm->handleRequest($request);
         if($allFieldsForm->isSubmitted()) {
-          foreach($projet->getProducteurs() as $producteur)
-          {
-              $producteur->setProjet($projet);
-              $manager->persist($producteur);
-          }
-          foreach($projet->getAuteurRealisateurs() as $auteurRealisateurs)
-          {
-              $auteurRealisateurs->setProjet($projet);
-              $manager->persist($auteurRealisateurs);
-          }
-          foreach($projet->getDocumentAudioVisuels() as $documentAudio)
-          {
-              $documentAudio->setProjet($projet);
-              $manager->persist($documentAudio);
-          }
-          $manager->persist($projet);
-          $manager->flush();
-          return $this->redirectToRoute('information_save',['id'=>$id,'idSession'=>$idSession]);
+            foreach($projet->getProducteurs() as $producteur)
+            {
+                $producteur->setProjet($projet);
+                $manager->persist($producteur);
+            }
+            foreach($projet->getAuteurRealisateurs() as $auteurRealisateurs)
+            {
+                $auteurRealisateurs->setProjet($projet);
+                $manager->persist($auteurRealisateurs);
+            }
+            foreach($projet->getDocumentAudioVisuels() as $documentAudio)
+            {
+                $documentAudio->setProjet($projet);
+                $manager->persist($documentAudio);
+            }
+            $manager->persist($projet);
+            $manager->flush();
+
+            $idProjet = $projet->getId();
+
+            return $this->redirectToRoute('information_save',['idProjet'=>$idProjet,'idSession'=>$idSession]);
         }
         return $this->render('all_fields_form/displayAllFields.html.twig', [
             'allFieldsForm' => $allFieldsForm->createView(),
@@ -67,30 +76,30 @@ class AllFieldsFormController extends AbstractController
         ]);
     }
 
-    
+
     /**
      * permet d'afficher un message de confirmations d'enregistement des données
      * à partir d'un formulaire.
-     * 
-     *@Route("/fonds-d-aide-messages/{id}/{idSession}/",name="information_save")
+     *
+     *@Route("/fonds-d-aide-messages/{idSession}/{idProjet}",name="information_save")
      *
      * @param WhichCommissionChoice $choice
-     * @param Integer $id
      * @param Integer $idSession
-     * 
+     * @param Integer $idProjet
+     *
      * @return Response
      */
-    public function displayInformationSave(WhichCommissionChoice $choice,$id,$idSession)
+    public function displayInformationSave(SessionRepository $sessionRepo, $idSession, $idProjet)
     {
-        $choice->setId($id);
-        $fondsAide = $choice->getFondsAide();
-        $titre = $fondsAide->getNom();
-        $dateFinSession = $choice->getDateFin($fondsAide,$idSession);
+        $session = $sessionRepo->findOneById($idSession);
+        $titre = $session->getFondsAide()->getNom();
+        $dateFinSession = $session->getDateFin();
+
         return $this->render('information/informationSave.html.twig',
-                                        ['titre'=>$titre,
-                                          'id'=>$id,
-                                          'dateFin'=>$dateFinSession,
-                                          'idSession'=>$idSession,
-                                        ]);
+            ['titre'=>$titre,
+                'dateFin'=>$dateFinSession,
+                'idSession'=>$idSession,
+                'idProjet'=>$idProjet,
+            ]);
     }
 }
