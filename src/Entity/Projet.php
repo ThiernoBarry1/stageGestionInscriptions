@@ -905,7 +905,7 @@ class Projet
         return $this->fraisFinanciersTotalHt;
     }
 
-    public function setFraisFinanciersTotalHt(?float $fraisFinanciersTotalHT): self
+    public function setFraisFinanciersTotalHt(?float $fraisFinanciersTotalHt): self
     {
         $this->fraisFinanciersTotalHt = $fraisFinanciersTotalHt;
 

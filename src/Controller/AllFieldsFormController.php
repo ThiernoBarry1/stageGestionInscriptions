@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Controller;
+
 use App\Repository\FondsAideRepository;
 use App\Repository\ProjetRepository;
 use App\Repository\SessionRepository;
@@ -16,6 +18,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 class AllFieldsFormController extends AbstractController
 {
     /**
@@ -28,6 +31,7 @@ class AllFieldsFormController extends AbstractController
      * @param ObjectManager $manager
      * @return Response
      */
+
     public function registrationnew(ProjetRepository $projetRepo, SessionRepository $sessionRepo, $idSession, $idProjet = "", ObjectManager $manager, Request $request)
     {
         if(empty($idProjet)){
@@ -35,9 +39,11 @@ class AllFieldsFormController extends AbstractController
         }else{
             $projet = $projetRepo->findOneById($idProjet);
         }
+
         $session = $sessionRepo->findOneById($idSession);
         $whichChoice = $session->getFondsAide()->getId();
         $fondsAide = $session->getFondsAide()->getNom();
+
         $allFieldsForm =  $this->createForm(RegistrationType::class,$projet);
         $allFieldsForm->handleRequest($request);
         if($allFieldsForm->isSubmitted()) {
@@ -58,7 +64,9 @@ class AllFieldsFormController extends AbstractController
             }
             $manager->persist($projet);
             $manager->flush();
+
             $idProjet = $projet->getId();
+
             return $this->redirectToRoute('information_save',['idProjet'=>$idProjet,'idSession'=>$idSession]);
         }
         return $this->render('all_fields_form/displayAllFields.html.twig', [
@@ -67,16 +75,18 @@ class AllFieldsFormController extends AbstractController
             'fondsAide' => $fondsAide,
         ]);
     }
+
+    
     /**
      * permet d'afficher un message de confirmations d'enregistement des données
      * à partir d'un formulaire.
-     *
+     * 
      *@Route("/fonds-d-aide-messages/{idSession}/{idProjet}",name="information_save")
      *
      * @param WhichCommissionChoice $choice
      * @param Integer $idSession
      * @param Integer $idProjet
-     *
+     * 
      * @return Response
      */
     public function displayInformationSave(SessionRepository $sessionRepo, $idSession, $idProjet)
@@ -84,11 +94,12 @@ class AllFieldsFormController extends AbstractController
         $session = $sessionRepo->findOneById($idSession);
         $titre = $session->getFondsAide()->getNom();
         $dateFinSession = $session->getDateFin();
+
         return $this->render('information/informationSave.html.twig',
-            ['titre'=>$titre,
-                'dateFin'=>$dateFinSession,
-                'idSession'=>$idSession,
-                'idProjet'=>$idProjet,
-            ]);
+                                        ['titre'=>$titre,
+                                          'dateFin'=>$dateFinSession,
+                                          'idSession'=>$idSession,
+                                          'idProjet'=>$idProjet,
+                                        ]);
     }
 }

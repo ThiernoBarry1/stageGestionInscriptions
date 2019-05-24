@@ -4,15 +4,19 @@ namespace App\Service;
 use App\Entity\Projet;
 use App\Entity\FondsAide;
 use App\Repository\FondsAideRepository;
+use App\Repository\ProjetRepository;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class WhichCommissionChoice 
 {   
     private $id;
     private $fondsAideRepo;
+    private $projetRepo;
 
-    public function __construct(FondsAideRepository $fondsAideRepo){
+
+    public function __construct(FondsAideRepository $fondsAideRepo, ProjetRepository $projetRepo){
         $this->fondsAideRepo = $fondsAideRepo;
+        $this->projetRepo = $projetRepo;
     }
     public function  getId(){
         return $this->id;
@@ -37,6 +41,11 @@ class WhichCommissionChoice
     public function getInstanceProjet(){
        return new Projet();
     }
+
+    public function setInstanceProjet($idprojet){
+        return $this->projetRepo->findOneById($idprojet);
+    }
+
     public function getFondsAide(){
         return $this->fondsAideRepo->find($this->id);
     }
