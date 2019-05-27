@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription à la commission du {{ fondsAide}} {% endblock %}
+{% block title %}Inscription à la commission du {{ fondsAide.nom }} {% endblock %}
 {% form_theme allFieldsForm  with
    [
      'all_fields_form/_auteurRealisateursForm.html.twig', 
@@ -61,13 +61,13 @@
                   <div class="col-4">
                      <div class="row">
                         <label for="duree" class="dureeEnvisagee"></label>
-                        {{ form_row(allFieldsForm.duree,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}<span>minutes</span>
+                        {{ form_widget(allFieldsForm.duree,{'label':false,'attr':{'class':'form-control-sm w-50'}}) }}<span>minutes</span>
                      </div>
                   </div>
                   <div class="col-4 col-dureeEpisode">
                       <div class="row ml-3">
                          <label for="duree" class="dureeEpisode"></label>
-                         {{ form_row(allFieldsForm.dureeEpisode,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}<span>minutes</span>
+                         {{ form_widget(allFieldsForm.dureeEpisode,{'label':false,'attr':{'class':'form-control-sm w-50'}}) }}<span>minutes</span>
                       </div>
                   </div>
                </div>
@@ -118,12 +118,14 @@
       <fieldset class="border p-3">
          <legend class="w-auto">Document(s) audiovisuel(s) joint(s)</legend>
          <small class="form-text text-muted">Vous pouvez joindre de un à deux documents audiovisuels ou films précédents de l'auteur/réalisateur (images de repérages, tests, teasers, extraits, photos, musiques...)</small>
-         <div id="documentAudioVisuels" class="mt-3" data-prototype="{{ form_widget(allFieldsForm.documentAudioVisuels.vars.prototype)|e('html_attr') }}">
-         </div>
-         <input type="hidden" id="widget-counter-documentAudioVisuels" value="0">
-         <div>
-            <button type="button" id="ajoutDocumentAudioVisuels" class="btn btn-primary my-4">Ajouter un document audiovisuel</button>
-         </div>
+         {% block _registration_auteurRealisateurs_widget %}
+            <div id="documentAudioVisuels" class="mt-3" data-prototype="{{ form_widget(allFieldsForm.documentAudioVisuels.vars.prototype)|e('html_attr') }}">
+            </div>
+            <input type="hidden" id="widget-counter-documentAudioVisuels" value="0">
+            <div>
+               <button type="button" id="ajoutDocumentAudioVisuels" class="btn btn-primary my-4">Ajouter un document audiovisuel</button>
+            </div>
+         {% endblock %}
       </fieldset>
       {% if whichChoice == 1 %}
       <hr>

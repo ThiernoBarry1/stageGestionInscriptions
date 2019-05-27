@@ -17,12 +17,12 @@ class AuteurRealisateur
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50,nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=100,nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $prenom;
 
@@ -32,38 +32,38 @@ class AuteurRealisateur
     private $pseudonyme;
 
     /**
-     * @ORM\Column(type="string", length=60,nullable=true)
+     * @ORM\Column(type="string", length=60, nullable=true)
      */
     private $adresse;
 
     /**
-     * @ORM\Column(type="string", length=6,nullable=true)
+     * @ORM\Column(type="string", length=6, nullable=true)
      */
     private $codePostal;
 
     /**
-     * @ORM\Column(type="string", length=50,nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $ville;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $telephoneMobile;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $courriel;
 
     /**
-     * @ORM\Column(type="string", length=25,nullable=true)
+     * @ORM\Column(type="string", length=25, nullable=true)
      */
     private $typePersonne;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Projet", inversedBy="auteurRealisateurs")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $projet;
 
@@ -77,24 +77,24 @@ class AuteurRealisateur
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getNom()
     {
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom($nom): self
     {
         $this->nom = $nom;
 
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getPrenom()
     {
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom($prenom): self
     {
         $this->prenom = $prenom;
 

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190423131305 extends AbstractMigration
+final class Version20190527131027 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,7 @@ final class Version20190423131305 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE document_audio_visuels (id INT AUTO_INCREMENT NOT NULL, titre VARCHAR(255) NOT NULL, realisateur VARCHAR(255) NOT NULL, genre VARCHAR(255) NOT NULL, annee INT DEFAULT NULL, duree INT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE projet CHANGE imprevus_total_ht imprevus_total_ht DOUBLE PRECISION DEFAULT NULL, CHANGE imprevus_total_ht_normandie imprevus_total_ht_normandie DOUBLE PRECISION DEFAULT NULL, CHANGE total_general_total_ht total_general_total_ht DOUBLE PRECISION DEFAULT NULL, CHANGE total_general_total_ht_normandie total_general_total_ht_normandie DOUBLE PRECISION DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -30,6 +30,6 @@ final class Version20190423131305 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE document_audio_visuels');
+        $this->addSql('ALTER TABLE projet CHANGE imprevus_total_ht imprevus_total_ht INT DEFAULT NULL, CHANGE imprevus_total_ht_normandie imprevus_total_ht_normandie INT DEFAULT NULL, CHANGE total_general_total_ht total_general_total_ht INT DEFAULT NULL, CHANGE total_general_total_ht_normandie total_general_total_ht_normandie INT DEFAULT NULL');
     }
 }

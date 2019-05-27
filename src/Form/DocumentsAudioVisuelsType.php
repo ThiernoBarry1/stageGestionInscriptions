@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class DocumentsAudioVisuelsType extends ConfigurationFildsType
@@ -15,27 +16,34 @@ class DocumentsAudioVisuelsType extends ConfigurationFildsType
     {   
         
         $builder
-            ->add('titre',TextType::class,$this->getConfiguration())
-            ->add('realisateur',TextType::class,$this->getConfiguration())
-            ->add('genre',ChoiceType::class,$this->getArrayChoice(
-                                                                    [
-                                                                        'Fiction'=>true,
-                                                                        'Documentaire'=>false,
-                                                                        'Animation'=>false,
-                                                                        'Autre'=>false
-                                                                    ],false,false
-                                                                )
+            ->add('titre',TextType::class,[ 'required'=>false])
+            ->add('realisateur',TextType::class,[ 'required'=>false])
+            ->add('genre',ChoiceType::class,[
+                                                'choices'  => [
+                                                    'Fiction' => 'fiction',
+                                                    'Animation' => 'animation',
+                                                    'Documentaire' => 'documentaire',
+                                                    'Autre'=>'autre',
+                                                ],
+                                                
+                                            ]
                 )
-            ->add('annee',ChoiceType::class,
-                ['choices'  => 
-                   $this->getArrayDuration(1950,2100),
-                   'required'=>false
-                ])
-            ->add('duree',TextType::class,$this->getConfiguration()
+            ->add('annee',IntegerType::class,
+                                            [
+                                                'required' => false,
+                                                'label' => false,
+                                                'attr' => [
+                                                        'min' => 0,
+                                                        'max' => 300,
+                                                        'step' => 1,
+                                                ]
+                                            ]
+                )
+            ->add('duree',TextType::class,[ 'required'=>false]
                  )
-            ->add('lien',TextType::class,$this->getConfiguration()
+            ->add('lien',TextType::class,[ 'required'=>false]
                 )
-            ->add('motDePasse',PasswordType::class,$this->getConfiguration()
+            ->add('motDePasse',PasswordType::class,[ 'required'=>false]
                 )
         ;
     }

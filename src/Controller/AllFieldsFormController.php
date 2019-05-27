@@ -1,26 +1,28 @@
 <?php
 namespace App\Controller;
-use App\Repository\FondsAideRepository;
-use App\Repository\ProjetRepository;
-use App\Repository\SessionRepository;
 use DateTime;
 use App\Entity\Projet;
+use App\Entity\Session;
 use App\Entity\FondsAide;
 use App\Entity\Producteur;
 use App\Form\RegistrationType;
 use App\Entity\AuteurRealisateur;
 use App\Entity\DocumentAudioVisuels;
+use App\Repository\ProjetRepository;
+use App\Repository\SessionRepository;
 use App\Service\WhichCommissionChoice;
+use App\Repository\FondsAideRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
 class AllFieldsFormController extends AbstractController
 {
     /**
      * permet d'afficher le formulaire de saisie selon la commission.
-     * @Route("/fonds-d-aide/{idSession}", name="all_fields_form_new")
+     * @Route("/fonds-d-aide/{idSession}/", name="all_fields_form_new")
      * @Route("/fonds-d-aide/{idSession}/{idProjet}", name="all_fields_form")
      *
      * @param  integer $idSession
@@ -28,19 +30,23 @@ class AllFieldsFormController extends AbstractController
      * @param ObjectManager $manager
      * @return Response
      */
-    public function registrationnew(ProjetRepository $projetRepo, SessionRepository $sessionRepo, $idSession, $idProjet = "", ObjectManager $manager, Request $request)
+    public function registrationnew(ProjetRepository $projetRepo, SessionRepository $sessionRepo, $idSession, $idProjet = null, ObjectManager $manager, Request $request)
     {
-        if(empty($idProjet)){
-            $projet  = new Projet();
-        }else{
-            $projet = $projetRepo->findOneById($idProjet);
-        }
         $session = $sessionRepo->findOneById($idSession);
-        $whichChoice = $session->getFondsAide()->getId();
-        $fondsAide = $session->getFondsAide()->getNom();
+        $projet = $projetRepo->findOneById($idProjet);
+        if(empty($projet)){
+            $projet  = new Projet();
+        }
+
+        $fondsAide = $session->getFondsAide();
+        $whichChoice = $fondsAide->getId();
         $allFieldsForm =  $this->createForm(RegistrationType::class,$projet);
         $allFieldsForm->handleRequest($request);
+
         if($allFieldsForm->isSubmitted()) {
+            $projet->setSession($session);
+            $manager->persist($projet);
+    
             foreach($projet->getProducteurs() as $producteur)
             {
                 $producteur->setProjet($projet);
@@ -56,7 +62,6 @@ class AllFieldsFormController extends AbstractController
                 $documentAudio->setProjet($projet);
                 $manager->persist($documentAudio);
             }
-            $manager->persist($projet);
             $manager->flush();
             $idProjet = $projet->getId();
             return $this->redirectToRoute('information_save',['idProjet'=>$idProjet,'idSession'=>$idSession]);
@@ -67,6 +72,7 @@ class AllFieldsFormController extends AbstractController
             'fondsAide' => $fondsAide,
         ]);
     }
+
     /**
      * permet d'afficher un message de confirmations d'enregistement des données
      * à partir d'un formulaire.

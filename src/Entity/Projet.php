@@ -22,17 +22,17 @@ class Projet
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $titre;
 
     /**
-     * @ORM\Column(type="integer",nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $duree;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $formatTournage;
 
@@ -42,7 +42,7 @@ class Projet
     private $formatDefinitif;
 
     /**
-     * @ORM\Column(type="string", length=20,nullable=true)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $genre;
 
@@ -53,12 +53,12 @@ class Projet
     private $synopsis;
 
     /**
-     * @ORM\Column(type="boolean",nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $adaptationOeuvre;
 
     /**
-     * @ORM\Column(type="boolean",nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $deposant;
 
@@ -650,12 +650,12 @@ class Projet
         return $this;
     }
 
-    public function getLieuxTournage(): ?text
+    public function getLieuxTournage()
     {
         return $this->lieuxTournage;
     }
 
-    public function setLieuxTournage(?text $lieuxTournage): self
+    public function setLieuxTournage( $lieuxTournage): self
     {
         $this->lieuxTournage = $lieuxTournage;
 
@@ -751,7 +751,7 @@ class Projet
     }
     public function setInterpretationTotalHtNormandie(?float $interpretationTotalHtNormandie): self
     {
-        $this->interpretationTotalHt = $interpretationTotalHtNormandie;
+        $this->interpretationTotalHtNormandie = $interpretationTotalHtNormandie;
 
         return $this;
     }
@@ -785,7 +785,7 @@ class Projet
         return $this->decoEtCostumesTotalHt;
     }
 
-    public function setDecoEtCostumes(?float $decoEtCostumesTotalHt): self
+    public function setDecoEtCostumesTotalHt(?float $decoEtCostumesTotalHt): self
     {
         $this->decoEtCostumesTotalHt = $decoEtCostumesTotalHt;
 
@@ -894,7 +894,7 @@ class Projet
 
     public function setAssuranceEtFraisTotalHtNormandie(?float $assuranceEtFraisNormandie): self
     {
-        $this->assuranceEtFraisNormandie = $assuranceEtFraisNormandie;
+        $this->assuranceEtFraisTotalHtNormandie = $assuranceEtFraisNormandie;
 
         return $this;
     }
@@ -905,7 +905,7 @@ class Projet
         return $this->fraisFinanciersTotalHt;
     }
 
-    public function setFraisFinanciersTotalHt(?float $fraisFinanciersTotalHT): self
+    public function setFraisFinanciersTotalHt(?float $fraisFinanciersTotalHt): self
     {
         $this->fraisFinanciersTotalHt = $fraisFinanciersTotalHt;
 
@@ -955,7 +955,7 @@ class Projet
 
     public function setImprevusTotalHt(?float $imprevusTotalHt): self
     {
-        $this->inprevusTotalHt = $imprevusTotalHt;
+        $this->imprevusTotalHt = $imprevusTotalHt;
 
         return $this;
     }

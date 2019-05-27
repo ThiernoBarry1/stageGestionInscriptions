@@ -15,24 +15,24 @@ class DocumentAudioVisuels
      * @ORM\Column(type="integer")
      */
     private $id;
-
+ 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $titre;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $realisateur;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $genre;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $annee;
 
@@ -42,13 +42,13 @@ class DocumentAudioVisuels
     private $duree;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $motDePasse;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Projet", inversedBy="documentAudioVisuels")
-     * * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $projet;
 

@@ -17,17 +17,17 @@ class Producteur
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nature;
 
     /**
-     * @ORM\Column(type="string", length=14,nullable=true)
+     * @ORM\Column(type="string", length=14, nullable=true)
      */
     private $siret;
 
@@ -86,7 +86,7 @@ class Producteur
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Projet", inversedBy="producteurs")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $projet;
 

@@ -13,33 +13,35 @@ class AuteurRealisateurType extends ConfigurationFildsType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom',TextType::class,$this->getConfiguration()
-                                        
-                )
-            ->add('prenom',TextType::class,$this->getConfiguration()
-                                           
+            ->add('nom',TextType::class,['required'=>false]
                  )
-            ->add('pseudonyme',TextType::class,$this->getConfiguration()
+            ->add('prenom',TextType::class,['required'=>false]
+                 )
+            ->add('pseudonyme',TextType::class,['required'=>false]
+                 )
+            ->add('adresse',TextType::class,['required'=>false]
+                 )
+            ->add('codePostal',TextType::class,['required'=>false]
+                 )
+            ->add('ville',TextType::class,['required'=>false]
                 )
-            ->add('adresse',TextType::class,$this->getConfiguration()
+            ->add('telephoneMobile',TextType::class,['required'=>false]
                 )
-            ->add('codePostal',TextType::class,$this->getConfiguration()
+            ->add('courriel',TextType::class,['required'=>false]
                 )
-            ->add('ville',TextType::class,$this->getConfiguration()
+            ->add('typePersonne',ChoiceType::class,
+                                            [
+                                                'choices'  => [
+                                                    'Auteur réalisateur'=>'Auteur réalisateur',
+                                                    'Scénariste'=>'Scénariste',
+                                                    'Réalisateur'=>'Réalisateur'
+                                                ],
+                                                'expanded' => true,
+                                                'required' => true,
+                                                'multiple' => false,
+                                            ]
                 )
-            ->add('telephoneMobile',TextType::class,$this->getConfiguration()
-                )
-            ->add('courriel',TextType::class,$this->getConfiguration()
-                )
-            ->add('typePersonne',ChoiceType::class,$this->getArrayChoice(
-                                                                            [
-                                                                                'Auteur réalisateur'=>true,
-                                                                                'Scénariste'=>false,
-                                                                                'Réalisateur'=>false,
-                                                                            ],false,true
-                                                                        )
-                )
-            ->add('pourcentageAuteurRealisateur',TextType::class, $this->getConfiguration()
+            ->add('pourcentageAuteurRealisateur',TextType::class, ['required'=>false]
                  )
         ;
     }
