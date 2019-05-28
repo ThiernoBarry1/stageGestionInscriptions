@@ -82,8 +82,6 @@ class Producteur
      */
     private $villeBureau;
 
-   
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Projet", inversedBy="producteurs")
      * @ORM\JoinColumn(nullable=false)

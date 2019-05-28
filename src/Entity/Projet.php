@@ -325,7 +325,7 @@ class Projet
     private $montantSollicite;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Producteur", mappedBy="projet", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Producteur", cascade={"persist"}, mappedBy="projet", orphanRemoval=true)
      */
     private $producteurs;
 

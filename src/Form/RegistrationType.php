@@ -108,8 +108,8 @@ class RegistrationType extends ConfigurationFildsType
             ->add('deposant',ChoiceType::class,
                                                 [
                                                   'choices'  => [
-                                                    'Le producteur' => 'Le producteur', 
-                                                    'L\'auteur/le réalisateur' => 'L\'auteur/le réalisateur',
+                                                    'Le producteur' => 'producteur',
+                                                    'L\'auteur/le réalisateur' => 'realisateur',
                                                   ],
                                                   'expanded' => true,
                                                   'required' => true,

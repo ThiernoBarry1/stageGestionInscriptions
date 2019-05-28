@@ -66,12 +66,13 @@ class AllFieldsFormController extends AbstractController
             $idProjet = $projet->getId();
 
             // gestion d'envoie des mails
+            /*
             $courrielAuteurRealisateur =  $projet->getAuteurRealisateurs()->get(0)->getCourriel();
             $message = new \Swift_Message();
             $message->setFrom('thiernobarrykankalabe@gmail.com')
                     ->setTo($courrielAuteurRealisateur)
                     ->setReplyTo($courrielAuteurRealisateur)
-                    ->setBody('le corp du message');
+                    ->setBody('le corp du message');*/
             return $this->redirectToRoute('information_save',['idProjet'=>$idProjet,'idSession'=>$idSession]);
         }
         return $this->render('all_fields_form/displayAllFields.html.twig', [
