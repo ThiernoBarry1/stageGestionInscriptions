@@ -101,84 +101,84 @@ class AuteurRealisateur
         return $this;
     }
 
-    public function getPseudonyme(): ?string
+    public function getPseudonyme()
     {
         return $this->pseudonyme;
     }
 
-    public function setPseudonyme(?string $pseudonyme): self
+    public function setPseudonyme( $pseudonyme): self
     {
         $this->pseudonyme = $pseudonyme;
 
         return $this;
     }
 
-    public function getAdresse(): ?string
+    public function getAdresse()
     {
         return $this->adresse;
     }
 
-    public function setAdresse(string $adresse): self
+    public function setAdresse( $adresse): self
     {
         $this->adresse = $adresse;
 
         return $this;
     }
 
-    public function getCodePostal(): ?string
+    public function getCodePostal()
     {
         return $this->codePostal;
     }
 
-    public function setCodePostal(string $codePostal): self
+    public function setCodePostal( $codePostal): self
     {
         $this->codePostal = $codePostal;
 
         return $this;
     }
 
-    public function getVille(): ?string
+    public function getVille()
     {
         return $this->ville;
     }
 
-    public function setVille(string $ville): self
+    public function setVille($ville): self
     {
         $this->ville = $ville;
 
         return $this;
     }
 
-    public function getTelephoneMobile(): ?string
+    public function getTelephoneMobile()
     {
         return $this->telephoneMobile;
     }
 
-    public function setTelephoneMobile(string $telephoneMobile): self
+    public function setTelephoneMobile( $telephoneMobile): self
     {
         $this->telephoneMobile = $telephoneMobile;
 
         return $this;
     }
 
-    public function getCourriel(): ?string
+    public function getCourriel()
     {
         return $this->courriel;
     }
 
-    public function setCourriel(string $courriel): self
+    public function setCourriel($courriel): self
     {
         $this->courriel = $courriel;
 
         return $this;
     }
 
-    public function getTypePersonne(): ?string
+    public function getTypePersonne()
     {
         return $this->typePersonne;
     }
 
-    public function setTypePersonne(string $typePersonne): self
+    public function setTypePersonne($typePersonne): self
     {
         $this->typePersonne = $typePersonne;
 

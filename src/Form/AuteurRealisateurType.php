@@ -13,15 +13,7 @@ class AuteurRealisateurType extends ConfigurationFildsType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-<<<<<<< HEAD
             ->add('nom',TextType::class,['required'=>false]
-=======
-            ->add('nom',TextType::class, [
-                    'required' => false,
-                ])
-            ->add('prenom',TextType::class,$this->getConfiguration()
-                                           
->>>>>>> d4ff347086523a38e3ed198c045001252d3b9268
                  )
             ->add('prenom',TextType::class,['required'=>false]
                  )

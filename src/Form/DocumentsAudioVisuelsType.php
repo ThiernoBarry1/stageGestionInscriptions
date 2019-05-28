@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\DocumentAudioVisuels;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,7 +28,6 @@ class DocumentsAudioVisuelsType extends ConfigurationFildsType
                                                 
                                             ]
                 )
-<<<<<<< HEAD
             ->add('annee',IntegerType::class,
                                             [
                                                 'required' => false,
@@ -42,18 +40,6 @@ class DocumentsAudioVisuelsType extends ConfigurationFildsType
                                             ]
                 )
             ->add('duree',TextType::class,[ 'required'=>false]
-=======
-            ->add('annee',IntegerType::class, [
-                'required' => false,
-                'label' => false,
-                'attr' => [
-                    'min' => 1950,
-                    'max' => 2100,
-                    'step' => 1,
-                ]
-            ])
-            ->add('duree',TextType::class,$this->getConfiguration()
->>>>>>> d4ff347086523a38e3ed198c045001252d3b9268
                  )
             ->add('lien',TextType::class,[ 'required'=>false]
                 )

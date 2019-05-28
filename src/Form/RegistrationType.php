@@ -22,7 +22,6 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class RegistrationType extends ConfigurationFildsType
 { 
@@ -36,7 +35,6 @@ class RegistrationType extends ConfigurationFildsType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-<<<<<<< HEAD
             ->add('titre',TextType::class,[ 'required'=>false])
             ->add('duree',IntegerType::class,
                                               [
@@ -87,49 +85,6 @@ class RegistrationType extends ConfigurationFildsType
             ->add('typeOeuvre',TextType::class,[ 'required'=>false])
             ->add('genrePrecisionAutre',TextType::class,[ 'required'=>false])
             ->add('synopsis',TextareaType::class,[ 'required'=>false])
-=======
-            ->add('titre',TextType::class,$this->getConfiguration())
-            ->add('duree', IntegerType::class, [
-                'required' => false,
-                'label' => false,
-                'attr' => [
-                    'min' => 0,
-                    'max' => 300,
-                    'step' => 1,
-                ]
-            ])
-
-            ->add('typeFilm',ChoiceType::class,$this->getArrayChoice(
-                                         ['Unitaire'=>true,
-                                           'Serie'=>false
-                                         ])
-                )
-            ->add('dureeEpisode',IntegerType::class, [
-                'required' => false,
-                'label' => false,
-                'attr' => [
-                    'min' => 0,
-                    'max' => 300,
-                    'step' => 1,
-                ]
-            ])
-            ->add('formatTournage',TextType::class,$this->getConfiguration())
-            ->add('formatDefinitif',TextType::class,$this->getConfiguration())
-            ->add('genre',ChoiceType::class,[
-                'choices'  => [
-                    'Fiction' => 'fiction',
-                    'Animation' => 'animation',
-                    'Documentaire' => 'documentaire',
-                    'Autre'=>'autre',
-                ],
-                'expanded' => true,
-                'required' => true,
-                'multiple' => false,
-            ])
-              ->add('typeOeuvre',TextType::class,$this->getConfiguration())
-             ->add('genrePrecisionAutre',TextType::class,$this->getConfiguration())
-            ->add('synopsis',TextareaType::class,$this->getConfiguration())
->>>>>>> d4ff347086523a38e3ed198c045001252d3b9268
             ->add('adaptationOeuvre',ChoiceType::class,
                                                          [
                                                            'choices'  => [
@@ -165,7 +120,6 @@ class RegistrationType extends ConfigurationFildsType
                                                            [
                                                             'entry_type'=>ProducteurType::class,
                                                             'allow_add'=>true,
-                                                               'required' => false,
                                                            ]
                     )
               ->add('auteurRealisateurs',CollectionType::class,
@@ -173,7 +127,6 @@ class RegistrationType extends ConfigurationFildsType
                                                                   'entry_type'=>AuteurRealisateurType::class,
                                                                   'allow_add'=>true,
                                                                   'allow_delete'=>true,
-                                                                    'required' => false,
                                                                 ]
                     )
                  ->add('documentAudioVisuels',CollectionType::class,

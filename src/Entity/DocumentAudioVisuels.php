@@ -62,72 +62,72 @@ class DocumentAudioVisuels
         return $this->id;
     }
 
-    public function getTitre(): ?string
+    public function getTitre()
     {
         return $this->titre;
     }
 
-    public function setTitre(string $titre): self
+    public function setTitre($titre): self
     {
         $this->titre = $titre;
 
         return $this;
     }
 
-    public function getRealisateur(): ?string
+    public function getRealisateur()
     {
         return $this->realisateur;
     }
 
-    public function setRealisateur(string $realisateur): self
+    public function setRealisateur($realisateur): self
     {
         $this->realisateur = $realisateur;
 
         return $this;
     }
 
-    public function getGenre(): ?string
+    public function getGenre()
     {
         return $this->genre;
     }
 
-    public function setGenre(string $genre): self
+    public function setGenre( $genre): self
     {
         $this->genre = $genre;
 
         return $this;
     }
 
-    public function getAnnee(): ?int
+    public function getAnnee()
     {
         return $this->annee;
     }
 
-    public function setAnnee(?int $annee): self
+    public function setAnnee($annee): self
     {
         $this->annee = $annee;
 
         return $this;
     }
 
-    public function getDuree(): ?int
+    public function getDuree()
     {
         return $this->duree;
     }
 
-    public function setDuree(?int $duree): self
+    public function setDuree($duree): self
     {
         $this->duree = $duree;
 
         return $this;
     }
 
-    public function getMotDePasse(): ?string
+    public function getMotDePasse()
     {
         return $this->motDePasse;
     }
 
-    public function setMotDePasse(string $motDePasse): self
+    public function setMotDePasse( $motDePasse): self
     {
         $this->motDePasse = $motDePasse;
 
@@ -146,12 +146,12 @@ class DocumentAudioVisuels
         return $this;
     }
 
-    public function getLien(): ?string
+    public function getLien()
     {
         return $this->lien;
     }
 
-    public function setLien(?string $lien): self
+    public function setLien( $lien): self
     {
         $this->lien = $lien;
 
