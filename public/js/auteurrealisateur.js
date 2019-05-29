@@ -1,70 +1,122 @@
-var $collectionAuteurRealisateur;
+ // simuler l'ajout d'un auteursRealisateur
+   
+ var count = counterForm('#widget-counter');
+ if( count == 0 ) {
+    traitementEvenClicksAuteurRealisateur('#auteurRealisateurs',count,'#ajoutAuteur-realisateur');
+    // j'effectue la suppressesion du formulaire auteur réalisateur 
+    supFormAuteurRealisateur('button[data-action="delete"]');
+ }
 
-// setup an "add a auteur/realisateur" button
-var $addAuteurButton = $('<button type="button" id="ajoutAuteur-realisateur" class="btn btn-primary my-4" >Ajouter un auteur réalisateur</button>');
-var $newLinkDiv = $('<div class=""></div>').append($addAuteurButton);
+  
+ // gerer l'ajout d'un auteur ou/et d'un réalisateur lors qu'on clique sur le button
+ $('#ajoutAuteur-realisateur').click(function()
+ { 
+    var count = counterForm('#widget-counter');
 
-jQuery(document).ready(function() {
+    //traitementEvenClicks('#auteurRealisateurs','#widget-counter','#ajoutAuteur-realisateur');
+    traitementEvenClicksAuteurRealisateur('#auteurRealisateurs',count);
+    // j'effectue la suppressesion du formulaire auteur réalisateur 
+    supFormAuteurRealisateur('button[data-action="delete"]');
+    //counterForm('#auteurRealisateurs div.form-group','#widget-counter');
+     
+ });
 
-    // Get the div that holds the collection of contacts
-    $collectionAuteurRealisateur = $('div#auteurRealisateurs');
+ /**
+    * 
+    * @param {String} selecteurDiv 
+    *  @param {String} counter
+    */
+   function traitementEvenClicksAuteurRealisateur(selecteurDiv,counter){
+    // je recupère le numero des forms !, je le met en comment pour tester avec counter
+   // let index  = +$(widget_counter).val();
+    // je remplace tous les __name__ par ce numero
+    const str = '<div class="row my-3" id="blockPourcentage_registration_auteurRealisateurs___name__"><div class="col"><p id="para_registration_auteurRealisateurs___name__"></p></div><div class="col"><div class="row"><div><input type="text" id="registration_auteurRealisateurs___name___pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][__name__][pourcentageAuteurRealisateur]" class="form-control-sm w-100" /></div><span>%</span></div></div></div>';
+    const templates = $(selecteurDiv).data('prototype').replace(str,'').replace(/__name__/g,counter);
+    const newStr = str.replace(/__name__/g,counter);
+    // j'injecte ce code au sein de la div 
+    $(selecteurDiv).append(templates);
+    $('.pourcentageAuteurRealisateur').append(newStr);
+    $('#widget-counter').val(counter+1);
 
-    // add the "add a contact" anchor and div to the tags ul
-    $collectionAuteurRealisateur.append($newLinkDiv);
+    // gestion des labels pourcentage auteurs réalisateur
+    $('.prenom').on('change',function(){
+       // je récupère le nombre correspondant à l'id dans ce input
+      var valAttId = $(this).attr('id').match(/\d+/g).join('');
+      var scan = $(this).val()+"   "+$('.nom').val()+" a";
+       $('.pourcentageAuteurRealisateur p').each(function(){
+          var valAttIdPourc = $(this).attr('id').match(/\d+/g).join('');
+          if( valAttId == valAttIdPourc )
+          {
+             $(this).html(scan);
+             // quant on arrive ici pas besoin de continuer à chercher 
+             return false;
+          }
+       });
+   });
 
-    $addAuteurButton.on('click', function(e) {
-        // add a new auteur/realisateur form (see next code block)
-        addAuteurForm($collectionAuteurRealisateur, $newLinkDiv);
+   $('.nom').on('change',function(){
+      // je récupère le nombre correspondant à l'id dans ce input
+     var valAttId = $(this).attr('id').match(/\d+/g).join('');
+     var scan = $('.prenom').val() +"   "+$(this).val().toUpperCase()+"  a ";
+    $('.pourcentageAuteurRealisateur p').each(function(){
+       var valAttIdPourc = $(this).attr('id').match(/\d+/g).join('');
+       if( valAttId == valAttIdPourc )
+       {
+          $(this).html(scan);
+          return false;
+       }
     });
-
-
-    // handle the removal, just for this example
-    $('.remove-auteur').click(function(e) {
-        e.preventDefault();
-
-        $(this).parent().remove();
-
-        return false;
-    });
-
 });
+ }
 
-function addAuteurForm($collectionAuteurRealisateur, $newLinkDiv) {
-    // Get the data-prototype explained earlier
-    var prototype = $collectionAuteurRealisateur.data('prototype');
+ /**
+  * 
+  * @param {boolean} isAuteurRealisateur 
+  * @param {Integer} counter 
+  * @param {String} selecteurButton 
+  */
+ function traitementEvenClicksDocumetAudio(selecteurDiv,counter,selecteurButton){
+    // je remplace tous les __name__ par ce numero
+    const templates = $(selecteurDiv).data('prototype').replace(/__name__/g,counter);
+    // j'injecte ce code au sein de la div 
+    $(selecteurDiv).append(templates);
+    let count = +$('#documentAudioVisuels div.form-group').length;
+    if(count >= 2)
+    {
+       $(selecteurButton).hide();
+    }
+    $('#widget-counter-documentAudioVisuels').val(counter+1);
+ }
 
-    var arr = prototype.split('<div class="form-group">');
-
-    // get the new index
-    var index = $collectionAuteurRealisateur.data('index');
-
-    var newForm = prototype;
-    // You need this only if you didn't set 'label' => false in your tags field in TaskType
-    // Replace '__name__label__' in the prototype's HTML to
-    // instead be a number based on how many items we have
-    // newForm = newForm.replace(/__name__label__/g, index);
-
-    // Replace '__name__' in the prototype's HTML to
-    // instead be a number based on how many items we have
-
-    newForm = newForm.replace(/__name__/g, index);
-    newForm = newForm.replace(/<label/g, '<label style="color:#000; font-weight: bold"');
-
-    // increase the index with one for the next item
-    $collectionAuteurRealisateur.data('index', index + 1);
-
-    // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormDiv = $('<div class="auteurRealisateurs"></div>').append(newForm);
-
-    $newLinkDiv.before($newFormDiv);
-
-    // handle the removal, just for this example
-    $('.remove-auteur').click(function (e) {
-        e.preventDefault();
-
-        $(this).parent().parent().parent().remove();
-
-        return false;
+ /**
+    * compte le nombre de fois qu'on a ajouté un formulaire 
+    * 
+    * @param {String} widget_counter 
+    */
+   function counterForm(widget_counter)
+   {  
+      var estimeDiv = +$(widget_counter).val();
+      return estimeDiv;
+   }
+   /**
+    * supprime le formulaire auteur réalisateur
+    * 
+    * @param {String} boutton 
+    */
+   function supFormAuteurRealisateur(boutton) {
+    $(boutton).click(function(){
+    const target = this.dataset.target;
+    $(target).remove();
     });
-}
-
+ }
+/**
+ * Permet de mettre à jour
+ * @param {String} selectDivForm 
+ * @param {String} widget 
+ */
+   function miseAjourCounter(selectDivForm, widget){
+      const count = +$(selectDivForm).length;
+      $(widget).val(count);
+   }
+ miseAjourCounter('#auteurRealisateurs div.form-group','#widget-counter');
+ supFormAuteurRealisateur('button[data-action="delete"]');
