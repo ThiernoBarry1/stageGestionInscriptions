@@ -12,11 +12,11 @@ class ProducteurType extends ConfigurationFildsType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom',TextType::class,[ 'required'=>false]
+            ->add('nom',TextType::class,['required'=>false]
                 )
-            ->add('nature',TextType::class,[ 'required'=>false]                          
+            ->add('nature',TextType::class,['required'=>false]                          
                 )
-            ->add('siret',TextType::class,[ 'required'=>false]
+            ->add('siret',TextType::class,['required'=>false]
                 )
             ->add('nomGerant',TextType::class,[ 'required'=>false]
                 )

@@ -17,23 +17,58 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AllFieldsFormController extends AbstractController
 {
+
+    /**
+     * permet de verifier en amont les routers pour accèder au projet
+     * 
+     * @Route("/connexion/{idSession}/", name="connexion_new")
+     * @Route("/connexion/{idSession}/{idProjet}/{pass}/", name="connexion_edit")
+
+     * @param ProjetRepository $projetRepo
+     * @param [type] $idProjet
+     * @param SessionRepository $sessionRepo
+     * @param [type] $idSession
+     * @return void
+     */
+    public function verificationRouter(ProjetRepository $projetRepo,$idProjet=null, SessionRepository $sessionRepo,$idSession, $pass=null) 
+    {
+        $session = $sessionRepo->findOneById($idSession);
+        $projet = $projetRepo->findOneById($idProjet);
+        if(empty($projet))
+        {
+            return $this->redirectToRoute('all_fields_form_new',['idSession'=>$idSession]);
+        }else
+        {
+            $mdpHass = $projet->getMotpassehass();
+            $value = password_verify($pass,$mdpHass);
+            if($value) {
+                return $this->redirectToRoute('all_fields_form',['idSession'=>$idSession,'idProjet'=>$idProjet,'pass'=>$pass]);
+            }else{
+                return $this->render('information/routingError.html.twig');
+            }
+        }
+    }
+
     /**
      * permet d'afficher le formulaire de saisie selon la commission.
      * @Route("/fonds-d-aide/{idSession}/", name="all_fields_form_new")
-     * @Route("/fonds-d-aide/{idSession}/{idProjet}", name="all_fields_form")
+     * @Route("/fonds-d-aide/{idSession}/{idProjet}/{pass}/", name="all_fields_form")
      *
      * @param  integer $idSession
      * @param  integer $idProjet
      * @param ObjectManager $manager
      * @return Response
      */
-    public function registrationnew(ProjetRepository $projetRepo, SessionRepository $sessionRepo, $idSession, $idProjet = null, ObjectManager $manager, Request $request)
+    public function registrationnew(ProjetRepository $projetRepo, SessionRepository $sessionRepo, $idSession, $idProjet = null,$pass=null ,ObjectManager $manager, 
+                                Request $request, \Swift_Mailer $mailer)
     {
         $session = $sessionRepo->findOneById($idSession);
         $projet = $projetRepo->findOneById($idProjet);
+        
         if(empty($projet)){
             $projet  = new Projet();
         }
@@ -45,6 +80,13 @@ class AllFieldsFormController extends AbstractController
 
         if($allFieldsForm->isSubmitted()) {
             $projet->setSession($session);
+            // generation de mot de pass
+            //$mdp = uniqid('', $more_entropy=true);
+           // $hash = $encoder->encodePassword($projet,$pass);
+           $mdp = md5(uniqid());
+           $hash = password_hash($mdp,PASSWORD_BCRYPT);
+            $projet->setMotpassehass($hash);
+
             $manager->persist($projet);
     
             foreach($projet->getProducteurs() as $producteur)
@@ -64,15 +106,16 @@ class AllFieldsFormController extends AbstractController
             }
             $manager->flush();
             $idProjet = $projet->getId();
-
+            
             // gestion d'envoie des mails
-            $courrielAuteurRealisateur =  $projet->getAuteurRealisateurs()->get(0)->getCourriel();
-            $message = new \Swift_Message();
-            $message->setFrom('thiernobarrykankalabe@gmail.com')
+           $courrielAuteurRealisateur =  $projet->getAuteurRealisateurs()->get(0)->getCourriel();
+            $message = (new \Swift_Message("lien de retour au formulaire d'inscription"))
+                    ->setFrom('thiernobarrykankalabe@gmail.com')
                     ->setTo($courrielAuteurRealisateur)
-                    ->setReplyTo($courrielAuteurRealisateur)
-                    ->setBody('le corp du message');
-            return $this->redirectToRoute('information_save',['idProjet'=>$idProjet,'idSession'=>$idSession]);
+                    ->setBody($this->renderView('emails/registration.html.twig',['idSession'=>$idSession,'idProjet'=>$idProjet,'pass'=>$mdp]),'text/html');
+            $mailer->send($message);
+
+            return $this->redirectToRoute('information_save',['idProjet'=>$idProjet,'idSession'=>$idSession,'pass'=>$mdp]);
         }
         return $this->render('all_fields_form/displayAllFields.html.twig', [
             'allFieldsForm' => $allFieldsForm->createView(),
@@ -85,7 +128,7 @@ class AllFieldsFormController extends AbstractController
      * permet d'afficher un message de confirmations d'enregistement des données
      * à partir d'un formulaire.
      *
-     *@Route("/fonds-d-aide-messages/{idSession}/{idProjet}",name="information_save")
+     *@Route("/fonds-d-aide-messages/{idSession}/{idProjet}/{pass}/",name="information_save")
      *
      * @param WhichCommissionChoice $choice
      * @param Integer $idSession
@@ -93,7 +136,7 @@ class AllFieldsFormController extends AbstractController
      *
      * @return Response
      */
-    public function displayInformationSave(SessionRepository $sessionRepo, $idSession, $idProjet)
+    public function displayInformationSave(SessionRepository $sessionRepo, $idSession, $idProjet,$pass)
     {
         $session = $sessionRepo->findOneById($idSession);
         $titre = $session->getFondsAide()->getNom();
@@ -103,6 +146,7 @@ class AllFieldsFormController extends AbstractController
                 'dateFin'=>$dateFinSession,
                 'idSession'=>$idSession,
                 'idProjet'=>$idProjet,
+                'pass'=>$pass
             ]);
     }
 }

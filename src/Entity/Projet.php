@@ -8,11 +8,12 @@ use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjetRepository")
  * @Vich\Uploadable
  */
-class Projet
+class Projet implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -325,7 +326,7 @@ class Projet
     private $montantSollicite;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Producteur", mappedBy="projet", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Producteur", cascade={"persist"}, mappedBy="projet", orphanRemoval=true)
      */
     private $producteurs;
 
@@ -371,6 +372,11 @@ class Projet
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $motpassehass;
 
     public function __construct()
     {
@@ -1268,4 +1274,29 @@ class Projet
 
         return $this;
     }
+
+    public function getMotpassehass(): ?string
+    {
+        return $this->motpassehass;
+    }
+
+    public function setMotpassehass(?string $motpassehass): self
+    {
+        $this->motpassehass = $motpassehass;
+
+        return $this;
+    }
+
+    // le méthode de l'interface UserInterface
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+    public function getPassword()
+    {
+        return $this->motpassehass;
+    }
+    public function getSalt(){}
+    public function getUsername(){}
+    public function eraseCredentials(){}
 }
