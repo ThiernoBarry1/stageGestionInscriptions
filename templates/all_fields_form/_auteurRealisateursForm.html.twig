@@ -7,12 +7,12 @@
              <div class="col-10">
                 <div class="row">
                     <div class="col-4">
-                        <label> Prénom </label>
-                        {{ form_row(form.prenom,{'label':false,'attr':{'class':'form-control-sm w-100 prenom' ,'placeholder':'Prénom'}}) }}
+                        Prénom
+                        {{ form_row(form.prenom,{'label':false,'attr':{'class':'form-control-sm w-100 prenom' ,'placeholder':'Prénom', 'onchange' : 'recupererauteur(this)'}}) }}
                     </div>
                      <div class="col-4">
                         <label> Nom  de l'état civil</label>
-                         {{ form_row(form.nom,{'label':false,'attr':{'class':'form-control-sm w-100 nom','placeholder':'Nom'}}) }}
+                         {{ form_row(form.nom,{'label':false,'attr':{'class':'form-control-sm w-100 nom','placeholder':'Nom', 'onchange' : 'recupererauteur(this)'}}) }}
                      </div>
                      <div class="col-4">
                         <label> Pseudonyme </label>
@@ -40,22 +40,22 @@
                          <label>Courriel</label>
                          {{ form_row(form.courriel,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Votre adresse mail'}}) }}
                      </div>
-             {% spaceless %}
                  </div>
+                 {% spaceless %}
                  <div class="row my-3" id="blockPourcentage_{{id}}">
-                     <div class="col">
+                     <div class="col-auto">
                         <p id="para_{{id}}"> </p>
                      </div>
                      <div class="col">
                         <div class="row">
-                            {{ form_row(form.pourcentageAuteurRealisateur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }} <span>%</span>
+                            {{ form_row(form.pourcentageAuteurRealisateur,{'label':false,'attr':{'class':'form-control-sm','style':'width:3rem'}}) }} <span>%</span>
                         </div>
                      </div>
                   </div>
-             {% endspaceless %}
+                {% endspaceless %}
             </div>
              <div class="col-2">
-                 <button type="button" class="remove-auteur btn btn-danger" data-action="delete" data-target="#block_{{id}},#blockPourcentage_{{id}}"> Supprimer</button>
+                 <button type="button" class="remove-auteur btn btn-danger" data-action="delete" data-target="#blockPourcentage_{{id}}"> Supprimer</button>
              </div>
          </div>
     </div>

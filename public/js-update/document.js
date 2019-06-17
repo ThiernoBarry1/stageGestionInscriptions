@@ -16,17 +16,32 @@ jQuery(document).ready(function() {
     // index when inserting a new item (e.g. 2)
     $collectionDocuments.data('index', $collectionDocuments.find(':input').length);
 
-    $addDocumentButton.on('click', function(e) {
-        // add a new contact form (see next code block)
-        addDocumentForm($collectionDocuments, $newLinkDivDoc);
-    });
+    var count = $('.documentAudioVisuel').length;
 
+    if(count >= 2)
+    {
+        $('#ajoutDocument').hide();
+    }
+
+    $addDocumentButton.on('click', function(e) {
+        var count = $('.documentAudioVisuel').length;
+
+        if(count < 2){
+            addDocumentForm($collectionDocuments, $newLinkDivDoc);
+        }
+        if(count >= 1){
+            $('#ajoutDocument').hide();
+        }
+    });
 
     // handle the removal, just for this example
     $('.remove-document').click(function(e) {
         e.preventDefault();
 
-        $(this).parent().remove();
+        $('#ajoutDocument').show();
+        //$('#widget-counter-documentAudioVisuels').val($count-1);
+
+        $(this).parent().parent().parent().remove();
 
         return false;
     });
@@ -43,30 +58,25 @@ function addDocumentForm($collectionDocuments, $newLinkDiv) {
     var index = $collectionDocuments.data('index');
 
     var newForm = prototype;
-    // You need this only if you didn't set 'label' => false in your tags field in TaskType
-    // Replace '__name__label__' in the prototype's HTML to
-    // instead be a number based on how many items we have
-    // newForm = newForm.replace(/__name__label__/g, index);
-
-    // Replace '__name__' in the prototype's HTML to
-    // instead be a number based on how many items we have
 
     newForm = newForm.replace(/__name__/g, index);
-    newForm = newForm.replace(/<label/g, '<label style="color:#000; font-weight: bold"');
+    newForm = newForm.replace(/<label/g, '<label style="color:#000;"');
 
     // increase the index with one for the next item
     $collectionDocuments.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormDiv = $('<div class="documentAudioVisuels"></div>').append(newForm);
+    var $newFormDivDoc = $('<div class="documentAudioVisuel"></div>').append(newForm);
 
-    $newLinkDiv.before($newFormDiv);
+    $newLinkDiv.before($newFormDivDoc);
 
     // handle the removal, just for this example
     $('.remove-document').click(function (e) {
         e.preventDefault();
 
-        $(this).parent().parent().parent().remove();
+        $('#ajoutDocument').show();
+
+        $(this).parent().parent().parent().parent().remove();
 
         return false;
     });

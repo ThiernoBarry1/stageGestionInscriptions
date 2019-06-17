@@ -1,10 +1,6 @@
 $(document).ready(function()
-<<<<<<< HEAD:public/js/app.js
 {     
     
-=======
-{
->>>>>>> 6dfc20efe0926bc6d4da72037984daba42b302e3:public/js/app2.js
   calculDevisPrevisionnel('.ht input','.input-totalHtTotalGeneral');
   calculDevisPrevisionnel('.htNormandie input','.input-totalHtNormandieTotalGeneral');
    

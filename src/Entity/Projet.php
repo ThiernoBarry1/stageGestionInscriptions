@@ -69,12 +69,12 @@ class Projet implements UserInterface
     private $session;
   
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\AuteurRealisateur", mappedBy="projet", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\AuteurRealisateur",  cascade={"persist"},mappedBy="projet", orphanRemoval=true)
      */
     private $auteurRealisateurs;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\DocumentAudioVisuels", mappedBy="projet")
+     * @ORM\OneToMany(targetEntity="App\Entity\DocumentAudioVisuels", cascade={"persist"}, mappedBy="projet")
      */
     private $documentAudioVisuels;
 
@@ -1200,12 +1200,12 @@ class Projet implements UserInterface
         return $this;
     }
 
-    public function getTypeFilm(): ?string
+    public function getTypeFilm()
     {
         return $this->typeFilm;
     }
 
-    public function setTypeFilm(string $typeFilm): self
+    public function setTypeFilm($typeFilm): self
     {
         $this->typeFilm = $typeFilm;
 

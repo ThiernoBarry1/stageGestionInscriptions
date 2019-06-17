@@ -1,31 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}calendier des commissions de soutien à la production et à la création du fonds d'aide région Noramndie{% endblock %}
+{% block title %}calendrier des commissions de soutien à la production et à la création du fonds d'aide Région Noramndie{% endblock %}
 {% block body %}
-  <h3 mt-4>Fonds de soutien écriture, développement, recherche</h3>
-    <div class="container">
-        <div class="row mt-4">
-            {% for entity in data %}
-                <div class="col-md-3">
-                    <div class="card border-secondary bg-light mb-3 text-center">
-                    <div class="card-header">
+<div class="container">
+        <h3 class="text-center my-4">Fonds de soutien écriture, développement, recherche</h3>
+        {% for entity in data %}
+           {% if loop.index == 5 %}
+           <h3 class="text-center my-4">Fonds de soutien à la production cinéma, audiovisuelle, multimédia</h3>
+           {% endif %}
+            <div class="row">
+                <div class="card border-secondary bg-ligth mb-3 text-center">
+                    <div class="card-header bg-info text-white">
                         {{entity.nom}}
                     </div>        
-                    <div class="card-body">
-                        {%for session in entity.sessions %}
-                            <fieldset class="border p-2">
+                    <div class="card-body row">
+                       {%for session in entity.sessions %}
+                            <fieldset class="border p-2 w-auto">
                                <legend class="w-auto">{{ session.nom }}</legend>
                                 <p class="card-text">Dépôt des dossiers du   {{ session.dateDebut | date('d/m/Y')}} au {{ session.dateFin | date('d/m/Y')}}</p>
                                 <p class="card-text">Présélection  le  {{ session.preselection | date('d/m/Y')}}</p>
                                 <p class="card-text">Plénière le  {{ session.pleniere | date('d/m/Y')}} </p>
                                 <br>
                                 <a href="{{path('connexion_new',{'idSession':session.id})}}" class="btn btn-secondary">Je m'inscris</a>
-                             </fieldset>
+                            </fieldset>
                         {% endfor %}
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
-</div>
 {% endblock %}

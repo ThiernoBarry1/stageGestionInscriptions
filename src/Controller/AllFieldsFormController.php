@@ -13,6 +13,7 @@ use App\Repository\SessionRepository;
 use App\Service\WhichCommissionChoice;
 use App\Repository\FondsAideRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,7 +58,6 @@ class AllFieldsFormController extends AbstractController
      * permet d'afficher le formulaire de saisie selon la commission.
      * @Route("/fonds-d-aide/{idSession}/", name="all_fields_form_new")
      * @Route("/fonds-d-aide/{idSession}/{idProjet}/{pass}/", name="all_fields_form")
-     *
      * @param  integer $idSession
      * @param  integer $idProjet
      * @param ObjectManager $manager
@@ -107,14 +107,15 @@ class AllFieldsFormController extends AbstractController
             $manager->flush();
             $idProjet = $projet->getId();
             
-            // gestion d'envoie des mails
-           $courrielAuteurRealisateur =  $projet->getAuteurRealisateurs()->get(0)->getCourriel();
-            $message = (new \Swift_Message("lien de retour au formulaire d'inscription"))
-                    ->setFrom('thiernobarrykankalabe@gmail.com')
-                    ->setTo($courrielAuteurRealisateur)
-                    ->setBody($this->renderView('emails/registration.html.twig',['idSession'=>$idSession,'idProjet'=>$idProjet,'pass'=>$mdp]),'text/html');
-            $mailer->send($message);
-
+            // gestion d'envoie de mail
+            if(count($projet->getAuteurRealisateurs()) != 0) {
+                $courrielAuteurRealisateur =  $projet->getAuteurRealisateurs()->first()->getCourriel();
+                $message = (new \Swift_Message("lien de retour au formulaire d'inscription"))
+                        ->setFrom('thiernobarrykankalabe@gmail.com')
+                        ->setTo($courrielAuteurRealisateur)
+                        ->setBody($this->renderView('emails/registration.html.twig',['idSession'=>$idSession,'idProjet'=>$idProjet,'pass'=>$mdp]),'text/html');
+                $mailer->send($message);
+           }
             return $this->redirectToRoute('information_save',['idProjet'=>$idProjet,'idSession'=>$idSession,'pass'=>$mdp]);
         }
         return $this->render('all_fields_form/displayAllFields.html.twig', [
@@ -148,5 +149,14 @@ class AllFieldsFormController extends AbstractController
                 'idProjet'=>$idProjet,
                 'pass'=>$pass
             ]);
+    }
+    /**
+     * permet de simuler une connection d'un candidat.
+     * @Route("/fonds-d-aide/connect",name="connect")
+     * @return Response
+     */
+    public function connect()
+    {
+        return $this->render('user/connect.html.twig');
     }
 }
