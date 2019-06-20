@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AuteurRealisateurRepository")
  */
@@ -53,6 +53,7 @@ class AuteurRealisateur
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Email(message="l'adresse mail que vous avez indiqué n'est pas valide")
      */
     private $courriel;
 

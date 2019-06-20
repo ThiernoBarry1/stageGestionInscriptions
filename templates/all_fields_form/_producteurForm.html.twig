@@ -5,6 +5,7 @@
            <div class="col-6">
               Nom de la structure
                  {{ form_row(form.nom,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                 {{ form_errors(form.nom)}}
            </div>
         </div>
         <div class="row my-2">
@@ -15,6 +16,7 @@
            <div class="col-6">
               <label for="siret">SIRET</label>
               {{ form_row(form.siret,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+              {{ form_errors(form.siret)}}
            </div>
         </div>
         <div class="row my-2">

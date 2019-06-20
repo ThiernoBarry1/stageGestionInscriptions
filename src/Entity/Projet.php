@@ -378,6 +378,18 @@ class Projet implements UserInterface
      */
     private $motpassehass;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $mailUtilisateur;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $token_date;
+
+    
+
     public function __construct()
     {
         $this->auteurRealisateurs = new ArrayCollection();
@@ -1286,17 +1298,44 @@ class Projet implements UserInterface
 
         return $this;
     }
+    
+     // le méthode de l'interface UserInterface
+     public function getRoles()
+     {
+         return ['ROLE_USER'];
+     }
+     public function getUsername(){
+         return $this->randomlogin;
+     }
+     public function getPassword()
+     {
+         return $this->motpassehass;
+     }
+     public function getSalt(){}
+     public function eraseCredentials(){}
 
-    // le méthode de l'interface UserInterface
-    public function getRoles()
-    {
-        return ['ROLE_USER'];
-    }
-    public function getPassword()
-    {
-        return $this->motpassehass;
-    }
-    public function getSalt(){}
-    public function getUsername(){}
-    public function eraseCredentials(){}
+     public function getMailUtilisateur(): ?string
+     {
+         return $this->mailUtilisateur;
+     }
+
+     public function setMailUtilisateur(string $mailUtilisateur): self
+     {
+         $this->mailUtilisateur = $mailUtilisateur;
+
+         return $this;
+     }
+
+     public function getTokenDate()
+     {
+         return $this->token_date;
+     }
+
+     public function setTokenDate( $token_date): self
+     {
+         $this->token_date = $token_date;
+
+         return $this;
+     }
+ 
 }

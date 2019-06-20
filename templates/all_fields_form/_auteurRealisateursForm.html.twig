@@ -35,10 +35,12 @@
                      <div class="col-4">
                          <label>Téléphone</label>
                          {{ form_row(form.telephoneMobile,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Votre numero de téléphone'}}) }}
+                         {{ form_errors(form.telephoneMobile)}}
                      </div>
                      <div class="col-8">
                          <label>Courriel</label>
                          {{ form_row(form.courriel,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Votre adresse mail'}}) }}
+                         {{ form_errors(form.courriel)}}
                      </div>
                  </div>
                  {% spaceless %}

@@ -10,12 +10,12 @@ use App\Entity\DocumentAudioVisuels;
 use App\Form\ConfigurationFildsType;
 use App\Form\DocumentsAudioVisuelsType;
 use Symfony\Component\Form\AbstractType;
-use App\Form\DataTransform\TransformeurDate;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -25,13 +25,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class RegistrationType extends ConfigurationFildsType
 { 
-   // pour la transforamtion de la date de fin de section au format français en datetime 
-   private $dateTransformeur; 
-
-   public function __construct(TransformeurDate $dateTransformeur)
-    {
-      $this->dateTransformeur = $dateTransformeur;
-    }
+   
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -243,11 +237,10 @@ class RegistrationType extends ConfigurationFildsType
                  )
             ->add('projetDejaPresenteFondsAideDate',TextType::class,[ 'required'=>false])
             ->add('projetDejaPresenteFondsAideTypeAide',TextType::class,[ 'required'=>false])
+            ->add('mailUtilisateur',EmailType::class)
             ->add('file',FileType::class,[ 'required'=>false])  
             ->add('enregistrer',SubmitType::class)
             ;
-            // pour la transforamtion de la date de fin de section au format français en datetime 
-            //$builder->get('adaptationOeuvreDfc')->addModelTransformer($this->dateTransformeur);
     }
 
     public function configureOptions(OptionsResolver $resolver)

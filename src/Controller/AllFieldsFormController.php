@@ -13,65 +13,49 @@ use App\Repository\SessionRepository;
 use App\Service\WhichCommissionChoice;
 use App\Repository\FondsAideRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AllFieldsFormController extends AbstractController
 {
-
-    /**
-     * permet de verifier en amont les routers pour accèder au projet
-     * 
-     * @Route("/connexion/{idSession}/", name="connexion_new")
-     * @Route("/connexion/{idSession}/{idProjet}/{pass}/", name="connexion_edit")
-
-     * @param ProjetRepository $projetRepo
-     * @param [type] $idProjet
-     * @param SessionRepository $sessionRepo
-     * @param [type] $idSession
-     * @return void
-     */
-    public function verificationRouter(ProjetRepository $projetRepo,$idProjet=null, SessionRepository $sessionRepo,$idSession, $pass=null) 
-    {
-        $session = $sessionRepo->findOneById($idSession);
-        $projet = $projetRepo->findOneById($idProjet);
-        if(empty($projet))
-        {
-            return $this->redirectToRoute('all_fields_form_new',['idSession'=>$idSession]);
-        }else
-        {
-            $mdpHass = $projet->getMotpassehass();
-            $value = password_verify($pass,$mdpHass);
-            if($value) {
-                return $this->redirectToRoute('all_fields_form',['idSession'=>$idSession,'idProjet'=>$idProjet,'pass'=>$pass]);
-            }else{
-                return $this->render('information/routingError.html.twig');
-            }
-        }
-    }
-
+  
     /**
      * permet d'afficher le formulaire de saisie selon la commission.
+     * 
      * @Route("/fonds-d-aide/{idSession}/", name="all_fields_form_new")
-     * @Route("/fonds-d-aide/{idSession}/{idProjet}/{pass}/", name="all_fields_form")
+     * @Route("/fonds-d-aide/{mail}/{token}/{token_date}", name="all_fields_form")
      * @param  integer $idSession
      * @param  integer $idProjet
      * @param ObjectManager $manager
      * @return Response
      */
-    public function registrationnew(ProjetRepository $projetRepo, SessionRepository $sessionRepo, $idSession, $idProjet = null,$pass=null ,ObjectManager $manager, 
+    public function registrationnew(ProjetRepository $projetRepo, SessionRepository $sessionRepo,$mail=null,$token=null,$token_date=null,$idSession=null,ObjectManager $manager, 
                                 Request $request, \Swift_Mailer $mailer)
     {
-        $session = $sessionRepo->findOneById($idSession);
-        $projet = $projetRepo->findOneById($idProjet);
-        
+        $projet = $projetRepo->findOneByCriteres($mail,$token,$token_date);   
         if(empty($projet)){
-            $projet  = new Projet();
+            // s'il n'existe pas de projet mais il y'a bien un mail, un token et un token_date 
+            // j'affiche une page d'erreur.
+            if( $mail != '' && $token != '' && $token_date != 0)
+            {
+                return  $this->render('information/displayError.html.twig',
+                                                                      [
+                                                                          'date_error'=> false
+                                                                      ]
+                                      );
+            }else {
+                //c'est ça prémière connection
+                $projet  = new Projet();
+            }
+        }else {
+            $idSession = $projet->getSession()->getId();
         }
+        $session = $sessionRepo->findOneById($idSession);
 
         $fondsAide = $session->getFondsAide();
         $whichChoice = $fondsAide->getId();
@@ -80,13 +64,13 @@ class AllFieldsFormController extends AbstractController
 
         if($allFieldsForm->isSubmitted()) {
             $projet->setSession($session);
-            // generation de mot de pass
-            //$mdp = uniqid('', $more_entropy=true);
-           // $hash = $encoder->encodePassword($projet,$pass);
-           $mdp = md5(uniqid());
-           $hash = password_hash($mdp,PASSWORD_BCRYPT);
-            $projet->setMotpassehass($hash);
-
+             // générer un  mot de pass en utilisant la méthode password_hash de php
+            $token = md5(uniqid(true));
+            $projet->setMotpassehass($token);
+            $date = new DateTime();
+            $projet->setUpdatedAt($date);
+            $token_date = $date->getTimestamp();
+            $projet->setTokenDate($token_date);
             $manager->persist($projet);
     
             foreach($projet->getProducteurs() as $producteur)
@@ -108,15 +92,15 @@ class AllFieldsFormController extends AbstractController
             $idProjet = $projet->getId();
             
             // gestion d'envoie de mail
-            if(count($projet->getAuteurRealisateurs()) != 0) {
-                $courrielAuteurRealisateur =  $projet->getAuteurRealisateurs()->first()->getCourriel();
-                $message = (new \Swift_Message("lien de retour au formulaire d'inscription"))
-                        ->setFrom('thiernobarrykankalabe@gmail.com')
-                        ->setTo($courrielAuteurRealisateur)
-                        ->setBody($this->renderView('emails/registration.html.twig',['idSession'=>$idSession,'idProjet'=>$idProjet,'pass'=>$mdp]),'text/html');
-                $mailer->send($message);
-           }
-            return $this->redirectToRoute('information_save',['idProjet'=>$idProjet,'idSession'=>$idSession,'pass'=>$mdp]);
+
+            $mail =  $projet->getMailUtilisateur();
+            $message = (new \Swift_Message("lien de retour au formulaire d'inscription"))
+                    ->setFrom('thiernobarrykankalabe@gmail.com')
+                    ->setTo($mail)
+                    ->setBody($this->renderView('emails/registration.html.twig',['mail'=>$mail,'token'=>$token,'token_date'=>$token_date]),'text/html');
+            $mailer->send($message);
+           
+            return $this->redirectToRoute('information_save',['mail'=>$mail,'token'=>$token,'token_date'=>$token_date]);
         }
         return $this->render('all_fields_form/displayAllFields.html.twig', [
             'allFieldsForm' => $allFieldsForm->createView(),
@@ -129,7 +113,7 @@ class AllFieldsFormController extends AbstractController
      * permet d'afficher un message de confirmations d'enregistement des données
      * à partir d'un formulaire.
      *
-     *@Route("/fonds-d-aide-messages/{idSession}/{idProjet}/{pass}/",name="information_save")
+     *@Route("/fonds-d-aide-message/",name="information_save")
      *
      * @param WhichCommissionChoice $choice
      * @param Integer $idSession
@@ -137,26 +121,22 @@ class AllFieldsFormController extends AbstractController
      *
      * @return Response
      */
-    public function displayInformationSave(SessionRepository $sessionRepo, $idSession, $idProjet,$pass)
+    public function displayInformationSave(ProjetRepository $projetRepo, Request $request)
     {
-        $session = $sessionRepo->findOneById($idSession);
+        $mail = $request->get('mail');
+        $token = $request->get('token');
+        $token_date = $request->get('token_date');
+        $projet = $projetRepo->findOneByCriteres($mail,$token,$token_date);
+        $session = $projet->getSession();
         $titre = $session->getFondsAide()->getNom();
         $dateFinSession = $session->getDateFin();
         return $this->render('information/informationSave.html.twig',
-            ['titre'=>$titre,
+            [   'titre'=>$titre,
                 'dateFin'=>$dateFinSession,
-                'idSession'=>$idSession,
-                'idProjet'=>$idProjet,
-                'pass'=>$pass
+                'token'=>$token,
+                'mail'=>$mail,
+                'token_date'=>$token_date,
             ]);
     }
-    /**
-     * permet de simuler une connection d'un candidat.
-     * @Route("/fonds-d-aide/connect",name="connect")
-     * @return Response
-     */
-    public function connect()
-    {
-        return $this->render('user/connect.html.twig');
-    }
+    
 }

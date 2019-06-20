@@ -1,5 +1,6 @@
 <h2> Retour au formulaire d'inscription en ligne</h2>
 <p> Bonjour,</p>
 <p> Vous avez enregistré des informations pour le fonds de soutien chez Normandie Images.</p>
-<p> Le lien suivant vous permet de revenir et modifier le formulaire d'inscription </p>
-<a href="{{ url('connexion_edit',{'idSession':idSession,'idProjet':idProjet,'pass':pass})}}">accéder au formulaire d'inscription en ligne</a>
+<p> Le lien suivant vous permet de recevoir un nouveau mail avec un lien pour revenir au formulaire d'inscription </p>
+<p> En cliquant sur le lien vous allez recevoir un nouveau mail avec un lien qui,<strong> expire au bout de 10 min</strong>,à partir de la date d'envoie du mail.</p>
+<a href="{{ url('new_mail',{'mail':mail,'token':token,'token_date':token_date})}}">m'envoyer un nouveau mail</a>
