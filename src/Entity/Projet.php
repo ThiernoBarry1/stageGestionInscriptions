@@ -24,6 +24,7 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(min=10,max=255,minMessage="le titre doit comprendre au moins 10 caractères",maxMessage="le titre doit comprendre au maximum 255 caractères")
      */
     private $titre;
 

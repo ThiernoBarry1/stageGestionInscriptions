@@ -19,7 +19,7 @@
            <div class="row">
               <div class="col-6">
                  <label for="titre">Titre du projet</label>
-                 {{ form_row(allFieldsForm.titre,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                 {{ form_widget(allFieldsForm.titre,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                  {{ form_errors(allFieldsForm.titre)}}
                </div>
               {% if fondsAide.id == 3 %}
