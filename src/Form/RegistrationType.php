@@ -201,6 +201,20 @@ class RegistrationType extends ConfigurationFildsType
             ->add('imprevusTotalHtNormandie',TextType::class,[ 'required'=>false])
             ->add('totalGeneralTotalHt',TextType::class,['required'=>false])
             ->add('totalGeneralTotalHtNormandie',TextType::class,['required'=>false])
+            ->add('droitArtistiquesFrance',TextType::class,['required'=>false])
+            ->add('transportFrance',TextType::class,['required'=>false])
+            ->add('personnelFrance',TextType::class,['required'=>false])
+            ->add('interpretationFrance',TextType::class,['required'=>false])
+            ->add('moyenTechniqueFrance',TextType::class,['required'=>false])
+            ->add('postProdFrance',TextType::class,['required'=>false])
+            ->add('chargeSocialeFrance',TextType::class,['required'=>false])
+            ->add('assuranceFrance',TextType::class,['required'=>false])
+            ->add('decoEtCostumesFrance',TextType::class,['required'=>false])
+            ->add('fraisFinanciersFrance',TextType::class,['required'=>false])
+            ->add('fraisGenerauxFrance',TextType::class,['required'=>false])
+            ->add('imprevusFrance',TextType::class,['required'=>false])
+            ->add('totalGeneralFrance',TextType::class,['required'=>false])
+            
             ->add('financementAcquis',ChoiceType::class,
                                                          [
                                                            'choices'  => [

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Valid;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -24,7 +25,6 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(min=10,max=255,minMessage="le titre doit comprendre au moins 10 caractères",maxMessage="le titre doit comprendre au maximum 255 caractères")
      */
     private $titre;
 
@@ -71,11 +71,13 @@ class Projet implements UserInterface
   
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\AuteurRealisateur",  cascade={"persist"},mappedBy="projet", orphanRemoval=true)
+     * @Assert\Valid()
      */
     private $auteurRealisateurs;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\DocumentAudioVisuels", cascade={"persist"}, mappedBy="projet")
+     * @Assert\Valid()
      */
     private $documentAudioVisuels;
 
@@ -328,6 +330,7 @@ class Projet implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Producteur", cascade={"persist"}, mappedBy="projet", orphanRemoval=true)
+     * @Assert\Valid()
      */
     private $producteurs;
 
@@ -388,6 +391,71 @@ class Projet implements UserInterface
      * @ORM\Column(type="integer", nullable=true)
      */
     private $token_date;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $droitArtistiquesFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $personnelFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $interpretationFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $chargeSocialeFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $decoEtCostumesFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $transportFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $moyenTechniqueFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $postProdFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $assuranceFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $fraisFinanciersFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $fraisGenerauxFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $imprevusFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $totalGeneralFrance;
 
     
 
@@ -1335,6 +1403,162 @@ class Projet implements UserInterface
      public function setTokenDate( $token_date): self
      {
          $this->token_date = $token_date;
+
+         return $this;
+     }
+
+     public function getDroitArtistiquesFrance(): ?float
+     {
+         return $this->droitArtistiquesFrance;
+     }
+
+     public function setDroitArtistiquesFrance(?float $droitArtistiquesFrance): self
+     {
+         $this->droitArtistiquesFrance = $droitArtistiquesFrance;
+
+         return $this;
+     }
+
+     public function getPersonnelFrance(): ?float
+     {
+         return $this->personnelFrance;
+     }
+
+     public function setPersonnelFrance(?float $personnelFrance): self
+     {
+         $this->personnelFrance = $personnelFrance;
+
+         return $this;
+     }
+
+     public function getInterpretationFrance(): ?float
+     {
+         return $this->interpretationFrance;
+     }
+
+     public function setInterpretationFrance(?float $interpretationFrance): self
+     {
+         $this->interpretationFrance = $interpretationFrance;
+
+         return $this;
+     }
+
+     public function getChargeSocialeFrance(): ?float
+     {
+         return $this->chargeSocialeFrance;
+     }
+
+     public function setChargeSocialeFrance(?float $chargeSocialeFrance): self
+     {
+         $this->chargeSocialeFrance = $chargeSocialeFrance;
+
+         return $this;
+     }
+
+     public function getDecoEtCostumesFrance(): ?float
+     {
+         return $this->decoEtCostumesFrance;
+     }
+
+     public function setDecoEtCostumesFrance(?float $decoEtCostumesFrance): self
+     {
+         $this->decoEtCostumesFrance = $decoEtCostumesFrance;
+
+         return $this;
+     }
+
+     public function getTransportFrance(): ?float
+     {
+         return $this->transportFrance;
+     }
+
+     public function setTransportFrance(?float $transportFrance): self
+     {
+         $this->transportFrance = $transportFrance;
+
+         return $this;
+     }
+
+     public function getMoyenTechniqueFrance(): ?float
+     {
+         return $this->moyenTechniqueFrance;
+     }
+
+     public function setMoyenTechniqueFrance(?float $moyenTechniqueFrance): self
+     {
+         $this->moyenTechniqueFrance = $moyenTechniqueFrance;
+
+         return $this;
+     }
+
+     public function getPostProdFrance(): ?float
+     {
+         return $this->postProdFrance;
+     }
+
+     public function setPostProdFrance(?float $postProdFrance): self
+     {
+         $this->postProdFrance = $postProdFrance;
+
+         return $this;
+     }
+
+     public function getAssuranceFrance(): ?float
+     {
+         return $this->assuranceFrance;
+     }
+
+     public function setAssuranceFrance(?float $assuranceFrance): self
+     {
+         $this->assuranceFrance = $assuranceFrance;
+
+         return $this;
+     }
+
+     public function getFraisFinanciersFrance(): ?float
+     {
+         return $this->fraisFinanciersFrance;
+     }
+
+     public function setFraisFinanciersFrance(?float $fraisFinanciersFrance): self
+     {
+         $this->fraisFinanciersFrance = $fraisFinanciersFrance;
+
+         return $this;
+     }
+
+     public function getFraisGenerauxFrance(): ?float
+     {
+         return $this->fraisGenerauxFrance;
+     }
+
+     public function setFraisGenerauxFrance(?float $fraisGenerauxFrance): self
+     {
+         $this->fraisGenerauxFrance = $fraisGenerauxFrance;
+
+         return $this;
+     }
+
+     public function getImprevusFrance(): ?float
+     {
+         return $this->imprevusFrance;
+     }
+
+     public function setImprevusFrance(?float $imprevusFrance): self
+     {
+         $this->imprevusFrance = $imprevusFrance;
+
+         return $this;
+     }
+
+     public function getTotalGeneralFrance(): ?float
+     {
+         return $this->totalGeneralFrance;
+     }
+
+     public function setTotalGeneralFrance(?float $totalGeneralFrance): self
+     {
+         $this->totalGeneralFrance = $totalGeneralFrance;
 
          return $this;
      }

@@ -32,6 +32,17 @@ class ProjetRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+    public function findOneByMailToken($mail,$token)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.mailUtilisateur = :mail')
+            ->setParameter('mail', $mail)
+            ->andWhere('p.motpassehass = :token')
+            ->setParameter('token', $token)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 
 
 

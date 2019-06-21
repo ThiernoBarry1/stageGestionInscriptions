@@ -29,57 +29,68 @@ class Producteur
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
+     * @Assert\Length(min=14,max=15,minMessage="Le numéro doit avoir 14 chiffres",maxMessage="Le numéro doit avoir 14 chiffres")
      */
     private $siret;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(max=50,maxMessage="Le nom du gérant ne doit pas dépasser 50 caractères")
      */
     private $nomGerant;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Length(max=100, maxMessage="Le prénom du gérant ne doit pas dépasser 100 caractères")
      */
     private $prenomGerant;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(max=50, maxMessage="Le nom du producteur ne doit pas dépasser 50 caractères")
      */
     private $nomProducteur;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Length(max=100, maxMessage="Le prénom du producteur ne doit pas dépasser 100 caractères")
      */
     private $prenomProducteur;
 
     
     /**
      * @ORM\Column(type="string", length=60, nullable=true)
+     * @Assert\Length(max=60,maxMessage="L'adresse ne doit pas dépasser plus de 60 caractères")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=6, nullable=true)
+     * @Assert\Length(min=4,max=6,minMessage=" Le code postal doit comporter 4 caractères",maxMessage=" Le code postal doit comporter 4 caractères")
      */
     private $codePostal;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(min=50,maxMessage="Le nom de la ville ne doit pas dépasser 50 caratères")
      */
     private $ville;
 
     /**
      * @ORM\Column(type="string", length=60, nullable=true)
+     * @Assert\Length(max=60,maxMessage="L'adresse ne doit pas dépasser plus de 60 caractères")
      */
     private $adresseBureau;
 
     /**
      * @ORM\Column(type="string", length=6, nullable=true)
+     *  @Assert\Length(min=4,max=6,minMessage=" Le code postal doit comporter 4 caractères",maxMessage=" Le code postal doit comporter 4 caractères")
      */
     private $codePostaleBureau;
 
     /**
-     * @ORM\Column(type="string", length=6, nullable=true)
+     * @ORM\Column(type="string", length=60, nullable=true)
+     * @Assert\Length(min=60,maxMessage="Le nom de la ville ne doit pas dépasser 60 caratères")
      */
     private $villeBureau;
 
@@ -90,17 +101,20 @@ class Producteur
     private $projet;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Length(max=100, maxMessage="Le prénom ne doit pas dépasser 100 caractères")
      */
     private $prenomPersonneChargee;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(max=50, maxMessage="Le nom ne doit pas dépasser 50 caractères")
      */
     private $nomPersonneChargee;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
      */
     private $telephoneMobilePersonneChargee;
 
@@ -111,7 +125,7 @@ class Producteur
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Email(message="l'adresse mail que vous avez indiqué n'est pas valide")
+     * @Assert\Email(message="L'adresse mail que vous avez indiqué n'est pas valide")
      */
     private $courrielPersonneChargee;
 
@@ -127,6 +141,7 @@ class Producteur
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Email(message="L'adresse mail que vous avez indiqué n'est pas valide")
      */
     private $courrielProducteur;
 

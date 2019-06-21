@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DocumentAudioVisuelsRepository")
@@ -18,16 +19,23 @@ class DocumentAudioVisuels
  
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+
+     * @Assert\Length(max=250, maxMessage="Le titre ne doit pas dépasser 250 caractères")
      */
+    
     private $titre;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Assert\Length(max=250, maxMessage="Le realisateur ne doit pas dépasser 250 caractères")
      */
     private $realisateur;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * 
+     * @Assert\Length(max=250, maxMessage="Le genre ne doit pas dépasser 250 caractères")
      */
     private $genre;
 
@@ -43,6 +51,7 @@ class DocumentAudioVisuels
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=250, maxMessage="Le mot de passe ne doit pas dépasser 250 caractères")
      */
     private $motDePasse;
 
@@ -54,6 +63,7 @@ class DocumentAudioVisuels
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(message="l'url {{ value }} n'est pas valide")
      */
     private $lien;
 

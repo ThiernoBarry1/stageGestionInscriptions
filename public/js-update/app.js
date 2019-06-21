@@ -3,7 +3,7 @@ $(document).ready(function()
     
   calculDevisPrevisionnel('.ht input','.input-totalHtTotalGeneral');
   calculDevisPrevisionnel('.htNormandie input','.input-totalHtNormandieTotalGeneral');
-   
+  calculDevisPrevisionnel('.depenseFrance input','.input-totalGeneralFrance');
   /**
    * permet d'effectue le calcul de devis prévisionnel 
    * cette méthode traite le cas montant Ht et dont rn région Normandie
@@ -57,7 +57,7 @@ $(document).ready(function()
 
    traitementVirgule('.ht input');
    traitementVirgule('.htNormandie input');
-
+   traitementVirgule('.depenseFrance input');
 // traitement boutton radio partie genre
 verifieNonSelectionne('#registration_genre_0','.genrePrecisionAutre');
 verifieNonSelectionne('#registration_genre_1','.genrePrecisionAutre');

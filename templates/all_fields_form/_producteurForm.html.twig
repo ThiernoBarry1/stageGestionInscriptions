@@ -42,15 +42,18 @@
                  <div class="col-4">
                     <label for="telephoneFixe">Téléphone fixe</label>
                      {{ form_row(form.telephoneFixeProducteur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                 </div>
+                     {{ form_errors(form.telephoneFixeProducteur)}}
+                  </div>
                  <div class="col-4">
                     <label for="telephoneMobile">Téléphone Mobile</label>
                      {{ form_row(form.telephoneMobileProducteur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                 </div>
+                     {{ form_errors(form.telephoneMobileProducteur)}}
+                  </div>
                  <div class="col-4">
                     <label for="corriel">Courriel</label>
-                    {{ form_row(form.courrielProducteur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                 </div>
+                    {{ form_widget(form.courrielProducteur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                    {{ form_errors(form.courrielProducteur)}}
+                  </div>
           </div>
      </fieldset>
      <fieldset class="border p-2">
@@ -67,37 +70,42 @@
            <div class="col-4">
               <label for="telephoneFixe">Téléphone fixe</label>
                {{ form_row(form.telephoneFixePersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-           </div>
+               {{ form_errors(form.telephoneFixePersonneChargee)}}
+            </div>
            <div class="col-4">
               <label for="telephoneMobile">Téléphone Mobile</label>
                {{ form_row(form.telephoneMobilePersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-           </div>
+               {{ form_errors(form.telephoneMobilePersonneChargee)}}
+            </div>
            <div class="col-4">
               <label for="corriel">Courriel</label>
               {{ form_row(form.courrielPersonneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-           </div>
+              {{ form_errors(form.courrielPersonneChargee)}}
+            </div>
         </div>
     </fieldset>
-    <div class="row">
+    <div class="row  mt-3">
         <div class="col-6">
            <label for="adresse">Adresse siège social</label>
             {{ form_row(form.adresse,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Numero et nom de la rue'}}) }}
         </div>
         <div class="col-3">
            {{ form_row(form.codePostal,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Code postal'}}) }}
-        </div>
+           {{ form_errors(form.codePostal)}}
+         </div>
         <div class="col-3">
            {{ form_row(form.ville,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Ville'}}) }}
         </div>
     </div>
-    <div class="row">
+    <div class="row  mt-3">
             <div class="col-6">
                <label for="adresseBureau">Adresse bureau (si differente du siège social)</label>
                 {{ form_row(form.adresseBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Numero et nom de la rue'}}) }}
             </div>
             <div class="col-3">
                {{ form_row(form.codePostaleBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Code postal'}}) }}
-           </div>
+               {{ form_errors(form.codePostaleBureau)}}
+            </div>
            <div class="col-3">
                {{ form_row(form.villeBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Ville'}}) }}
            </div>

@@ -30,6 +30,7 @@
                 <div class="col">
                     <label for="lien">Lien</label>
                     {{ form_row(form.lien,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
+                    {{ form_errors(form.lien) }}
                 </div>
                 <div class="col">
                     <label for="mot-passe">Mot de passe </label>

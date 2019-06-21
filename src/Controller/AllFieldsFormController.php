@@ -62,9 +62,9 @@ class AllFieldsFormController extends AbstractController
         $allFieldsForm =  $this->createForm(RegistrationType::class,$projet);
         $allFieldsForm->handleRequest($request);
 
-        if($allFieldsForm->isSubmitted()) {
+        if($allFieldsForm->isSubmitted() && $allFieldsForm->isValid()) {
             $projet->setSession($session);
-             // générer un  mot de pass en utilisant la méthode password_hash de php
+             // générer un  mot de pass 
             $token = md5(uniqid(true));
             $projet->setMotpassehass($token);
             $date = new DateTime();
