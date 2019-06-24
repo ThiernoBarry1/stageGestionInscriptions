@@ -127,16 +127,24 @@ class AllFieldsFormController extends AbstractController
         $token = $request->get('token');
         $token_date = $request->get('token_date');
         $projet = $projetRepo->findOneByCriteres($mail,$token,$token_date);
-        $session = $projet->getSession();
-        $titre = $session->getFondsAide()->getNom();
-        $dateFinSession = $session->getDateFin();
-        return $this->render('information/informationSave.html.twig',
-            [   'titre'=>$titre,
-                'dateFin'=>$dateFinSession,
-                'token'=>$token,
-                'mail'=>$mail,
-                'token_date'=>$token_date,
-            ]);
+        if($projet == null) {
+            return  $this->render('information/displayError.html.twig',
+                                                                      [
+                                                                          'date_error'=> false
+                                                                      ]
+                                 );
+        }else {
+            $session = $projet->getSession();
+            $titre = $session->getFondsAide()->getNom();
+            $dateFinSession = $session->getDateFin();
+            return $this->render('information/informationSave.html.twig',
+                [   'titre'=>$titre,
+                    'dateFin'=>$dateFinSession,
+                    'token'=>$token,
+                    'mail'=>$mail,
+                    'token_date'=>$token_date,
+                ]);
+       }
     }
     
 }

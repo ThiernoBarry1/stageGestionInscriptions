@@ -25,6 +25,7 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Merci de saisir mois de 255 caractères pour le titre")
      */
     private $titre;
 
@@ -35,22 +36,25 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Merci de saisir mois de 255 caractères")
      */
     private $formatTournage;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Merci de saisir mois de 255 caractères")
      */
     private $formatDefinitif;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=20,maxMessage="Merci de saisir mois de 20 caractères")
      */
     private $genre;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(max=600,maxMessage="le synopsis ne dois pas dépasser {{ limit }} caractères")
+     * @Assert\Length(max=600,maxMessage="le synopsis ne dois pas dépasser {{ value }} caractères")
      */
     private $synopsis;
 
@@ -88,6 +92,7 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
+     * * @Assert\Length(max=20,maxMessage="Merci de saisir mois de 20 caractères")
      */
     private $typeAideDoc;
 
@@ -118,6 +123,7 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Merci de saisir mois de 255 caractères")
      */
     private $castingEnvisage;
 
@@ -295,26 +301,31 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=55, nullable=true)
+     * @Assert\Length(max=55,maxMessage="Merci de saisir mois de 55 caractères")
      */
     private $projetDejaPresenteFondsAideDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Merci de saisir mois de 255 caractères")
      */
     private $projetDejaPresenteFondsAideTypeAide;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Merci de saisir mois de 255 caractères")
      */
     private $genrePrecisionAutre;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Merci de renseigner mois de 255 caractères")
      */
     private $adaptationOeuvreToa;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Merci de saisir mois de 255 caractères")
      */
     private $adaptationOeuvreDacp;
 
@@ -325,6 +336,7 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Merci de saisir moins de 255 caractères")
      */
     private $montantSollicite;
 
@@ -336,26 +348,30 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime(message="Cette date n'est pas une date valide")
      */
     private $modifiedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=25,nullable=true)
+     * @Assert\Length(max=255,maxMessage="Merci de saisir moins de 255 caractères")
      */
     private $typeFilm;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Merci de saisir moins de 255 caractères")
      */
     private $typeOeuvre;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer",  nullable=true)
      */
     private $dureeEpisode;
 
@@ -369,6 +385,7 @@ class Projet implements UserInterface
     /**
      * @var  string|null
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
      */
     private $nomFichier;
 
@@ -379,11 +396,13 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le mot de pass ne doit pas dépasser 255 caractères")
      */
     private $motpassehass;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message="L'adresse mail que vous avez indiqué n'est pas valide")
      */
     private $mailUtilisateur;
 

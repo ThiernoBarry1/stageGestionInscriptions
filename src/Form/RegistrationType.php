@@ -37,7 +37,7 @@ class RegistrationType extends ConfigurationFildsType
                                                           'min' => 0,
                                                           'max' => 300,
                                                           'step' => 1,
-                                                         ]
+                                               ],
                                               ]
                    )
             ->add('typeFilm',ChoiceType::class,

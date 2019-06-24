@@ -121,7 +121,8 @@
                         <div class="col-6">
                             <label for="siret">SIRET</label>
                             {{ form_row(producteur.siret,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                        </div>
+                            {{ form_errors(producteur.siret)}}
+                           </div>
                     </div>
                     <div class="row my-2">
                         <div class="col-6">
@@ -215,7 +216,7 @@
         <legend class="w-auto">Auteur(s)/réalisateur(s) </legend>
         <div id="auteurRealisateurs"  data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
             {%  for auteur in allFieldsForm.auteurRealisateurs %}
-                <div class="form-group" id="">
+                <div class="form-group">
                     <div class="form-group typePersonne mt-2">
                         {{ form_row(auteur.typePersonne,{'label':false,'attr':{'class':'typePersonne'}})}}
                     </div>
@@ -395,6 +396,7 @@
                         <div class="col">
                            <label for="castingEnvisage">Casting envisagé</label>
                            {{ form_row(allFieldsForm.castingEnvisage,{'label':false,'attr':{'class':'form-control-sm w-65'}})}}
+                           {{ form_errors(allFieldsForm.castingEnvisage) }}
                         </div>
                      </div>
                 {% endif %}
@@ -768,20 +770,22 @@
                 {{ form_row(allFieldsForm.file, {'label':false,'attr':{'class':'custom-file-input'}}) }}
               <label class="custom-file-label" for="inputGroupFile01">en cliquant ici vous pouver télecharger votre fichier</label>
             </div>
-       </div>
+         </div>
        <div class="form-group my-3">
            <div class="row">
               <label for="mailUtilisateur">Courriel pour le retour au formulaire</label>
               <smal class="form-text text-muted"> Pour vous permettre de revenir au formulaire, nous allons vous envoyé un lien securisé.
                 Pour cela merci d'indiquer ci-dessous le mail à partir duquel vous souterez recevoir le lien.</smal>
                <div class="col-6">
-                 {{ form_row(allFieldsForm.mailUtilisateur,{'label':false,'attr':{'class':'form-control w-100 my-3'} })}}
-              </div>
+                  {{ form_errors(allFieldsForm.mailUtilisateur) }}
+                 {{ form_widget(allFieldsForm.mailUtilisateur,{'label':false,'attr':{'class':'form-control-sm w-100 my-3'} })}}
+               </div>
            </div>
        </div>
+       
       <div class="form-group enregistrer mt-4">
          {{ form_widget(allFieldsForm._token)}}
-         {{form_widget(allFieldsForm.enregistrer,{'label':'Enregistrer','attr':{'class':'btn btn-success'}})}}
+         {{ form_widget(allFieldsForm.enregistrer,{'label':'Enregistrer','attr':{'class':'btn btn-success'}})}}
       </div>
       {{ form_end(allFieldsForm,{'render_rest':false}) }}
    </div>
