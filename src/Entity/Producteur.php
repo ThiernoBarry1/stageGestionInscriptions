@@ -29,7 +29,7 @@ class Producteur
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
-     * @Assert\Length(min=14,max=15,minMessage="Le numéro doit avoir 14 chiffres",maxMessage="Le numéro doit avoir 14 chiffres")
+     * @Assert\Length(max=15,minMessage="Le numéro doit avoir 14 chiffres",maxMessage="Le numéro doit avoir 14 chiffres")
      */
     private $siret;
 

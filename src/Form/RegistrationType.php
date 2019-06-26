@@ -34,21 +34,23 @@ class RegistrationType extends ConfigurationFildsType
                                               [
                                                'required' => false,
                                                'attr' => [
-                                                          'min' => 0,
+                                                          'min' => 1,
                                                           'max' => 300,
                                                           'step' => 1,
                                                ],
+                                               'data'=>1
                                               ]
                    )
             ->add('typeFilm',ChoiceType::class,
                                          [
                                           'choices'  => [
                                               'Unitaire'=>'unitaire',
-                                              'Serie'=>'serie'
+                                              'Série'=>'serie'
                                           ],
                                           'expanded' => true,
                                           'required' => true,
                                           'multiple' => false,
+                                          'data'=>'unitaire',
                                         ]
                 )
             ->add('dureeEpisode',IntegerType::class,
@@ -56,10 +58,11 @@ class RegistrationType extends ConfigurationFildsType
                                                      'required' => false,
                                                      'label' => false,
                                                      'attr' => [
-                                                                'min' => 0,
+                                                                'min' => 1,
                                                                 'max' => 300,
                                                                 'step' => 1,
-                                                               ]
+                                                     ],
+                                                     
                                                     ] 
                  )
             ->add('formatTournage',TextType::class,[ 'required'=>false])
@@ -74,6 +77,7 @@ class RegistrationType extends ConfigurationFildsType
                                               'expanded' => true,
                                               'required' => true,
                                               'multiple' => false,
+                                              'data'=>'fiction'
                                             ]
                   )
             ->add('typeOeuvre',TextType::class,[ 'required'=>false])
@@ -88,6 +92,7 @@ class RegistrationType extends ConfigurationFildsType
                                                            'expanded' => true,
                                                            'required' => true,
                                                            'multiple' => false,
+                                                           'data'=>true
                                                          ]
                   )
             ->add('adaptationOeuvreToa',TextType::class,[ 'required'=>false])
@@ -103,11 +108,12 @@ class RegistrationType extends ConfigurationFildsType
                                                 [
                                                   'choices'  => [
                                                     'Le producteur' => true, 
-                                                    'L\'auteur/le réalisateur' => false,
+                                                    'auteur.s/réalisateur.s' => false,
                                                   ],
                                                   'expanded' => true,
                                                   'required' => true,
                                                   'multiple' => false,
+                                                  'data'=>true
                                                 ]
                 )
                ->add('producteurs',CollectionType::class,
@@ -133,23 +139,25 @@ class RegistrationType extends ConfigurationFildsType
                ->add('typeAideLm',ChoiceType::class,
                                                     [
                                                       'choices'  => [
-                                                        'Écriture' => 'Écriture',
-                                                        'Réécriture' => 'Réécriture',
+                                                        'Écriture' => 'ecriture',
+                                                        'Réécriture' => 'reecriture',
                                                       ],
                                                       'expanded' => true,
                                                       'required' => true,
                                                       'multiple' => false,
+                                                      'data'=>'ecriture'
                                                     ]
                                                                           
                     )
             ->add('typeAideDoc',ChoiceType::class, [
                                                       'choices'  => [
-                                                      'Écriture' => 'Écriture',
-                                                      'Développement' => 'Développement',
+                                                      'Écriture' => 'ecriture',
+                                                      'Développement' => 'developpement',
                                                       ],
                                                       'expanded' => true,
                                                       'required' => true,
                                                       'multiple' => false,
+                                                      'data'=>'ecriture'
                                                   ]
 
                   )
@@ -157,7 +165,7 @@ class RegistrationType extends ConfigurationFildsType
             ->add('liensEligibilite',ChoiceType::class,
                                                          [
                                                            'choices'  => [
-                                                             'Un auteur réalisateur domicilié en région Normandie'=>'Un auteur réalisateur domicilié en région Normandie',
+                                                             'Un auteur réalisateur domicilié en région Normandie'=>'un auteur realisateur domicilie en région Normandie',
                                                              'Une société de production disposant d’un établissement stable en région Normandie'=>'Une société de production disposant d’un établissement stable en région Normandie',
                                                              'Un projet entretenant un lien culturel avec la région Normandie'=>'Un projet entretenant un lien culturel avec la région Normandie',
                                                              'Un auteur réalisateur ayant obtenu une aide à la production d’œuvre cinématographique de courte durée, de longue durée ou de documentaire de la Région Normandie au cours des 5 dernières années '=>'Un auteur réalisateur ayant obtenu une aide à la production d’œuvre cinématographique de courte durée, de longue durée ou de documentaire de la Région Normandie au cours des 5 dernières années ',
@@ -214,7 +222,6 @@ class RegistrationType extends ConfigurationFildsType
             ->add('fraisGenerauxFrance',TextType::class,['required'=>false])
             ->add('imprevusFrance',TextType::class,['required'=>false])
             ->add('totalGeneralFrance',TextType::class,['required'=>false])
-            
             ->add('financementAcquis',ChoiceType::class,
                                                          [
                                                            'choices'  => [
@@ -224,6 +231,7 @@ class RegistrationType extends ConfigurationFildsType
                                                            'expanded' => true,
                                                            'required' => true,
                                                            'multiple' => false,
+                                                           'data'=>true
                                                          ]
                  )         
             ->add('financementAcquisPrecision',TextType::class,[ 'required'=>false])
@@ -236,6 +244,7 @@ class RegistrationType extends ConfigurationFildsType
                                                                'expanded' => true,
                                                                'required' => true,
                                                                'multiple' => false,
+                                                               'data'=>true
                                                              ]
                  )
             ->add('depotProjetCollectivitePrecision',TextType::class,[ 'required'=>false])
@@ -247,6 +256,7 @@ class RegistrationType extends ConfigurationFildsType
                                                                     'expanded' => true,
                                                                     'required' => true,
                                                                     'multiple' => false,
+                                                                    'data'=>true
                                                                   ]
                  )
             ->add('projetDejaPresenteFondsAideDate',TextType::class,[ 'required'=>false])

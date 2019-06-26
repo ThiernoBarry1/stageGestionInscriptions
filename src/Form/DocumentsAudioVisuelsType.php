@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\DocumentAudioVisuels;
 use Symfony\Component\Form\FormBuilderInterface;
+
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -24,8 +26,9 @@ class DocumentsAudioVisuelsType extends ConfigurationFildsType
                                                     'Animation' => 'animation',
                                                     'Documentaire' => 'documentaire',
                                                     'Autre'=>'autre',
+                                                    
                                                 ],
-                                                
+                                                'empty_data'=>'fiction'
                                             ]
                 )
             ->add('annee',IntegerType::class,
@@ -33,10 +36,10 @@ class DocumentsAudioVisuelsType extends ConfigurationFildsType
                                                 'required' => false,
                                                 'label' => false,
                                                 'attr' => [
-                                                        'min' => 0,
-                                                        'max' => 300,
+                                                        'min' => date("Y"),
+                                                        'max' => 2100,
                                                         'step' => 1,
-                                                ]
+                                                ],
                                             ]
                 )
             ->add('duree',TextType::class,[ 'required'=>false]

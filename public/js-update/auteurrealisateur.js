@@ -9,24 +9,30 @@ var $str = '<div class="row my-3" id="blockPourcentage_registration_auteurRealis
 
 
 jQuery(document).ready(function() {
-
+    
     // Get the div that holds the collection of contacts
     $collectionAuteurRealisateur = $('div#auteurRealisateurs');
-
+    
     // add the "add a contact" anchor and div to the tags ul
     $collectionAuteurRealisateur.append($newLinkDiv);
-
+    
     $newpourcentage = $('div#test');
-
+    
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
     $collectionAuteurRealisateur.data('index', $collectionAuteurRealisateur.find(':input').length);
-
+    
     $addAuteurButton.on('click', function(e) {
         // add a new auteur/realisateur form (see next code block)
         addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentage, $str);
     });
-
+   
+   // simuler l'ajout d'un auteur/realisateur
+    if(+$('div#auteurRealisateurs .form-group').length == 0){
+        $addAuteurButton.click();
+    }
+    $('div#auteurRealisateurs .form-group:first-child').find('.remove-auteur:first-child').hide();
+    
     // handle the removal, just for this example
     $('.remove-auteur').click(function(e) {
         e.preventDefault();
@@ -61,9 +67,10 @@ function addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentag
 
     newForm = newForm.replace(/__name__/g, index);
     newForm = newForm.replace(/<label/g, '<label style="color:#000;"');
-
-    str = $str.replace(/__name__/g, index);
-    var newFormPourcentage = $('<div class="pourcentageAuteurRealisateur"></div>').append(str);
+   if(!$('#registration_deposant_0').is(':checked')) {
+       str = $str.replace(/__name__/g, index);
+       var newFormPourcentage = $('<div class="pourcentageAuteurRealisateur"></div>').append(str);
+   }
 
     // increase the index with one for the next item
     $collectionAuteurRealisateur.data('index', index + 1);
@@ -72,9 +79,8 @@ function addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentag
     var $newFormDiv = $('<div class="auteurRealisateur"></div>').append(newForm);
 
     $newLinkDiv.before($newFormDiv);
-
     $newpourcentage.before(newFormPourcentage);
-
+    
     // handle the removal, just for this example
     $('.remove-auteur').click(function (e) {
         e.preventDefault();
@@ -86,13 +92,29 @@ function addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentag
     });
 }
 
-function recupererauteur(e) {
-    var id = (e.id).match(/\d+/g).join('');
-    var prenom = '#registration_auteurRealisateurs_' + id +'_prenom';
-    var nom = '#registration_auteurRealisateurs_' + id +'_nom';
+    function recupererauteur(e) {
+        var id = (e.id).match(/\d+/g).join('');
+        var prenom = '#registration_auteurRealisateurs_' + id +'_prenom';
+        var nom = '#registration_auteurRealisateurs_' + id +'_nom';
+    
+        $('#para_registration_auteurRealisateurs_' + id).text($(prenom).val()+ ' ' + $(nom).val()) ;
+    }
+// permet de masquer ou afficher le bouton les champs pourcentage
 
-    $('#para_registration_auteurRealisateurs_' + id).text($(prenom).val()+ ' ' + $(nom).val()) ;
-}
-
+if($('#registration_deposant_0').is(':checked'))
+{
+    $('.pourcentageAuteurRealisateur').hide();
+}  
+if( $('#registration_deposant_1').is(':checked'))
+{
+    $('.pourcentageAuteurRealisateur').show();
+}  
+$('#registration_deposant_0').click(function(){
+    $('.pourcentageAuteurRealisateur').hide();
+   
+}) 
+$('#registration_deposant_1').click(function(){
+    $('.pourcentageAuteurRealisateur').show();
+}) 
 
 

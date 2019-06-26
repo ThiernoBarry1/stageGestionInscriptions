@@ -1,6 +1,6 @@
 $(document).ready(function()
 {     
-    
+ 
   calculDevisPrevisionnel('.ht input','.input-totalHtTotalGeneral');
   calculDevisPrevisionnel('.htNormandie input','.input-totalHtNormandieTotalGeneral');
   calculDevisPrevisionnel('.depenseFrance input','.input-totalGeneralFrance');
@@ -133,11 +133,18 @@ verifieSelectionne('#registration_projetDejaPresenteFondsAide_0','.projetDejaPre
  });
 
 // traitement autorisationtype d'aide développement
-$('#registration_typeAideDoc_1').click(function(){
-   if($('#registration_deposant_1').is(':checked')){
-      alert('uniquement les producteurs peuvent déposer en développement');
-   }
-});
+autorisationSelection('#registration_typeAideDoc_1','#registration_typeAideDoc_0','#registration_deposant_1');
+autorisationSelection('#registration_deposant_1','#registration_deposant_0','#registration_typeAideDoc_1');
+
+function autorisationSelection(selecteurClick,selecteurClick1,selecteurRadio)
+ { $(selecteurClick).click(function(){
+      if($(selecteurRadio).is(':checked')){
+         alert('seule une structure de production peut déposer en développement'); 
+         $(selecteurClick1).click();
+      }
+   });
+ }
+
 
 /**
  * Partie concerne uniquement projet Deposer par :
@@ -168,7 +175,7 @@ $('#registration_typeAideDoc_1').click(function(){
                $(selecteur).val('');
             }else{
                $(selecteuChecked).click();
-               //voir(selecteurVoir);
+               
             }
             return false;
          }
@@ -242,7 +249,7 @@ $('#registration_typeFilm_0').click(function(){
 })
 $('#registration_typeFilm_1').click(function(){
    voir('.col-dureeEpisode');
-   $('.dureeEnvisagee').html('Nombre d\épisodes');
+   $('.dureeEnvisagee').html('Nombre d\'épisodes');
    $('.dureeEpisode').html('Durée par épisode');
    
 })
@@ -308,6 +315,7 @@ function longMax(element, max){
       $('label[for="synopsis"]').css('color','red');
 	}
 }
+
 
 });
 

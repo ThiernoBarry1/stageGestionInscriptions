@@ -33,12 +33,13 @@ class AuteurRealisateurType extends ConfigurationFildsType
                                             [
                                                 'choices'  => [
                                                     'Auteur réalisateur'=>'Auteur réalisateur',
-                                                    'Scénariste'=>'Scénariste',
+                                                    'Auteur'=>'Scénariste',
                                                     'Réalisateur'=>'Réalisateur'
                                                 ],
                                                 'expanded' => true,
                                                 'required' => true,
                                                 'multiple' => false,
+                                                'data'=>'Auteur réalisateur'
                                             ]
                 )
             ->add('pourcentageAuteurRealisateur',TextType::class, ['required'=>false]

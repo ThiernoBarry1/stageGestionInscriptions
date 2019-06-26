@@ -22,7 +22,7 @@ function addProducteurForm($collectionProducteurs, $newLinkDivProd) {
     // Get the data-prototype explained earlier
     var prototype = $collectionProducteurs.data('prototype');
 
-    var arr = prototype.split('<div class="form-group">');
+    //var arr = prototype.split('<div class="form-group">');
 
     // get the new index
     var index = $collectionProducteurs.data('index');

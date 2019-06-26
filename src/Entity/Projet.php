@@ -379,6 +379,7 @@ class Projet implements UserInterface
      * le fichier à télécharger
      * 
      *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichier")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
      * @var File|null
      */
     private $file;

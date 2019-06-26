@@ -63,7 +63,7 @@ class AuteurRealisateur
     private $typePersonne;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Projet", inversedBy="auteurRealisateurs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Projet", cascade={"persist"},inversedBy="auteurRealisateurs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $projet;

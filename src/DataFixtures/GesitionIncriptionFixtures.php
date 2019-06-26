@@ -118,22 +118,13 @@ class GesitionIncriptionFixtures extends Fixture
         $manager->persist($session1);
         $manager->persist($session2);
         $manager->persist($session3);
-        $productionCmfa->setNom("Production court métrage fiction et d'animation")
+        $productionCmfa->setNom("Production court métrage fiction et animation")
                        ->addSession($session1)
                        ->addSession($session2)
                       ->addSession($session3);
         $manager->persist($productionCmfa);
       
-        $session1 = new Session();
-        $musiqueOriginalFilm = new FondsAide();
-        $session1->setNom('session 1')
-                 ->setDateDebut(new DateTime('2019-06-10'))
-                 ->setDateFin(new DateTime('2019-07-05'))
-                 ->setPleniere(new DateTime('2019-09-24'))
-                 ->setFondsAide($musiqueOriginalFilm);   
-        $manager->persist($session1);
-        $musiqueOriginalFilm->setNom('Musique originale film pour le court (fonds SACEM)') ;
-        $manager->persist($musiqueOriginalFilm);
+        
 
         $productionlongMc = new FondsAide();
         $session1 = new Session();

@@ -1,6 +1,10 @@
 <?php
 namespace App\Controller;
 use DateTime;
+
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 use App\Entity\Projet;
 use App\Entity\Session;
 use App\Entity\FondsAide;
@@ -34,7 +38,7 @@ class AllFieldsFormController extends AbstractController
      * @param ObjectManager $manager
      * @return Response
      */
-    public function registrationnew(ProjetRepository $projetRepo, SessionRepository $sessionRepo,$mail=null,$token=null,$token_date=null,$idSession=null,ObjectManager $manager, 
+    public function registration(ProjetRepository $projetRepo, SessionRepository $sessionRepo,$mail=null,$token=null,$token_date=null,$idSession=null,ObjectManager $manager, 
                                 Request $request, \Swift_Mailer $mailer)
     {
         $projet = $projetRepo->findOneByCriteres($mail,$token,$token_date);   
@@ -99,14 +103,50 @@ class AllFieldsFormController extends AbstractController
                     ->setTo($mail)
                     ->setBody($this->renderView('emails/registration.html.twig',['mail'=>$mail,'token'=>$token,'token_date'=>$token_date]),'text/html');
             $mailer->send($message);
-           
+
+           // traitement generation du fichier pdf
+                 /*
+            // Configure Dompdf according to your needs
+            $pdfOptions = new Options();
+            $pdfOptions->set('defaultFont', 'Arial');
+            
+            // Instantiate Dompdf with our options
+            $dompdf = new Dompdf($pdfOptions);
+            $html = $this->renderView('all_fields_form/displayAllFields.html.twig', [
+                'allFieldsForm' => $allFieldsForm->createView(),
+                'whichChoice' => $whichChoice,
+                'fondsAide' => $fondsAide,
+            ]);
+            // Load HTML to Dompdf
+            $dompdf->loadHtml($html);
+            
+            // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+            $dompdf->setPaper('A4', 'portrait');
+    
+            // Render the HTML as PDF
+            $dompdf->render();
+            // Store PDF Binary Data
+            $output = $dompdf->output();
+                
+                
+            // In this case, we want to write the file in the public directory
+            $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/';
+            // e.g /var/www/project/public/mypdf.pdf
+            $pdfFilepath =  $publicDirectory . 'pdf/'.$token.'.pdf';
+            // Write file to the desired path
+            file_put_contents($pdfFilepath, $output);
+            */
             return $this->redirectToRoute('information_save',['mail'=>$mail,'token'=>$token,'token_date'=>$token_date]);
         }
+        
+        
         return $this->render('all_fields_form/displayAllFields.html.twig', [
             'allFieldsForm' => $allFieldsForm->createView(),
             'whichChoice' => $whichChoice,
             'fondsAide' => $fondsAide,
         ]);
+        
+        
     }
 
     /**
