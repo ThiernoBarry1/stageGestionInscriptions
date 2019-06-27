@@ -211,7 +211,7 @@ class Projet implements UserInterface
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $postProdTotalHt;
+    private $pelliculesTotalHt;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -221,7 +221,7 @@ class Projet implements UserInterface
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $postProdTotalHtNormandie;
+    private $pelliculesTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -233,36 +233,16 @@ class Projet implements UserInterface
      */
     private $assuranceEtFraisTotalHtNormandie;
 
+    
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $fraisFinanciersTotalHt;
-
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $fraisFinanciersTotalHtNormandie;
+    private $totalPartielTotalHt;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $fraisGenerauxTotalHt;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $fraisGenerauxTotalHtNormandie;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $imprevusTotalHt;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $imprevusTotalHtNormandie;
+    private $totalPartielTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -450,32 +430,38 @@ class Projet implements UserInterface
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $postProdFrance;
+    private $pelliculesFrance;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
     private $assuranceFrance;
 
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $fraisFinanciersFrance;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $fraisGenerauxFrance;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $imprevusFrance;
+    private $totalPartielFrance;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
     private $totalGeneralFrance;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $productionTv;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $preachatTv;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nombreEpisode;
 
     
 
@@ -947,14 +933,14 @@ class Projet implements UserInterface
         return $this;
     }
 
-    public function getPostProdTotalHt(): ?float
+    public function getPelliculesTotalHt(): ?float
     {
-        return $this->postProdTotalHt;
+        return $this->pelliculesTotalHt;
     }
 
-    public function setPostProdTotalHt(?float $postProdTotalHt): self
+    public function setPelliculesTotalHt(?float $pelliculesTotalHt): self
     {
-        $this->postProdTotalHt = $postProdTotalHt;
+        $this->pelliculesTotalHt = $pelliculesTotalHt;
 
         return $this;
     }
@@ -971,14 +957,14 @@ class Projet implements UserInterface
         return $this;
     }
 
-    public function getPostProdTotalHtNormandie(): ?float
+    public function getPelliculesTotalHtNormandie(): ?float
     {
-        return $this->postProdTotalHtNormandie;
+        return $this->pelliculesTotalHtNormandie;
     }
 
-    public function setPostProdTotalHtNormandie(?float $postProdTotalHtNormandie): self
+    public function setPelliculesTotalHtNormandie(?float $pelliculesTotalHtNormandie): self
     {
-        $this->postProdTotalHtNormandie = $postProdTotalHtNormandie;
+        $this->pelliculesTotalHtNormandie = $pelliculesTotalHtNormandie;
 
         return $this;
     }
@@ -1007,74 +993,26 @@ class Projet implements UserInterface
     }
 
 
-    public function getFraisFinanciersTotalHt(): ?float
+    public function getTotalPartielTotalHt(): ?float
     {
-        return $this->fraisFinanciersTotalHt;
+        return $this->totalPartielTotalHt;
     }
 
-    public function setFraisFinanciersTotalHt(?float $fraisFinanciersTotalHt): self
+    public function setTotalPartielTotalHt(?float $totalPartielTotalHt): self
     {
-        $this->fraisFinanciersTotalHt = $fraisFinanciersTotalHt;
+        $this->totalPartielTotalHt = $totalPartielTotalHt;
 
         return $this;
     }
 
-    public function getFraisFinanciersTotalHtNormandie(): ?float
+    public function getTotalPartielTotalHtNormandie(): ?float
     {
-        return $this->fraisFinanciersTotalHtNormandie;
+        return $this->totalPartielTotalHtNormandie;
     }
 
-    public function setFraisFinanciersTotalHtNormandie(?float $fraisFinanciersTotalHtNormandie): self
+    public function setTotalPartielTotalHtNormandie(?float $totalPartielTotalHtNormandie): self
     {
-        $this->fraisFinanciersTotalHtNormandie = $fraisFinanciersTotalHtNormandie;
-
-        return $this;
-    }
-
-    public function getFraisGenerauxTotalHt(): ?float
-    {
-        return $this->fraisGenerauxTotalHt;
-    }
-
-    public function setFraisGenerauxTotalHt(?float $fraisGenerauxTotalHt): self
-    {
-        $this->fraisGenerauxTotalHt = $fraisGenerauxTotalHt;
-
-        return $this;
-    }
-
-    public function getFraisGenerauxTotalHtNormandie(): ?float
-    {
-        return $this->fraisGenerauxTotalHtNormandie;
-    }
-
-    public function setFraisGenerauxTotalHtNormandie(?float $fraisGenerauxTotalHtNormandie): self
-    {
-        $this->fraisGenerauxTotalHtNormandie = $fraisGenerauxTotalHtNormandie;
-
-        return $this;
-    }
-
-    public function getImprevusTotalHt(): ?float
-    {
-        return $this->imprevusTotalHt;
-    }
-
-    public function setImprevusTotalHt(?float $imprevusTotalHt): self
-    {
-        $this->imprevusTotalHt = $imprevusTotalHt;
-
-        return $this;
-    }
-
-    public function getImprevusTotalHtNormandie(): ?float
-    {
-        return $this->imprevusTotalHtNormandie;
-    }
-
-    public function setImprevusTotalHtNormandie(?float $imprevusTotalHtNormandie): self
-    {
-        $this->imprevusTotalHtNormandie = $imprevusTotalHtNormandie;
+        $this->totalPartielTotalHtNormandie = $totalPartielTotalHtNormandie;
 
         return $this;
     }
@@ -1511,14 +1449,14 @@ class Projet implements UserInterface
          return $this;
      }
 
-     public function getPostProdFrance(): ?float
+     public function getPelliculesFrance(): ?float
      {
-         return $this->postProdFrance;
+         return $this->pelliculesFrance;
      }
 
-     public function setPostProdFrance(?float $postProdFrance): self
+     public function setPelliculesFrance(?float $pelliculesFrance): self
      {
-         $this->postProdFrance = $postProdFrance;
+         $this->pelliculesFrance = $pelliculesFrance;
 
          return $this;
      }
@@ -1535,38 +1473,16 @@ class Projet implements UserInterface
          return $this;
      }
 
-     public function getFraisFinanciersFrance(): ?float
+     
+
+     public function getTotalPartielFrance(): ?float
      {
-         return $this->fraisFinanciersFrance;
+         return $this->totalPartielFrance;
      }
 
-     public function setFraisFinanciersFrance(?float $fraisFinanciersFrance): self
+     public function setTotalPartielFrance(?float $totalPartielFrance): self
      {
-         $this->fraisFinanciersFrance = $fraisFinanciersFrance;
-
-         return $this;
-     }
-
-     public function getFraisGenerauxFrance(): ?float
-     {
-         return $this->fraisGenerauxFrance;
-     }
-
-     public function setFraisGenerauxFrance(?float $fraisGenerauxFrance): self
-     {
-         $this->fraisGenerauxFrance = $fraisGenerauxFrance;
-
-         return $this;
-     }
-
-     public function getImprevusFrance(): ?float
-     {
-         return $this->imprevusFrance;
-     }
-
-     public function setImprevusFrance(?float $imprevusFrance): self
-     {
-         $this->imprevusFrance = $imprevusFrance;
+         $this->totalPartielFrance = $totalPartielFrance;
 
          return $this;
      }
@@ -1579,6 +1495,42 @@ class Projet implements UserInterface
      public function setTotalGeneralFrance(?float $totalGeneralFrance): self
      {
          $this->totalGeneralFrance = $totalGeneralFrance;
+
+         return $this;
+     }
+
+     public function getProductionTv(): ?string
+     {
+         return $this->productionTv;
+     }
+
+     public function setProductionTv(?string $productionTv): self
+     {
+         $this->productionTv = $productionTv;
+
+         return $this;
+     }
+
+     public function getPreachatTv(): ?string
+     {
+         return $this->preachatTv;
+     }
+
+     public function setPreachatTv(?string $preachatTv): self
+     {
+         $this->preachatTv = $preachatTv;
+
+         return $this;
+     }
+
+     public function getNombreEpisode(): ?string
+     {
+         return $this->nombreEpisode;
+     }
+
+     public function setNombreEpisode(?string $nombreEpisode): self
+     {
+         $this->nombreEpisode = $nombreEpisode;
 
          return $this;
      }

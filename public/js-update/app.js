@@ -228,6 +228,7 @@ function voir(selecteur)
    }
 }
 // partie traitment de durée envisage pour le projet
+/*
 if ($('#registration_typeFilm_0').is(':checked') )
 {
    $('.dureeEnvisagee').html('Durée envisagée');
@@ -253,7 +254,32 @@ $('#registration_typeFilm_1').click(function(){
    $('.dureeEpisode').html('Durée par épisode');
    
 })
+*/
+if ($('#registration_typeFilm_0').is(':checked') )
+{
+   cacher('.serie');
+   voir('.unitaire');
+}else if($('#registration_typeFilm_1').is(':checked'))
+{
+   cacher('.unitaire');
+   voir('.serie');
+}
 
+
+if(!$('.typeFilm').is(':visible'))
+{
+  voir('.unitaire');
+  cacher('.serie');
+}
+// pour les cliks
+$('#registration_typeFilm_0').click(function(){
+   cacher('.serie');
+   voir('.unitaire');
+})
+$('#registration_typeFilm_1').click(function(){
+   cacher('.unitaire');
+   voir('.serie');
+})
 // gestion checkbox listeLiensEligibilite  pour n'afficher que les 3 prémiers
 
 if($('.liensEligibiliteReste').is(':visible')){
@@ -303,19 +329,28 @@ $('#registration_typeAideDoc_1').click(function(){
 });
 
 // gestion nombre de caractère synopsis
-
-$('#registration_synopsis').keypress(function(){
-      longMax(this,600);
+var MAX_VALUE_SYNOPSIS = 500;
+$('#registration_synopsis').on('change',function(){
+      longMax(this,MAX_VALUE_SYNOPSIS);
 })
 function longMax(element, max){
 	var value = element.value;
 	var max = parseInt(max);
 	if(value.length > max){
       element.value = value.substr(0, max);
+      alert("Vous devez pas saisir plus de 500 caractères ");
       $('label[for="synopsis"]').css('color','red');
 	}
 }
+// masquer ou afficher les deux autres radio button partie genre
 
+if($('.genreProjetProductionCourtMFA').is(':visible') )
+{
+   $('#registration_genre_2').hide();
+   $('label[for="registration_genre_2"]').hide();
+   $('label[for="registration_genre_3"]').hide();
+   $('#registration_genre_3').hide();
+}
 
 });
 

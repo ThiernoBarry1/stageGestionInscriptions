@@ -53,6 +53,17 @@ class RegistrationType extends ConfigurationFildsType
                                           'data'=>'unitaire',
                                         ]
                 )
+            ->add('nombreEpisode',IntegerType::class,
+                                              [
+                                               'required' => false,
+                                               'attr' => [
+                                                          'min' => 1,
+                                                          'max' => 300,
+                                                          'step' => 1,
+                                               ],
+                                               'data'=>1
+                                              ]
+                   )
             ->add('dureeEpisode',IntegerType::class,
                                                    [
                                                      'required' => false,
@@ -165,11 +176,11 @@ class RegistrationType extends ConfigurationFildsType
             ->add('liensEligibilite',ChoiceType::class,
                                                          [
                                                            'choices'  => [
-                                                             'Un auteur réalisateur domicilié en région Normandie'=>'un auteur realisateur domicilie en région Normandie',
-                                                             'Une société de production disposant d’un établissement stable en région Normandie'=>'Une société de production disposant d’un établissement stable en région Normandie',
-                                                             'Un projet entretenant un lien culturel avec la région Normandie'=>'Un projet entretenant un lien culturel avec la région Normandie',
-                                                             'Un auteur réalisateur ayant obtenu une aide à la production d’œuvre cinématographique de courte durée, de longue durée ou de documentaire de la Région Normandie au cours des 5 dernières années '=>'Un auteur réalisateur ayant obtenu une aide à la production d’œuvre cinématographique de courte durée, de longue durée ou de documentaire de la Région Normandie au cours des 5 dernières années ',
-                                                             'Un projet d’œuvre cinématographique de longue durée ayant bénéficié d’une résidence d’écriture au CECI-Moulin d’Andé ou dans tout autre lieu de résidence d\'écriture reconnu en Normandie au cours des 5 dernières années'=>'Un projet d’œuvre cinématographique de longue durée ayant bénéficié d’une résidence d’écriture au CECI-Moulin d’Andé ou dans tout autre lieu de résidence d\'écriture reconnu en Normandie au cours des 5 dernières années',
+                                                             'Auteur réalisateur domicilié en région Normandie'=>'un auteur realisateur domicilie en région Normandie',
+                                                             'Société de production disposant d’un établissement stable en région Normandie'=>'une société de production disposant d’un établissement stable en région Normandie',
+                                                             'Projet entretenant un lien culturel avec la région Normandie'=>'un projet entretenant un lien culturel avec la région Normandie',
+                                                             'Auteur réalisateur ayant obtenu une aide à la production d’œuvre cinématographique de courte durée, de longue durée ou de documentaire de la Région Normandie au cours des 5 dernières années '=>'un auteur réalisateur ayant obtenu une aide à la production d’œuvre cinématographique de courte durée, de longue durée ou de documentaire de la Région Normandie au cours des 5 dernières années ',
+                                                             'Projet d’œuvre cinématographique de longue durée ayant bénéficié d’une résidence d’écriture au CECI-Moulin d’Andé ou dans tout autre lieu de résidence d\'écriture reconnu en Normandie au cours des 5 dernières années'=>'un projet d’œuvre cinématographique de longue durée ayant bénéficié d’une résidence d’écriture au CECI-Moulin d’Andé ou dans tout autre lieu de résidence d\'écriture reconnu en Normandie au cours des 5 dernières années',
                                                            ],
                                                            'expanded' => true,
                                                            'required' => true,
@@ -196,17 +207,15 @@ class RegistrationType extends ConfigurationFildsType
             ->add('transportTotalHt',TextType::class,[ 'required'=>false])
             ->add('transportTotalHtNormandie',TextType::class,[ 'required'=>false])
             ->add('moyenTechniqueTournageTotalHt',TextType::class,[ 'required'=>false])
-            ->add('postProdTotalHt',TextType::class,[ 'required'=>false])
+            ->add('pelliculesTotalHt',TextType::class,[ 'required'=>false])
             ->add('moyenTechniqueTournageTotalHtNormandie',TextType::class,[ 'required'=>false])
-            ->add('postProdTotalHtNormandie',TextType::class,[ 'required'=>false])
+            ->add('pelliculesTotalHtNormandie',TextType::class,[ 'required'=>false])
             ->add('assuranceEtFraisTotalHt',TextType::class,[ 'required'=>false])
+            ->add('assuranceFrance',TextType::class,['required'=>false])
             ->add('assuranceEtFraisTotalHtNormandie',TextType::class,[ 'required'=>false])
-            ->add('fraisFinanciersTotalHt',TextType::class,[ 'required'=>false])
-            ->add('fraisFinanciersTotalHtNormandie',TextType::class,[ 'required'=>false])
-            ->add('fraisGenerauxTotalHt',TextType::class,[ 'required'=>false])
-            ->add('fraisGenerauxTotalHtNormandie',TextType::class,[ 'required'=>false])
-            ->add('imprevusTotalHt',TextType::class,[ 'required'=>false])
-            ->add('imprevusTotalHtNormandie',TextType::class,[ 'required'=>false])
+            ->add('totalPartielTotalHt',TextType::class,[ 'required'=>false])
+            ->add('totalPartielFrance',TextType::class,['required'=>false])
+            ->add('totalPartielTotalHtNormandie',TextType::class,[ 'required'=>false])
             ->add('totalGeneralTotalHt',TextType::class,['required'=>false])
             ->add('totalGeneralTotalHtNormandie',TextType::class,['required'=>false])
             ->add('droitArtistiquesFrance',TextType::class,['required'=>false])
@@ -214,13 +223,9 @@ class RegistrationType extends ConfigurationFildsType
             ->add('personnelFrance',TextType::class,['required'=>false])
             ->add('interpretationFrance',TextType::class,['required'=>false])
             ->add('moyenTechniqueFrance',TextType::class,['required'=>false])
-            ->add('postProdFrance',TextType::class,['required'=>false])
+            ->add('pelliculesFrance',TextType::class,['required'=>false])
             ->add('chargeSocialeFrance',TextType::class,['required'=>false])
-            ->add('assuranceFrance',TextType::class,['required'=>false])
             ->add('decoEtCostumesFrance',TextType::class,['required'=>false])
-            ->add('fraisFinanciersFrance',TextType::class,['required'=>false])
-            ->add('fraisGenerauxFrance',TextType::class,['required'=>false])
-            ->add('imprevusFrance',TextType::class,['required'=>false])
             ->add('totalGeneralFrance',TextType::class,['required'=>false])
             ->add('financementAcquis',ChoiceType::class,
                                                          [
@@ -235,6 +240,8 @@ class RegistrationType extends ConfigurationFildsType
                                                          ]
                  )         
             ->add('financementAcquisPrecision',TextType::class,[ 'required'=>false])
+            ->add('productionTv',TextType::class,[ 'required'=>false])
+            ->add('preachatTv',TextType::class,[ 'required'=>false])
             ->add('montantSollicite',TextType::class,[ 'required'=>false])
             ->add('depotProjetCollectivite',ChoiceType::class,[
                                                                'choices'  => [
