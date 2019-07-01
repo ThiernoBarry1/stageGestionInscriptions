@@ -268,6 +268,18 @@ class RegistrationType extends ConfigurationFildsType
                  )
             ->add('projetDejaPresenteFondsAideDate',TextType::class,[ 'required'=>false])
             ->add('projetDejaPresenteFondsAideTypeAide',TextType::class,[ 'required'=>false])
+            ->add('validerEtTransmettreCandidature',ChoiceType::class,[
+                                                                       'choices'  => [
+                                                                           'Je souhaite valide le formulaire et transmetre définitivement ma candidature' => 'transmis',
+                                                                    
+                                                                       ],
+                                                                       'expanded' => true,
+                                                                       'required' => true,
+                                                                       'multiple' => true,
+                                                                       
+                                                                       
+                                                                     ]
+                  )
             ->add('mailUtilisateur',EmailType::class)
             ->add('file',FileType::class,[ 'required'=>false])  
             ->add('enregistrer',SubmitType::class)

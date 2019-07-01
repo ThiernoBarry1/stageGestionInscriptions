@@ -124,7 +124,7 @@
                 <div class="form-group producteur">
                     <div class="row">
                         <div class="col-6">
-                            Nom de la structure
+                           <label for="nom">Nom de la structure</label> 
                             {{ form_row(producteur.nom,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                         </div>
                     </div>
@@ -231,7 +231,7 @@
         <legend class="w-auto">Auteur.s/réalisateur.s </legend>
         <div id="auteurRealisateurs"  data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
             {%  for auteur in allFieldsForm.auteurRealisateurs %}
-                <div class="form-group">
+                <div class="form-group nombreAuteurRealisateurBoucle">
                     <div class="form-group typePersonne mt-2">
                         {{ form_row(auteur.typePersonne,{'label':false,'attr':{'class':'typePersonne'}})}}
                     </div>
@@ -705,11 +705,12 @@
              {{ form_row(allFieldsForm.montantSollicite,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }} 
          </div>
       </div>
-       {%  for auteur in allFieldsForm.auteurRealisateurs %}
+      {%  for auteur in allFieldsForm.auteurRealisateurs %}
+      <label for="partParAuteur">Par de chaque auteur</label>
        <div class="pourcentageAuteurRealisateur">
            <div class="row my-3" id="blockPourcentage_{{ auteur.vars.id }}">
                <div class="col-auto">
-                   <p id="para_{{ auteur.vars.id }}">{{ auteur.vars.value.prenom }} {{ auteur.vars.value.nom }}</label>
+                   <label id="para_{{ auteur.vars.id }}">{{ auteur.vars.value.prenom }} {{ auteur.vars.value.nom }}</label>
                </div>
                <div class="row col">
                    {{ form_row(auteur.pourcentageAuteurRealisateur,{'label':false,'attr':{'class':'form-control-sm','style':'width:3rem'}}) }} %
@@ -734,7 +735,7 @@
             {{ form_row(allFieldsForm.projetDejaPresenteFondsAide,{'label':false}) }} 
          </div>
          <div class="col-6 projetDejaPresenteFondsAidePrecision">
-            <label for="projetDejaPresenteFondsAideDate"> A quelle date  ?</label>
+            <label for="projetDejaPresenteFondsAideDate"> À quelle date  ?</label>
              {{ form_row(allFieldsForm.projetDejaPresenteFondsAideDate,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'date'}}) }} 
             <label for="projetDejaPresenteFondsAideTypeAide">Pour quel type d'aide ?</label>
             {{ form_row(allFieldsForm.projetDejaPresenteFondsAideTypeAide,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'type d\'aide'}}) }} 
@@ -743,14 +744,17 @@
       <hr>
    
       <h4 class="text-center">Téléchargement du fichier complet de votre projet</h4>
-         <div class="input-group mt-4">
+         <div class="input-group mt-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroupFileAddon01"><i class="fas fa-arrow-alt-circle-up"></i></span>
+              <span class="input-group-text" id="inputGroupFileAddon01"></span>
             </div>
             <div class="custom-file">
                 {{ form_row(allFieldsForm.file, {'label':false,'attr':{'class':'custom-file-input'}}) }}
               <label class="custom-file-label" for="inputGroupFile01">merci de cliquer ici pour télecharger votre fichier</label>
             </div>
+         </div>
+         <div class="row my-3">
+            {{form_row(allFieldsForm.validerEtTransmettreCandidature,{'label':false})}}
          </div>
        <div class="form-group my-3">
            <div class="row">

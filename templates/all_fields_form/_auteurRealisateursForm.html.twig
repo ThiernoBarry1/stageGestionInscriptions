@@ -1,5 +1,5 @@
 {% block _registration_auteurRealisateurs_entry_widget %}
-    <div class="form-group" id="block_{{id}}">
+    <div class="form-group nombreAuteurRealisateurTheme" id="block_{{id}}">
         <div class="form-group typePersonne mt-2">
             {{ form_row(form.typePersonne,{'label':false,'attr':{'class':'typePersonne'}})}}
          </div>
@@ -46,7 +46,7 @@
                  {% spaceless %}
                  <div class="row my-3" id="blockPourcentage_{{id}}">
                      <div class="col-auto">
-                        <p id="para_{{id}}"> </p>
+                        <label id="para_{{id}}"> </label>
                      </div>
                      <div class="col">
                         <div class="row">

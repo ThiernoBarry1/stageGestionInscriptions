@@ -5,7 +5,7 @@ var $addAuteurButton = $('<button type="button" id="ajoutAuteur-realisateur" cla
 var $newLinkDiv = $('<div class=""></div>').append($addAuteurButton);
 
 var $newpourcentage;
-var $str = '<div class="row my-3" id="blockPourcentage_registration_auteurRealisateurs___name__"><div class="col-auto"><p id="para_registration_auteurRealisateurs___name__"></p></div><div class="col"><div class="row"><div><input type="text" id="registration_auteurRealisateurs___name___pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][__name__][pourcentageAuteurRealisateur]" class="form-control-sm" style="width:3rem" /></div><span>%</span></div></div></div>';
+var $str = '<div class="row my-3" id="blockPourcentage_registration_auteurRealisateurs___name__"><div class="col-auto"><label id="para_registration_auteurRealisateurs___name__"></label></div><div class="col"><div class="row"><div><input type="text" id="registration_auteurRealisateurs___name___pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][__name__][pourcentageAuteurRealisateur]" class="form-control-sm" style="width:3rem" /></div><span>%</span></div></div></div>';
 
 
 jQuery(document).ready(function() {
@@ -23,12 +23,15 @@ jQuery(document).ready(function() {
     $collectionAuteurRealisateur.data('index', $collectionAuteurRealisateur.find(':input').length);
     
     $addAuteurButton.on('click', function(e) {
+        
         // add a new auteur/realisateur form (see next code block)
+
         addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentage, $str);
+        displayPourcentage();
     });
    
    // simuler l'ajout d'un auteur/realisateur
-    if(+$('div#auteurRealisateurs .form-group').length == 0){
+    if($('div#auteurRealisateurs .form-group').length == 0){
         $addAuteurButton.click();
     }
     $('div#auteurRealisateurs .form-group:first-child').find('.remove-auteur:first-child').hide();
@@ -42,8 +45,42 @@ jQuery(document).ready(function() {
         return false;
     });
 
-});
+    
+// permet de masquer ou afficher les champs pourcentage
 
+if($('#registration_deposant_0').is(':checked'))
+{
+    $('.pourcentageAuteurRealisateur').hide();
+}  
+if( $('#registration_deposant_1').is(':checked'))
+{  
+    displayPourcentage();
+}  
+$('#registration_deposant_0').click(function(){
+    $('.pourcentageAuteurRealisateur').hide();
+}) 
+$('#registration_deposant_1').click(function()
+{
+    displayPourcentage();
+}) 
+
+
+
+
+
+function displayPourcentage()
+{
+    alert('deposant 1');
+    const count = $('.nombreAuteurRealisateurTheme').length + $('.nombreAuteurRealisateurBoucle').length;
+    if( count <= 1)
+    {
+       $('.pourcentageAuteurRealisateur').hide();
+    }else
+    {
+       $('.pourcentageAuteurRealisateur').show();
+    }
+}
+});
 function addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentage, $str) {
     // Get the data-prototype explained earlier
     var prototype = $collectionAuteurRealisateur.data('prototype');
@@ -67,10 +104,10 @@ function addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentag
 
     newForm = newForm.replace(/__name__/g, index);
     newForm = newForm.replace(/<label/g, '<label style="color:#000;"');
-   if(!$('#registration_deposant_0').is(':checked')) {
+   //if(!$('#registration_deposant_0').is(':checked')) {
        str = $str.replace(/__name__/g, index);
        var newFormPourcentage = $('<div class="pourcentageAuteurRealisateur"></div>').append(str);
-   }
+   //}
 
     // increase the index with one for the next item
     $collectionAuteurRealisateur.data('index', index + 1);
@@ -97,24 +134,5 @@ function addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentag
         var prenom = '#registration_auteurRealisateurs_' + id +'_prenom';
         var nom = '#registration_auteurRealisateurs_' + id +'_nom';
     
-        $('#para_registration_auteurRealisateurs_' + id).text($(prenom).val()+ ' ' + $(nom).val()) ;
+        $('#para_registration_auteurRealisateurs_' + id).text(' La part de  '+ $(prenom).val()+ ' ' + $(nom).val()) ;
     }
-// permet de masquer ou afficher le bouton les champs pourcentage
-
-if($('#registration_deposant_0').is(':checked'))
-{
-    $('.pourcentageAuteurRealisateur').hide();
-}  
-if( $('#registration_deposant_1').is(':checked'))
-{
-    $('.pourcentageAuteurRealisateur').show();
-}  
-$('#registration_deposant_0').click(function(){
-    $('.pourcentageAuteurRealisateur').hide();
-   
-}) 
-$('#registration_deposant_1').click(function(){
-    $('.pourcentageAuteurRealisateur').show();
-}) 
-
-

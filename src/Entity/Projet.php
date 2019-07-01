@@ -463,6 +463,11 @@ class Projet implements UserInterface
      */
     private $nombreEpisode;
 
+    /**
+     * @ORM\Column(type="array",nullable=true)
+     */
+    private $validerEtTransmettreCandidature;
+
     
 
     public function __construct()
@@ -1531,6 +1536,18 @@ class Projet implements UserInterface
      public function setNombreEpisode(?string $nombreEpisode): self
      {
          $this->nombreEpisode = $nombreEpisode;
+
+         return $this;
+     }
+
+     public function getValiderEtTransmettreCandidature()
+     {
+         return $this->validerEtTransmettreCandidature;
+     }
+
+     public function setValiderEtTransmettreCandidature( $validerEtTransmettreCandidature): self
+     {
+         $this->validerEtTransmettreCandidature = $validerEtTransmettreCandidature;
 
          return $this;
      }

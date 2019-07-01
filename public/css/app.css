@@ -9,7 +9,7 @@ div[id^="registration_auteurRealisateurs"] >.required
 }
 
 
-
+#registration_validerEtTransmettreCandidature_0,
 input[id^="registration_projetDejaPresenteFondsAide"],
 input[id^="registration_depotProjetCollectivite"],
 input[id^="registration_auteurRealisateurs"],
