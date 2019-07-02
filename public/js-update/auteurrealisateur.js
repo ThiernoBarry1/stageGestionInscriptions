@@ -41,7 +41,7 @@ jQuery(document).ready(function() {
         e.preventDefault();
         $(this).parent().parent().parent().remove();
         $($(this).attr('data-target')).remove();
-
+        displayPourcentage();
         return false;
     });
 
@@ -70,9 +70,8 @@ $('#registration_deposant_1').click(function()
 
 function displayPourcentage()
 {
-    alert('deposant 1');
     const count = $('.nombreAuteurRealisateurTheme').length + $('.nombreAuteurRealisateurBoucle').length;
-    if( count <= 1)
+    if( count <= 1  || $('.production').is(':visible'))
     {
        $('.pourcentageAuteurRealisateur').hide();
     }else
@@ -81,6 +80,21 @@ function displayPourcentage()
     }
 }
 });
+
+// je déclare à nouveau la même fonction pour m'en servir dans la méthode addAuteurForm(), dans la partie remove
+// sinon, cette dernière ne vas pas prendre en compte celle qui se trouve dans le block ready juste en dessus.
+
+function displayPourcentage()
+{
+    const count = $('.nombreAuteurRealisateurTheme').length + $('.nombreAuteurRealisateurBoucle').length;
+    if( count <= 1  || $('.production').is(':visible'))
+    {
+       $('.pourcentageAuteurRealisateur').hide();
+    }else
+    {
+       $('.pourcentageAuteurRealisateur').show();
+    }
+}
 function addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentage, $str) {
     // Get the data-prototype explained earlier
     var prototype = $collectionAuteurRealisateur.data('prototype');
@@ -124,7 +138,7 @@ function addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentag
 
         $(this).parent().parent().parent().remove();
         $($(this).attr('data-target')).remove();
-
+        displayPourcentage();
         return false;
     });
 }
