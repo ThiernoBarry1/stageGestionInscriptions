@@ -9,7 +9,7 @@ div[id^="registration_auteurRealisateurs"] >.required
 }
 
 
-#registration_validerEtTransmettreCandidature_0,
+
 input[id^="registration_projetDejaPresenteFondsAide"],
 input[id^="registration_depotProjetCollectivite"],
 input[id^="registration_auteurRealisateurs"],
@@ -19,7 +19,8 @@ input[id^="registration_typeAideDoc"],
 input[id^="registration_typeAideLm"],
 input[id^="registration_deposant"],
 input[id^="registration_genre"],
-input[id^="registration_typeFilm"]
+input[id^="registration_typeFilm"],
+#registration_premierFilm_0
 {
     margin-right:5px;
 }
@@ -63,4 +64,7 @@ hr
 .decalageLegend
 {
     margin-top: 120px;
+}
+#registration_premierFilm_0{
+    margin-left: 15px;
 }

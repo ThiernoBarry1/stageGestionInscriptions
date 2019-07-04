@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 use DateTime;
-
+use Fpdf\Fpdf;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -102,39 +102,54 @@ class AllFieldsFormController extends AbstractController
                     ->setFrom('thiernobarrykankalabe@gmail.com')
                     ->setTo($mail)
                     ->setBody($this->renderView('emails/registration.html.twig',['mail'=>$mail,'token'=>$token,'token_date'=>$token_date]),'text/html');
-            $mailer->send($message);
+            /*$mailer->send($message);
 
            // traitement generation du fichier pdf
-                 /*
-            // Configure Dompdf according to your needs
-            $pdfOptions = new Options();
-            $pdfOptions->set('defaultFont', 'Arial');
-            
-            // Instantiate Dompdf with our options
-            $dompdf = new Dompdf($pdfOptions);
-            $html = $this->renderView('all_fields_form/displayAllFields.html.twig', [
-                'allFieldsForm' => $allFieldsForm->createView(),
-                'whichChoice' => $whichChoice,
-                'fondsAide' => $fondsAide,
-            ]);
-            // Load HTML to Dompdf
-            $dompdf->loadHtml($html);
-            
-            // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-            $dompdf->setPaper('A4', 'portrait');
     
-            // Render the HTML as PDF
-            $dompdf->render();
-            // Store PDF Binary Data
-            $output = $dompdf->output();
-                
-                
-            // In this case, we want to write the file in the public directory
-            $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/';
-            // e.g /var/www/project/public/mypdf.pdf
-            $pdfFilepath =  $publicDirectory . 'pdf/'.$token.'.pdf';
-            // Write file to the desired path
-            file_put_contents($pdfFilepath, $output);
+            $pdf = new FPDF();
+
+            $pdf->AddPage();
+            $pdf->SetFont('Arial','',11);
+            $pdf->Cell(40,10,$projet->getTitre(),0,1);
+            $auteurs = '';
+            foreach($projet->getAuteurRealisateurs() as $auteurRealisateur){
+               $auteurs .= $auteurRealisateur->getPrenom(). ' '. $auteurRealisateur->getNom().' ; ';
+            }
+            $producteurs = '';
+            foreach($projet->getProducteurs() as $producteur){
+                $producteurs .= $producteur->getNomProducteur() . ' '.$producteur->getPrenomProducteur(). ' /'.$producteur->getNom().'  ;';
+            }
+            $pdf->Cell(40,10,utf8_decode('Auteur.s : '.$auteurs),0,1);
+            $pdf->Cell(40,10,utf8_decode('Produit par : '.$producteurs),0,1);
+            $pdf->Cell(40,10,utf8_decode('Durée envisagée : '.$projet->getDuree().' minutes'),0,1);
+            $pdf->Cell(40,10,utf8_decode('Genre  : '.$projet->getGenre()),0,1);
+            $pdf->Cell(40,10,utf8_decode('Format tournage : '.$projet->getFormatTournage()),0,1);
+            $pdf->Cell(40,10,utf8_decode('Synopsis  : '.$projet->getSynopsis()),0,1);
+            if($projet->getAdaptationOeuvreDacp() != null ){
+                 $pdf->Cell(40,10,utf8_decode('Adaptation : date cession '.$projet->getAdaptationOeuvreDacp()),0,1);
+            }
+            $pdf->Cell(40,10,utf8_decode('Documents audiovisuels joints : '),0,1);
+            foreach($projet->getDocumentAudioVisuels() as $document)
+            {
+              $text = $document->getTitre(). '/'.$document->getRealisateur().'/'.$document->getGenre().'/'.$document->getMotDePasse();
+              $pdf->Cell(40,10,utf8_decode($text),0,1,'L',false,$document->getLien());
+            }
+            $pdf->Cell(40,10,utf8_decode('Demande d\'aide : '.$projet->getTypeAideLm()),0,1);
+            $pdf->Cell(40,10,utf8_decode('Demande d\'aide : '.$projet->getTypeAideDoc()),0,1);
+            $pdf->Cell(40,10,utf8_decode('Projet déposé par : '.$projet->getDeposant()),0,1);
+           // $pdf->Cell(40,10,utf8_decode('Lien.s d\éligibilité : '.$projet->getLiensEligibilite()),0,1);
+            $pdf->Cell(40,10,utf8_decode('Nombre de jours de tournage sur le territoire : '.$projet->getNombreJoursTournage()),0,1);
+            $pdf->Cell(40,10,utf8_decode('Nombre total de jours de tournage: '.$projet->getNombreJoursTotal()),0,1);
+            $pdf->Cell(40,10,utf8_decode('Casting envisagé: '.$projet->getCastingEnvisage()),0,1);
+            $pdf->Cell(40,10,utf8_decode('Lieux de tournage envisagés: '.$projet->getLieuxTournage()),0,1);
+            $pdf->Cell(40,10,utf8_decode('Montant du budget  :'.$projet->getMtBudget().' euros'),0,1);
+            if($projet->getFinancementAcquisPrecision() != null)
+                $pdf->Cell(40,10,utf8_decode(' Financement acquis :'.$projet->getFinancementAcquisPrecision()),0,1);
+            $pdf->Cell(40,10,utf8_decode('Projet déposé auprès d\'autre collectivités territoriales '.$projet->getDepotProjetCollectivitePrecision()),0,1);
+            if($projet->getProjetDejaPresenteFondsAide())
+                $pdf->Cell(40,10,utf8_decode('Projet déjà présenté à la Normandie '.$projet->getProjetDejaPresenteFondsAideDate().'/'.$projet->getProjetDejaPresenteFondsAideTypeAide()),0,1);
+
+            $pdf->Output('F','pdf/'.$token.'.pdf');
             */
             return $this->redirectToRoute('information_save',['mail'=>$mail,'token'=>$token,'token_date'=>$token_date]);
         }

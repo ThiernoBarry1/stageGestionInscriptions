@@ -468,6 +468,107 @@ class Projet implements UserInterface
      */
     private $validerEtTransmettreCandidature;
 
+    /**
+     * @ORM\Column(type="array",nullable=true)
+     */
+    
+    private $premierFilm;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $droitArtistiqueCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $personnelCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $interpretationCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $totalChargeSocialesCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $decoEtCostumesCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $transportCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $moyenTechniqueCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $pelliculesCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $assuranceEtFraisCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $totalPartielCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $fraisGenerauxCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $imprevusCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $totalGeneralCoutDefinitif;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $fraisGenerauxTotalHT;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $fraisGenerauxDepenseFrance;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $fraisGenerauxNormandie;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $imprevusDepenseFrance;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $imprevusNormandie;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $imprevusTotalHT;
+
     
 
     public function __construct()
@@ -1548,6 +1649,246 @@ class Projet implements UserInterface
      public function setValiderEtTransmettreCandidature( $validerEtTransmettreCandidature): self
      {
          $this->validerEtTransmettreCandidature = $validerEtTransmettreCandidature;
+
+         return $this;
+     }
+
+     public function getPremierFilm(): ?string
+     {
+         return $this->premierFilm;
+     }
+
+     public function setPremierFilm(?string $premierFilm): self
+     {
+         $this->premierFilm = $premierFilm;
+
+         return $this;
+     }
+
+     public function getDroitArtistiqueCoutDefinitif(): ?float
+     {
+         return $this->droitArtistiqueCoutDefinitif;
+     }
+
+     public function setDroitArtistiqueCoutDefinitif(?float $droitArtistiqueCoutDefinitif): self
+     {
+         $this->droitArtistiqueCoutDefinitif = $droitArtistiqueCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getPersonnelCoutDefinitif(): ?float
+     {
+         return $this->personnelCoutDefinitif;
+     }
+
+     public function setPersonnelCoutDefinitif(?float $personnelCoutDefinitif): self
+     {
+         $this->personnelCoutDefinitif = $personnelCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getInterpretationCoutDefinitif(): ?float
+     {
+         return $this->interpretationCoutDefinitif;
+     }
+
+     public function setInterpretationCoutDefinitif(?float $interpretationCoutDefinitif): self
+     {
+         $this->interpretationCoutDefinitif = $interpretationCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getTotalChargeSocialesCoutDefinitif(): ?float
+     {
+         return $this->totalChargeSocialesCoutDefinitif;
+     }
+
+     public function setTotalChargeSocialesCoutDefinitif(?float $totalChargeSocialesCoutDefinitif): self
+     {
+         $this->totalChargeSocialesCoutDefinitif = $totalChargesSocialeCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getDecoEtCostumesCoutDefinitif(): ?float
+     {
+         return $this->decoEtCostumesCoutDefinitif;
+     }
+
+     public function setDecoEtCostumesCoutDefinitif(?float $decoEtCostumesCoutDefinitif): self
+     {
+         $this->decoEtCostumesCoutDefinitif = $decoEtCostumesCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getTransportCoutDefinitif(): ?float
+     {
+         return $this->transportCoutDefinitif;
+     }
+
+     public function setTransportCoutDefinitif(?float $transportCoutDefinitif): self
+     {
+         $this->transportCoutDefinitif = $transportCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getMoyenTechniqueCoutDefinitif(): ?float
+     {
+         return $this->moyenTechniqueCoutDefinitif;
+     }
+
+     public function setMoyenTechniqueCoutDefinitif(?float $moyenTechniqueCoutDefinitif): self
+     {
+         $this->moyenTechniqueCoutDefinitif = $moyenTechniqueCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getPelliculesCoutDefinitif(): ?float
+     {
+         return $this->pelliculesCoutDefinitif;
+     }
+
+     public function setPelliculesCoutDefinitif(?float $pelliculesCoutDefinitif): self
+     {
+         $this->pelliculesCoutDefinitif = $pelliculesCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getAssuranceEtFraisCoutDefinitif(): ?float
+     {
+         return $this->assuranceEtFraisCoutDefinitif;
+     }
+
+     public function setAssuranceEtFraisCoutDefinitif(?float $assuranceEtFraisCoutDefinitif): self
+     {
+         $this->assuranceEtFraisCoutDefinitif = $assuranceEtFraisCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getTotalPartielCoutDefinitif(): ?float
+     {
+         return $this->totalPartielCoutDefinitif;
+     }
+
+     public function setTotalPartielCoutDefinitif(?float $totalPartielCoutDefinitif): self
+     {
+         $this->totalPartielCoutDefinitif = $totalPartielCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getFraisGenerauxCoutDefinitif(): ?float
+     {
+         return $this->fraisGenerauxCoutDefinitif;
+     }
+
+     public function setFraisGenerauxCoutDefinitif(?float $fraisGenerauxCoutDefinitif): self
+     {
+         $this->fraisGenerauxCoutDefinitif = $fraisGenerauxCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getImprevusCoutDefinitif(): ?float
+     {
+         return $this->imprevusCoutDefinitif;
+     }
+
+     public function setImprevusCoutDefinitif(?float $imprevusCoutDefinitif): self
+     {
+         $this->imprevusCoutDefinitif = $imprevusCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getTotalGeneralCoutDefinitif(): ?float
+     {
+         return $this->totalGeneralCoutDefinitif;
+     }
+
+     public function setTotalGeneralCoutDefinitif(?float $totalGeneralCoutDefinitif): self
+     {
+         $this->totalGeneralCoutDefinitif = $totalGeneralCoutDefinitif;
+
+         return $this;
+     }
+
+     public function getFraisGenerauxTotalHT(): ?float
+     {
+         return $this->fraisGenerauxTotalHT;
+     }
+
+     public function setFraisGenerauxTotalHT(?float $fraisGenerauxTotalHT): self
+     {
+         $this->fraisGenerauxTotalHT = $fraisGenerauxTotalHT;
+
+         return $this;
+     }
+
+     public function getFraisGenerauxDepenseFrance(): ?float
+     {
+         return $this->fraisGenerauxDepenseFrance;
+     }
+
+     public function setFraisGenerauxDepenseFrance(?float $fraisGenerauxDepenseFrance): self
+     {
+         $this->fraisGenerauxDepenseFrance = $fraisGenerauxDepenseFrance;
+
+         return $this;
+     }
+
+     public function getFraisGenerauxNormandie(): ?float
+     {
+         return $this->fraisGenerauxNormandie;
+     }
+
+     public function setFraisGenerauxNormandie(float $fraisGenerauxNormandie): self
+     {
+         $this->fraisGenerauxNormandie = $fraisGenerauxNormandie;
+
+         return $this;
+     }
+
+     public function getImprevusDepenseFrance(): ?float
+     {
+         return $this->imprevusDepenseFrance;
+     }
+
+     public function setImprevusDepenseFrance(?float $imprevusDepenseFrance): self
+     {
+         $this->imprevusDepenseFrance = $imprevusDepenseFrance;
+
+         return $this;
+     }
+
+     public function getImprevusNormandie(): ?float
+     {
+         return $this->imprevusNormandie;
+     }
+
+     public function setImprevusNormandie(?float $imprevusNormandie): self
+     {
+         $this->imprevusNormandie = $imprevusNormandie;
+
+         return $this;
+     }
+
+     public function getImprevusTotalHT(): ?float
+     {
+         return $this->imprevusTotalHT;
+     }
+
+     public function setImprevusTotalHT(?float $imprevusTotalHT): self
+     {
+         $this->imprevusTotalHT = $imprevusTotalHT;
 
          return $this;
      }

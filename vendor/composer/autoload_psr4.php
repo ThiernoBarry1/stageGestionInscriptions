@@ -78,6 +78,7 @@ return array(
     'PackageVersions\\' => array($vendorDir . '/ocramius/package-versions/src/PackageVersions'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Metadata\\' => array($vendorDir . '/jms/metadata/src'),
+    'Fpdf\\' => array($vendorDir . '/fpdf/fpdf/src/Fpdf'),
     'FontLib\\' => array($vendorDir . '/phenx/php-font-lib/src/FontLib'),
     'Fig\\Link\\' => array($vendorDir . '/fig/link-util/src'),
     'Facebook\\WebDriver\\' => array($vendorDir . '/facebook/webdriver/lib'),

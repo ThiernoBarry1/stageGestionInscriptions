@@ -148,5 +148,5 @@ function addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentag
         var prenom = '#registration_auteurRealisateurs_' + id +'_prenom';
         var nom = '#registration_auteurRealisateurs_' + id +'_nom';
     
-        $('#para_registration_auteurRealisateurs_' + id).text(' La part de  '+ $(prenom).val()+ ' ' + $(nom).val()) ;
+        $('#para_registration_auteurRealisateurs_' + id).text(' Part de  '+ $(prenom).val()+ ' ' + $(nom).val()) ;
     }

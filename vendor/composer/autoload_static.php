@@ -115,6 +115,7 @@ class ComposerStaticInitff7a4dc5d2b3f0a75438dea0886b41d3
         ),
         'F' => 
         array (
+            'Fpdf\\' => 5,
             'FontLib\\' => 8,
             'Fig\\Link\\' => 9,
             'Facebook\\WebDriver\\' => 19,
@@ -439,6 +440,10 @@ class ComposerStaticInitff7a4dc5d2b3f0a75438dea0886b41d3
         'Metadata\\' => 
         array (
             0 => __DIR__ . '/..' . '/jms/metadata/src',
+        ),
+        'Fpdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf',
         ),
         'FontLib\\' => 
         array (

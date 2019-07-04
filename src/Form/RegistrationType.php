@@ -94,6 +94,18 @@ class RegistrationType extends ConfigurationFildsType
             ->add('typeOeuvre',TextType::class,[ 'required'=>false])
             ->add('genrePrecisionAutre',TextType::class,[ 'required'=>false])
             ->add('synopsis',TextareaType::class,[ 'required'=>false])
+            ->add('premierFilm',ChoiceType::class,[
+                                                                          'choices'  => [
+                                                                              'Prémier film' => 'premier film',
+                                                                       
+                                                                          ],
+                                                                          'expanded' => true,
+                                                                          'required' => true,
+                                                                          'multiple' => true,
+                                                                          
+              
+                                                                      ]
+                   )
             ->add('adaptationOeuvre',ChoiceType::class,
                                                          [
                                                            'choices'  => [
@@ -196,28 +208,47 @@ class RegistrationType extends ConfigurationFildsType
             ->add('nombreJoursTotal',TextType::class,[ 'required'=>false])
             ->add('droitArtistiqueTotalHt',TextType::class,[ 'required'=>false])
             ->add('droitArtistiqueTotalHtNormandie',TextType::class,[ 'required'=>false])
+            ->add('droitArtistiqueCoutDefinitif',TextType::class,[ 'required'=>false])
             ->add('personnelTotalHt',TextType::class,[ 'required'=>false])
             ->add('personnelTotalHtNormandie',TextType::class,[ 'required'=>false])
+            ->add('personnelCoutDefinitif',TextType::class,[ 'required'=>false])
             ->add('interpretationTotalHt',TextType::class,[ 'required'=>false])
             ->add('interpretationTotalHtNormandie',TextType::class,[ 'required'=>false])
+            ->add('interpretationCoutDefinitif',TextType::class,[ 'required'=>false])
             ->add('totalChargeSocialesTotalHt',TextType::class,[ 'required'=>false])
             ->add('totalChargeSocialesTotalHtNormandie',TextType::class,[ 'required'=>false])
+            ->add('totalChargeSocialesCoutDefinitif',TextType::class,[ 'required'=>false])
             ->add('decoEtCostumesTotalHt',TextType::class,[ 'required'=>false])
             ->add('decoEtCostumesTotalHtNormandie',TextType::class,[ 'required'=>false])
+            ->add('decoEtCostumesCoutDefinitif',TextType::class,[ 'required'=>false])
             ->add('transportTotalHt',TextType::class,[ 'required'=>false])
             ->add('transportTotalHtNormandie',TextType::class,[ 'required'=>false])
+            ->add('transportCoutDefinitif',TextType::class,[ 'required'=>false])
             ->add('moyenTechniqueTournageTotalHt',TextType::class,[ 'required'=>false])
-            ->add('pelliculesTotalHt',TextType::class,[ 'required'=>false])
             ->add('moyenTechniqueTournageTotalHtNormandie',TextType::class,[ 'required'=>false])
+            ->add('moyenTechniqueCoutDefinitif',TextType::class,[ 'required'=>false])
+            ->add('pelliculesTotalHt',TextType::class,[ 'required'=>false])
             ->add('pelliculesTotalHtNormandie',TextType::class,[ 'required'=>false])
+            ->add('pelliculesCoutDefinitif',TextType::class,[ 'required'=>false])
             ->add('assuranceEtFraisTotalHt',TextType::class,[ 'required'=>false])
             ->add('assuranceFrance',TextType::class,['required'=>false])
             ->add('assuranceEtFraisTotalHtNormandie',TextType::class,[ 'required'=>false])
+            ->add('assuranceEtFraisCoutDefinitif',TextType::class,[ 'required'=>false])
             ->add('totalPartielTotalHt',TextType::class,[ 'required'=>false])
             ->add('totalPartielFrance',TextType::class,['required'=>false])
             ->add('totalPartielTotalHtNormandie',TextType::class,[ 'required'=>false])
+            ->add('totalPartielCoutDefinitif',TextType::class,[ 'required'=>false])
+            ->add('fraisGenerauxTotalHT',TextType::class,['required'=>false])
+            ->add('fraisGenerauxDepenseFrance',TextType::class,['required'=>false])
+            ->add('fraisGenerauxNormandie',TextType::class,['required'=>false])
+            ->add('fraisGenerauxCoutDefinitif',TextType::class,['required'=>false])
+            ->add('imprevusTotalHT',TextType::class,['required'=>false])
+            ->add('imprevusDepenseFrance',TextType::class,['required'=>false])
+            ->add('imprevusNormandie',TextType::class,['required'=>false])
+            ->add('imprevusCoutDefinitif',TextType::class,['required'=>false])
             ->add('totalGeneralTotalHt',TextType::class,['required'=>false])
             ->add('totalGeneralTotalHtNormandie',TextType::class,['required'=>false])
+            ->add('totalGeneralCoutDefinitif',TextType::class,['required'=>false])
             ->add('droitArtistiquesFrance',TextType::class,['required'=>false])
             ->add('transportFrance',TextType::class,['required'=>false])
             ->add('personnelFrance',TextType::class,['required'=>false])
@@ -268,18 +299,6 @@ class RegistrationType extends ConfigurationFildsType
                  )
             ->add('projetDejaPresenteFondsAideDate',TextType::class,[ 'required'=>false])
             ->add('projetDejaPresenteFondsAideTypeAide',TextType::class,[ 'required'=>false])
-            ->add('validerEtTransmettreCandidature',ChoiceType::class,[
-                                                                       'choices'  => [
-                                                                           'Je souhaite valide le formulaire et transmetre définitivement ma candidature' => 'transmis',
-                                                                    
-                                                                       ],
-                                                                       'expanded' => true,
-                                                                       'required' => true,
-                                                                       'multiple' => true,
-                                                                       
-                                                                       
-                                                                     ]
-                  )
             ->add('mailUtilisateur',EmailType::class)
             ->add('file',FileType::class,[ 'required'=>false])  
             ->add('enregistrer',SubmitType::class)

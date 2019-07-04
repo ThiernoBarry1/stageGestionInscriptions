@@ -1,9 +1,15 @@
 $(document).ready(function()
 {     
  
-  calculDevisPrevisionnel('.ht input','.input-totalHtTotalGeneral');
-  calculDevisPrevisionnel('.htNormandie input','.input-totalHtNormandieTotalGeneral');
-  calculDevisPrevisionnel('.depenseFrance input','.input-totalGeneralFrance');
+  calculDevisPrevisionnel('.ht input','.input-totalDEHtTotalPartiel');
+  calculDevisPrevisionnel('.htNormandie input','.input-totalDNTotalPartiel');
+  calculDevisPrevisionnel('.depenseFrance input','.input-totalDFTotalPartiel');
+  calculDevisPrevisionnel('.coutDefinitif input','.input-totalCDTotalPartiel');
+  
+  calculDevisPrevisionnel('.partielHT input','.input-totalHtTotalGeneral');
+  calculDevisPrevisionnel('.partielDepenseFrance input','.input-totalGeneralFrance');
+  calculDevisPrevisionnel('.partielNormandie input','.input-totalHtNormandieTotalGeneral');
+  calculDevisPrevisionnel('.partielCoutDefinitif input','.input-totalCoutDefinitif');
   /**
    * permet d'effectue le calcul de devis prévisionnel 
    * cette méthode traite le cas montant Ht et dont rn région Normandie
@@ -58,6 +64,13 @@ $(document).ready(function()
    traitementVirgule('.ht input');
    traitementVirgule('.htNormandie input');
    traitementVirgule('.depenseFrance input');
+   traitementVirgule('.coutDefinitif input');
+
+   traitementVirgule('.partielHT input');
+   traitementVirgule('.partielNormandie input');
+   traitementVirgule('.partielDepenseFrance input');
+   traitementVirgule('.partielCoutDefinitif input');
+
 // traitement boutton radio partie genre
 verifieNonSelectionne('#registration_genre_0','.genrePrecisionAutre');
 verifieNonSelectionne('#registration_genre_1','.genrePrecisionAutre');
@@ -228,33 +241,7 @@ function voir(selecteur)
    }
 }
 // partie traitment de durée envisage pour le projet
-/*
-if ($('#registration_typeFilm_0').is(':checked') )
-{
-   $('.dureeEnvisagee').html('Durée envisagée');
-   cacher('.col-dureeEpisode');
-}else if($('#registration_typeFilm_1').is(':checked')){
-   $('.dureeEnvisagee').html('Nombre d\'épisodes');
-   $('.dureeEpisode').html('Durée par épisode');
-}
 
-
-if(!$('.typeFilm').is(':visible')){
-$('.dureeEnvisagee').html('Durée envisagée');
-  cacher('.col-dureeEpisode');
-}
-// pour les cliks
-$('#registration_typeFilm_0').click(function(){
-   $('.dureeEnvisagee').html('Durée envisagée');
-   cacher('.col-dureeEpisode');
-})
-$('#registration_typeFilm_1').click(function(){
-   voir('.col-dureeEpisode');
-   $('.dureeEnvisagee').html('Nombre d\'épisodes');
-   $('.dureeEpisode').html('Durée par épisode');
-   
-})
-*/
 if ($('#registration_typeFilm_0').is(':checked') )
 {
    cacher('.serie');
@@ -352,6 +339,10 @@ if($('.genreProjetProductionCourtMFA').is(':visible') )
    $('#registration_genre_3').hide();
 }
 
+// gestion du popover
+
+$('a').info();
 });
+
 
 
