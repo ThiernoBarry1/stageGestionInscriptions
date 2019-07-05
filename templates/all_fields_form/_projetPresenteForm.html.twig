@@ -1,0 +1,46 @@
+{% block _registration_projetPresentes_entry_widget %}
+ <div class="form-group" id="projetPresentes_block_{{id}}">
+     <div class="row">
+        <div class="col">
+            <div class="row mt-2">
+                <div class="col">
+                    <label>Titre</label>
+                    {{form_row(form.titre,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
+                </div>
+                <div class="col">
+                    <label> Auteur réalisateur </label>
+                    {{ form_row(form.auteurrealisateur,{'label':false,'attr':{'class':'form-control-sm w-100','placehoder':'Nom et Prénom'}})}}
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    {% for genre in form.genre %}
+                        {{ form_widget(genre,{'attr':{'onclick' : 'controlPreciser(this)'}}) }}{{form_label(genre,null,{'label_attr':{'class':'genre'}})}}
+                    {% endfor %}
+                </div>
+                <div class="col-6" id="{{id}}_precision" style="display:none;" >
+                    <label>Précisez</label>
+                    {{ form_row(form.precisionAutre,{'label':false,'attr':{'class':'form-control-sm w-100'}})}} 
+                </div> 
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                     <label>Durée envisagée</label>
+                     {{ form_row(form.dureeEnvisagee,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
+                </div>
+                <div class="col">
+                    <label for="cout">Coût prévisionnel de développement </label>
+                    <div class="row">
+                        {{ form_row(form.coutPrevisionnel,{'label':false,'attr':{'class':'form-control-sm ml-3 w-85'}})}} <span>€</span>
+                    </div>
+                    {{ form_errors(form.coutPrevisionnel) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-2 mt-4">
+            <button type="button" class="remove-projetPresentes btn btn-danger" data-action="delete-projetPresentes" data-target="#projetPresentes_block_{{id}}"> Supprimer</button>
+         </div>
+    </div>
+   <hr>
+ </div>
+{% endblock %}

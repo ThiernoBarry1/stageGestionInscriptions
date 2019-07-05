@@ -92,6 +92,12 @@ class AllFieldsFormController extends AbstractController
                 $documentAudio->setProjet($projet);
                 $manager->persist($documentAudio);
             }
+            foreach($projet->getProjetPresentes() as $projetPresente)
+            {
+                $projetPresente->setProjet($projet);
+                $manager->persist($projetPresente);
+            }
+
             $manager->flush();
             $idProjet = $projet->getId();
             

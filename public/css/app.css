@@ -3,15 +3,17 @@
 #registration_financementAcquis>.required,#registration_depotProjetCollectivite>.required,
 #registration_adaptationOeuvre >.required,#registration_deposant>.required,
 #registration_projetDejaPresenteFondsAide >.required,
-div[id^="registration_auteurRealisateurs"] >.required
+div[id^="registration_auteurRealisateurs"] >.required,
+label[for^="registration_projetPresentes"]
 {
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 
 
 input[id^="registration_projetDejaPresenteFondsAide"],
 input[id^="registration_depotProjetCollectivite"],
+input[id^="registration_projetPresente"],
 input[id^="registration_auteurRealisateurs"],
 input[id^="registration_financementAcquis"],
 input[id^="registration_adaptationOeuvre"],

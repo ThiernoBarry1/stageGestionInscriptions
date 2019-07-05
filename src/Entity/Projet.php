@@ -550,7 +550,7 @@ class Projet implements UserInterface
     private $fraisGenerauxDepenseFrance;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $fraisGenerauxNormandie;
 
@@ -569,6 +569,36 @@ class Projet implements UserInterface
      */
     private $imprevusTotalHT;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreSalariePermanent;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombreSalarieIntermittent;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $salariePermenentEqtemps;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $salarieIntermittentth;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProjetPresente",cascade={"persist"}, mappedBy="projet", orphanRemoval=true)
+     */
+    private $projetPresentes;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $mtTotalProgrammeDeveloppement;
+
     
 
     public function __construct()
@@ -576,6 +606,7 @@ class Projet implements UserInterface
         $this->auteurRealisateurs = new ArrayCollection();
         $this->documentAudioVisuels = new ArrayCollection();
         $this->producteurs = new ArrayCollection();
+        $this->projetPresentes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -1653,12 +1684,12 @@ class Projet implements UserInterface
          return $this;
      }
 
-     public function getPremierFilm(): ?string
+     public function getPremierFilm(): ?array
      {
          return $this->premierFilm;
      }
 
-     public function setPremierFilm(?string $premierFilm): self
+     public function setPremierFilm(?array $premierFilm): self
      {
          $this->premierFilm = $premierFilm;
 
@@ -1889,6 +1920,97 @@ class Projet implements UserInterface
      public function setImprevusTotalHT(?float $imprevusTotalHT): self
      {
          $this->imprevusTotalHT = $imprevusTotalHT;
+
+         return $this;
+     }
+
+     public function getNombreSalariePermanent(): ?int
+     {
+         return $this->nombreSalariePermanent;
+     }
+
+     public function setNombreSalariePermanent(?int $nombreSalariePermanent): self
+     {
+         $this->nombreSalariePermanent = $nombreSalariePermanent;
+
+         return $this;
+     }
+
+     public function getNombreSalarieIntermittent(): ?int
+     {
+         return $this->nombreSalarieIntermittent;
+     }
+
+     public function setNombreSalarieIntermittent(?int $nombreSalarieIntermittent): self
+     {
+         $this->nombreSalarieIntermittent = $nombreSalarieIntermittent;
+
+         return $this;
+     }
+
+     public function getSalariePermenentEqtemps(): ?int
+     {
+         return $this->salariePermenentEqtemps;
+     }
+
+     public function setSalariePermenentEqtemps(?int $salariePermenentEqtemps): self
+     {
+         $this->salariePermenentEqtemps = $salariePermenentEqtemps;
+
+         return $this;
+     }
+
+     public function getSalarieIntermittentth(): ?string
+     {
+         return $this->salarieIntermittentth;
+     }
+
+     public function setSalarieIntermittentth(?string $salarieIntermittentth): self
+     {
+         $this->salarieIntermittentth = $salarieIntermittentth;
+
+         return $this;
+     }
+
+     /**
+      * @return Collection|ProjetPresente[]
+      */
+     public function getProjetPresentes(): Collection
+     {
+         return $this->projetPresentes;
+     }
+
+     public function addProjetPresente(ProjetPresente $projetPresente): self
+     {
+         if (!$this->projetPresentes->contains($projetPresente)) {
+             $this->projetPresentes[] = $projetPresente;
+             $projetPresente->setProjet($this);
+         }
+
+         return $this;
+     }
+
+     public function removeProjetPresente(ProjetPresente $projetPresente): self
+     {
+         if ($this->projetPresentes->contains($projetPresente)) {
+             $this->projetPresentes->removeElement($projetPresente);
+             // set the owning side to null (unless already changed)
+             if ($projetPresente->getProjet() === $this) {
+                 $projetPresente->setProjet(null);
+             }
+         }
+
+         return $this;
+     }
+
+     public function getMtTotalProgrammeDeveloppement(): ?string
+     {
+         return $this->mtTotalProgrammeDeveloppement;
+     }
+
+     public function setMtTotalProgrammeDeveloppement(?string $mtTotalProgrammeDeveloppement): self
+     {
+         $this->mtTotalProgrammeDeveloppement = $mtTotalProgrammeDeveloppement;
 
          return $this;
      }

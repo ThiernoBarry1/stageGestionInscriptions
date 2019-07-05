@@ -34,7 +34,8 @@ jQuery(document).ready(function() {
     if($('div#auteurRealisateurs .form-group').length == 0){
         $addAuteurButton.click();
     }
-    $('div#auteurRealisateurs .form-group:first-child').find('.remove-auteur:first-child').hide();
+    
+    //$('div#auteurRealisateurs .form-group:first-child').find('.remove-auteur:first-child').hide();
     
     // handle the removal, just for this example
     $('.remove-auteur').click(function(e) {

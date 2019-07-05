@@ -2,7 +2,7 @@ var $collectionDocuments;
 
 // setup an "add a auteur/realisateur" button
 var $addDocumentButton = $('<button type="button" id="ajoutDocument" class="btn btn-primary my-4" >Ajouter un document audiovisuel</button>');
-var $newLinkDivDoc = $('<div class=""></div>').append($addDocumentButton);
+var $newLinkDivDoc = $('<div></div>').append($addDocumentButton);
 
 jQuery(document).ready(function() {
 

@@ -10,6 +10,7 @@ use App\Entity\DocumentAudioVisuels;
 use App\Form\ConfigurationFildsType;
 use App\Form\DocumentsAudioVisuelsType;
 use Symfony\Component\Form\AbstractType;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -159,6 +160,18 @@ class RegistrationType extends ConfigurationFildsType
                                                                       'allow_delete'=>true,
                                                                     ]
                       )
+                ->add('projetPresentes',CollectionType::class,
+                                                                   [
+                                                                     'entry_type'=>ProjetPresenteType::class,
+                                                                     'allow_add'=>true,
+                                                                     'allow_delete'=>true,
+                                                                   ]
+                      )
+               ->add('mtTotalProgrammeDeveloppement',TextType::class,['required'=>false])
+               ->add('nombreSalariePermanent',TextType::class,['required'=>false])
+               ->add('nombreSalarieIntermittent',TextType::class,['required'=>false])
+               ->add('salarieIntermittentth',TextType::class,['required'=>false])
+               ->add('salariePermenentEqtemps',TextType::class,['required'=>false])
                ->add('typeAideLm',ChoiceType::class,
                                                     [
                                                       'choices'  => [

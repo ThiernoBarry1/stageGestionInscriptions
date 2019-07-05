@@ -5,14 +5,18 @@
    [
      'all_fields_form/_auteurRealisateursForm.html.twig', 
      'all_fields_form/_documentsAudioVisuelsForm.html.twig',
+     'all_fields_form/_projetPresenteForm.html.twig',
      'all_fields_form/_producteurForm.html.twig'
    ] 
 %}
 
 {% block body %}
    <div class="container">
-     <h4 class="text-center my-3 bg-info text-white">{{ fondsAide.nom}}</h4>
+      <h4 class="text-center mt-3"> FONDS D’AIDE A LA CREATION ET A LA PRODUCTION CINEMA, AUDIOVISUEL ET MULTIMEDIA </h2>
+      <h5 class="text-center">Région Normandie / CNC, en association avec Normandie Images</h4>
+     <h5 class="text-center my-3 bg-info text-white">{{ fondsAide.nom}}</h4>
       {{ form_start(allFieldsForm) }}
+   {%  if fondsAide.id != 10 %}
      <fieldset class="border p-3">
         <legend class="w-auto"> Le projet </legend>
         <div class="form-group">
@@ -126,6 +130,7 @@
       {% endif %}
       </fieldset>
       <hr class="production">
+    {% endif %}
       <fieldset class="border p-3 production">
          <legend class="w-auto h6"> Production </legend>
           <div id="producteurs" data-prototype="{{ form_widget(allFieldsForm.producteurs.vars.prototype)|e('html_attr') }}">
@@ -235,6 +240,103 @@
             {% endfor %}
           </div>
       </fieldset>
+      {% if fondsAide.id == 10 %}
+        <fieldset class="border p-3">
+           <legend class="w-auto h6 ">Equipe (chiffres de l’année précédente) </legend>
+           <fieldset class="border p-3">
+              <legend class="w-auto h6">Salariés permanents </legend>
+              <div class="row mt-2">
+                  <div class="col">
+                      <label>Nombre</label>
+                      {{form_row(allFieldsForm.nombreSalariePermanent,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
+                  </div>
+                  <div class="col">
+                      <label> Equivalent temps plein  </label>
+                      {{ form_row(allFieldsForm.salariePermenentEqtemps,{'label':false,'attr':{'class':'form-control-sm w-100','placehoder':'Nom et Prénom'}})}}
+                  </div>
+              </div>
+           </fieldset>
+           <fieldset class="border p-3">
+               <legend class="w-auto h6">Salariés intermittents  </legend>
+               <div class="row mt-2">
+                   <div class="col">
+                       <label>Nombre</label>
+                       {{form_row(allFieldsForm.nombreSalarieIntermittent,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
+                   </div>
+                   <div class="col">
+                       <label> Total des heures </label>
+                       <div class="row">  
+                          {{ form_row(allFieldsForm.salarieIntermittentth,{'label':false,'attr':{'class':'form-control-sm w-100','placehoder':'Nom et Prénom'}})}} <span> Heures</span>
+                        </div>
+                   </div>
+               </div>
+            </fieldset>
+        </fieldset>
+        <hr class="auteurRealisateurs">
+         <fieldset class="border p-3">
+            <legend class="w-auto h6">Projets présentés dans le portefeuille de développement (minimum 3) </legend>
+               <div id="projetPresentes" class="mt-3" data-prototype="{{ form_widget(allFieldsForm.projetPresentes.vars.prototype)|e('html_attr') }}">
+                   {% for projetPresente in allFieldsForm.projetPresentes %}
+                       <div class="form-group projetPresentes">
+                           <div class="row">
+                                 <div class="col">
+                                     <div class="row mt-2">
+                                         <div class="col">
+                                             <label>Titre</label>
+                                             {{form_row(projetPresente.titre,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
+                                         </div>
+                                         <div class="col">
+                                             <label> Auteur réalisateur </label>
+                                             {{ form_row(projetPresente.auteurrealisateur,{'label':false,'attr':{'class':'form-control-sm w-100','placehoder':'Nom et Prénom'}})}}
+                                         </div>
+                                     </div>
+                                     <div class="row mt-2">
+                                          <div class="col-6">
+                                              {% for genre in projetPresente.genre %}
+                                                  {{ form_widget(genre,{'attr':{'onclick' : 'controlPreciser(this)'}}) }}{{form_label(genre,null,{'label_attr':{'class':'genre'}})}}
+                                              {% endfor %}
+                                          </div>
+                                          <div class="col-6" id="{{projetPresente.vars.id}}_precision" style="display:none;" >
+                                              <label>Précisez</label>
+                                              {{ form_row(projetPresente.precisionAutre,{'label':false,'attr':{'class':'form-control-sm w-100'}})}} 
+                                          </div> 
+                                      </div>
+                                     <div class="row mt-2">
+                                         <div class="col">
+                                              <label>Durée envisagée</label>
+                                              {{ form_row(projetPresente.dureeEnvisagee,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
+                                         </div>
+                                         <div class="col">
+                                             <label for="lien">Coût prévisionnel de développement </label>
+                                             <div class="row">
+                                                 {{ form_row(projetPresente.coutPrevisionnel,{'label':false,'attr':{'class':'form-control-sm ml-3 w-85'}})}} <span>€</span>
+                                             </div>
+                                             {{ form_errors(projetPresente.coutPrevisionnel) }}
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-2 mt-4">
+                                     <button type="button" class="remove-projetPresentes btn btn-danger" data-action="delete-projetPresentes" data-target="#projetPresentes_block_{{projetPresente.vars.id}}"> Supprimer</button>
+                                  </div>
+                             </div>
+                           <hr>
+                       </div>
+                   {% endfor %}
+               </div>
+         </fieldset>
+         <div class="form-group">
+            <div class="row">
+               <div class="col mt-4">
+                  <label for="montanttotoalProgrammeDeveloppement">Montant total du programme de développement de la structure (projets en développement + développement de la société) </label>
+                  <div class="row">
+                     {{ form_row(allFieldsForm.mtTotalProgrammeDeveloppement,{'label':false,'attr':{'class':'form-control-sm ml-3 w-85'}})}} <span>€</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+    {% else %}
+      {# endif voir la partie telechargement des fichiers #}
+     
      <hr class="auteurRealisateurs">
      <fieldset class="border p-3 auteurRealisateurs">
         <legend class="w-auto h6">Auteur.s/réalisateur.s </legend>
@@ -363,7 +465,7 @@
          </div>
       {% endif %}
 
-      {# en attentant de révoir Fanny pour des explications #}
+      
 
       {% if fondsAide.id == 1 or fondsAide.id == 2 %}
          <div class="form-group my-2 montant-budget">
@@ -834,7 +936,6 @@
          </div>
       </div>
       {%  for auteur in allFieldsForm.auteurRealisateurs %}
-      <label for="partParAuteur">Par de chaque auteur</label>
        <div class="pourcentageAuteurRealisateur">
            <div class="row my-3" id="blockPourcentage_{{ auteur.vars.id }}">
                <div class="col-auto">
@@ -870,7 +971,8 @@
          </div>
       </div>
       <hr>
-   
+
+   {% endif %}
       <h4 class="text-center">Téléchargement du fichier complet de votre projet</h4>
          <div class="input-group mt-3">
             <div class="input-group-prepend">

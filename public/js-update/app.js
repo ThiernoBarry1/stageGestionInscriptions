@@ -341,7 +341,6 @@ if($('.genreProjetProductionCourtMFA').is(':visible') )
 
 // gestion du popover
 
-$('a').info();
 });
 
 
