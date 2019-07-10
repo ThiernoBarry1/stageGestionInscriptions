@@ -4,7 +4,14 @@
 #registration_adaptationOeuvre >.required,#registration_deposant>.required,
 #registration_projetDejaPresenteFondsAide >.required,
 div[id^="registration_auteurRealisateurs"] >.required,
-label[for^="registration_projetPresentes"]
+label[for^="registration_projetPresentes"],
+label[for^="registration_deposant_0"],
+label[for^="registration_typeAideLm_0"],
+label[for^="registration_typeAideDoc_0"],
+label[for^="registration_adaptationOeuvre_0"],
+label[for^="registration_financementAcquis_0"],
+label[for^="registration_depotProjetCollectivite_0"],
+label[for^="registration_projetDejaPresenteFondsAide_0"]
 {
     margin-right: 15px;
 }
@@ -44,12 +51,7 @@ hr
 {
     background-color:navy;
 }
-.enregistrer >button
-{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
+
 .decalageLabelProduction{
     margin-top: 15px;
 }
@@ -112,4 +114,18 @@ hr
 
 .form-check-input {
     margin-left: -1.01rem;
+}
+div.submitButton {
+    margin-left: 30%;
+    margin-bottom: 30px;
+}
+div.submitButton>.sauvegarder {
+    margin-left: 65%;
+    margin-bottom: 30px;
+}
+.enregistrer>button
+{
+    margin-left:auto;
+    margin-right: auto;
+    display: block;
 }

@@ -43,7 +43,7 @@ jQuery(document).ready(function() {
     function verifieNonSelectionne(selecteurVoir,selecteurCache)
     {
       if($(selecteurVoir).is(':checked')){
-         cacher(selecteurCache);  
+         $(selecteurCache).hide();  
       }
     }
 });

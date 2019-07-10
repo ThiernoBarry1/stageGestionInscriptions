@@ -26,7 +26,7 @@ class ProjetPresenteType extends AbstractType
                                                     
                                                 ],
                                                 'expanded' => true,
-                                                'required' => true,
+                                                'required' => false,
                                                 'multiple' => false,
                                                 'data'=>'fiction'
                                             ]

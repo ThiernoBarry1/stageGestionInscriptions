@@ -37,9 +37,9 @@ class AuteurRealisateurType extends ConfigurationFildsType
                                                     'Réalisateur'=>'Réalisateur'
                                                 ],
                                                 'expanded' => true,
-                                                'required' => true,
+                                                'required' => false,
                                                 'multiple' => false,
-                                                'data'=>'Auteur réalisateur'
+                                                
                                             ]
                 )
             ->add('pourcentageAuteurRealisateur',TextType::class, ['required'=>false]

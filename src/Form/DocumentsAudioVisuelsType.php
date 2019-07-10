@@ -28,7 +28,7 @@ class DocumentsAudioVisuelsType extends ConfigurationFildsType
                                                     'Autre'=>'autre',
                                                     
                                                 ],
-                                                'empty_data'=>'fiction'
+                                                'required'=>true,
                                             ]
                 )
             ->add('annee',IntegerType::class,

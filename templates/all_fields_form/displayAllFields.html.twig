@@ -43,15 +43,24 @@
             {% if fondsAide.id == 4  or fondsAide.id == 7 %}
                <div class="row genreProjetProductionCourtMFA">
                   <div class="col-6 custom-control custom-radio">
-                     {{ form_row(allFieldsForm.genre,{'label':false}) }} 
+                        {% for genre in allFieldsForm.genre %}
+                        {% if loop.index > 1 %}
+                             {{ form_widget(genre) }}{{form_label(genre,null,{'label_attr':{'class':'genre'}})}}
+                        {% endif %}
+                    {% endfor %}
                   </div>
                </div>
             {% else %}
                <div class="row genreProjet">
-                  <div class="col-6 custom-control custom-radio">
-                     {{ form_row(allFieldsForm.genre,{'label':false}) }} 
+                  
+                  <div class="col-6 custom-control custom-radio"">
+                     {% for genre in allFieldsForm.genre %}
+                        {% if loop.index > 1 %}
+                             {{ form_widget(genre) }}{{form_label(genre,null,{'label_attr':{'class':'genre'}})}}
+                        {% endif %}
+                    {% endfor %}
                   </div>
-                  <div class="col-6 genrePrecisionAutre">
+                  <div class="col-6 genrePrecisionAutre"style="display:none;">
                         <label for="precision">Précisez</label>
                      {{ form_row(allFieldsForm.genrePrecisionAutre,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }} 
                   </div>
@@ -61,7 +70,11 @@
          <div class="row my-2">
             {% if fondsAide.id == 2 or fondsAide.id == 7  or fondsAide.id == 6 %}
                 <div class="col-6 typeFilm">
-                   {{ form_row(allFieldsForm.typeFilm,{'label':false})}}
+                   {% for film in allFieldsForm.typeFilm %}
+                        {% if loop.index > 1 %}
+                             {{ form_widget(typeFilm) }}{{form_label(typeFilm,null)}}
+                        {% endif %}
+                    {% endfor %}
                 </div>
             {% elseif fondsAide.id == 3 %}
                <div class="col-6">
@@ -100,17 +113,20 @@
         </div>
         {% if fondsAide.id == 4 %}
             <div class="row my-3">
-               {#<label for="premierFilm">Prémier film</label>
-                  <a  href ="#"  class="btn btn-info" data-toggle="info" data-placement="bottom" data-content="Vivamus
-                  sagittis lacus vel augue laoreet rutrum faucibus.">i</a>#}
-                  
                {{form_row(allFieldsForm.premierFilm,{'label':false})}}
+              <i href="#" data-toggle="popover" title="Information" class="" data-popover-position="bottom"  data-content="Prémier film de l'auteur realisateur, produit par une société de production">i</i>
             </div>
         {% endif %}
       <div class="row my-3">
          <div class="col-6">
-            <label for="adaptationOeuvre">Adaption d'une œuvre préexistante</label>
-            {{ form_row(allFieldsForm.adaptationOeuvre,{'label':false,'attr':{'class':'form-control-sm'}}) }}
+            <label for="adaptationOeuvre">Adaption d'une œuvre préexistante<br></label>
+            <div class="row ml-3">
+               {% for adaptationOeuvre in allFieldsForm.adaptationOeuvre %}
+                   {% if loop.index > 1 %}
+                        {{ form_widget(adaptationOeuvre) }} {{form_label(adaptationOeuvre,null)}}
+                   {% endif %}
+               {% endfor %}
+            </div>
          </div>
          <div class="col-6 adaptationOeuvrePrecision">
             <label for="adptationOeuvreToa">Titre de l'œuvre et auteur </label>
@@ -124,7 +140,13 @@
       {% if fondsAide.id == 1 or fondsAide.id == 2 %}
           <div class="my-3">
              <label for="deposant">Projet déposé par</label>
-             {{ form_row(allFieldsForm.deposant,{'label':false,'attr':{'class':'form-control-sm'}}) }}
+             <div class="row ml-2">
+                {% for deposant in allFieldsForm.deposant %}
+                     {% if loop.index > 1 %}
+                          {{ form_widget(deposant) }}{{form_label(deposant,null)}}
+                     {% endif %}
+                {% endfor %}
+             </div>
           </div>
       {% endif %}
       </fieldset>
@@ -298,7 +320,9 @@
                                      <div class="row mt-2">
                                           <div class="col-6">
                                               {% for genre in projetPresente.genre %}
-                                                  {{ form_widget(genre,{'attr':{'onclick' : 'controlPreciser(this)'}}) }}{{form_label(genre,null,{'label_attr':{'class':'genre'}})}}
+                                                {% if loop.inde > 1 %}
+                                                      {{ form_widget(genre,{'attr':{'onclick' : 'controlPreciser(this)'}}) }}{{form_label(genre,null,{'label_attr':{'class':'genre'}})}}
+                                                {% endif %}
                                               {% endfor %}
                                           </div>
                                           <div class="col-6" id="{{projetPresente.vars.id}}_precision" style="display:none;" >
@@ -349,8 +373,12 @@
             {%  for auteur in allFieldsForm.auteurRealisateurs %}
                 <div class="form-group nombreAuteurRealisateurBoucle">
                     <div class="form-group typePersonne mt-2">
-                        {{ form_row(auteur.typePersonne,{'label':false,'attr':{'class':'typePersonne'}})}}
-                    </div>
+                        {% for typePersonne in auteur.typePersonne %}
+                           {% if loop.index > 1 %}
+                                {{ form_widget(typePersonne) }}{{form_label(typePersonne,null)}}
+                           {% endif %}
+                        {% endfor %}
+                     </div>
                     <div class="row">
                         <div class="col-10">
                             <div class="row">
@@ -459,19 +487,28 @@
       <hr>
          <div class="form-group my-2">
             <label for="typeAideLm">Type d'aide demandée</label>
-            {{ form_row(allFieldsForm.typeAideLm,{'label':false})}}
+            <div class="row ml-2">
+                  {% for typeAideLm in allFieldsForm.typeAideLm %}
+                     {% if loop.index > 1 %}
+                          {{ form_widget(typeAideLm) }}{{form_label(typeAideLm,null)}}
+                     {% endif %}
+                 {% endfor %}
+            </div>
          </div>
       {% endif %}
       {% if fondsAide.id == 2 %}
       <hr>
          <div class="form-group  my-2">
             <label for="typeAideDoc">Type d'aide demandée</label>
-            {{ form_widget(allFieldsForm.typeAideDoc,{'label':false})}}
+            <div class="row ml-2">
+               {% for typeAideDoc in allFieldsForm.typeAideDoc %}
+                  {% if loop.index > 1 %}
+                       {{ form_widget(typeAideDoc) }}{{form_label(genre,null)}}
+                  {% endif %}
+              {% endfor %}
+            </div>
          </div>
       {% endif %}
-
-      
-
       {% if fondsAide.id == 1 or fondsAide.id == 2 %}
          <div class="form-group my-2 montant-budget">
             <label for="montant-budget"></label>
@@ -918,8 +955,14 @@
       {% if fondsAide.id != 5 %}
          <div class="row my-3">
             <div class="col-6">
-               <label for="financementAcquis">Financement.s acquis</label>
-               {{ form_row(allFieldsForm.financementAcquis,{'label':false}) }} 
+               <label for="financementAcquis">Financement.s acquis</label> 
+               <div class="row ml-2">
+                  {% for financementAcquis in allFieldsForm.financementAcquis %}
+                     {% if loop.index > 1 %}
+                        {{ form_widget(financementAcquis) }}{{form_label(financementAcquis,null)}}
+                     {% endif %}
+                  {% endfor %}
+               </div>
             </div>
             <div class="col-6 financementAcquisPrecision">
                <label for="financementAcquisPrecision"> Le.squel.s ?</label>
@@ -959,7 +1002,13 @@
       <div class="row my-3">
          <div class="col-6">
             <label for="depotProjetCollectivite">Projet déposé auprès d'autres collectivités territoriales ? </label>
-            {{ form_row(allFieldsForm.depotProjetCollectivite,{'label':false}) }} 
+            <div class="row ml-2">
+               {% for depotProjetCollectivite in allFieldsForm.depotProjetCollectivite %}
+                  {% if loop.index > 1 %}
+                     {{ form_widget(depotProjetCollectivite) }}{{form_label(depotProjetCollectivite,null)}}
+                  {% endif %}
+               {% endfor %}
+            </div>
          </div>
          <div class="col-6 depotProjetCollectivitePrecision">
             <label for="depotProjetCollectivitePrecision"> Le.squelle.s ?</label>
@@ -969,13 +1018,25 @@
       <div class="row my-3">
          <div class="col-6">
             <label for="projetDejaPresenteFondsAide">Projet déjà présenté auprès du Fonds d'aide Normandie </label>
-            {{ form_row(allFieldsForm.projetDejaPresenteFondsAide,{'label':false}) }} 
+               <div class="row ml-2">
+                  {% for projetDejaPresenteFondsAide in allFieldsForm.projetDejaPresenteFondsAide %}
+                      {% if loop.index > 1 %}
+                         {{ form_widget(projetDejaPresenteFondsAide) }}{{form_label(projetDejaPresenteFondsAide,null)}}
+                      {% endif %}
+                   {% endfor %}
+               </div>
          </div>
          <div class="col-6 projetDejaPresenteFondsAidePrecision">
             <label for="projetDejaPresenteFondsAideDate"> À quelle date  ?</label>
              {{ form_row(allFieldsForm.projetDejaPresenteFondsAideDate,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'date'}}) }} 
             <label for="projetDejaPresenteFondsAideTypeAide">Pour quel type d'aide ?</label>
-            {{ form_row(allFieldsForm.projetDejaPresenteFondsAideTypeAide,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'type d\'aide'}}) }} 
+             <div class="row ml-2">
+                {% for projetDejaPresenteFondsAideTypeAide in allFieldsForm.projetDejaPresenteFondsAideTypeAide %}
+                   {% if loop.index > 1 %}
+                      {{ form_widget(projetDejaPresenteFondsAideTypeAide) }}{{form_label(projetDejaPresenteFondsAideTypeAide,null)}}
+                   {% endif %}
+               {% endfor %}
+             </div>
          </div>
       </div>
       <hr>
@@ -1180,6 +1241,12 @@
          {{ form_widget(allFieldsForm._token)}}
          {{ form_widget(allFieldsForm.enregistrer,{'label':'Enregistrer','attr':{'class':'btn btn-success'}})}}
       </div>
+      {#  partie valider et sauvegarder
+         <div class="submitButton">
+         <button type="button" class="btn btn-primary valider">  Valider</button>
+         <button type="button" class="btn btn-primary sauvegarder">  Sauvegarder</button>
+      </div>
+      #}
       {{ form_end(allFieldsForm,{'render_rest':false}) }}
    </div>
 {% endblock %}

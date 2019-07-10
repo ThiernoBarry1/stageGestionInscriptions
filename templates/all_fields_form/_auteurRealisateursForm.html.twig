@@ -1,7 +1,11 @@
 {% block _registration_auteurRealisateurs_entry_widget %}
     <div class="form-group nombreAuteurRealisateurTheme" id="block_{{id}}">
         <div class="form-group typePersonne mt-2">
-            {{ form_row(form.typePersonne,{'label':false,'attr':{'class':'typePersonne'}})}}
+            {% for typePersonne in form.typePersonne %}
+                {% if loop.index > 1 %}
+                     {{ form_widget(typePersonne) }}{{form_label(typePersonne,null)}}
+                {% endif %}
+            {% endfor %}
          </div>
          <div class="row">
              <div class="col-10">
