@@ -358,29 +358,301 @@ class Projet implements UserInterface
     /**
      * le fichier à télécharger
      * 
-     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichier")
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierCourrierdemande")
      * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
      * @var File|null
      */
-    private $file;
+    private $courrierdemande;
     /**
      * @var  string|null
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
      */
-    private $nomFichier;
+    private $nomFichierCourrierdemande;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updatedAt;
+    private $updatedAtCourrierdemande;
+
+    /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierDossierartistique")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $dossierartistique;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierDossierartistique;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtDossierartistique;
+    
+   /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierDevisPrevisionnel")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $devisPrevisionnel;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierDevisPrevisionnel;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtDevisPrevisionnel;
+
+
+    /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierPlanFinancement")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $planFinancement;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierPlanFinancement;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtPlanFinancement;
+
+
+     /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierContrat")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $contrat;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierContrat;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtContrat;
+
+
+     /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierJustificatifdiffusion")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $justificatifdiffusion;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierJustificatifdiffusion;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtJustificatifdiffusion;
+    
+     /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierfinsee")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $finsee;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierfinsee;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtfinsee;
+
+
+     /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierrib")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $rib;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierrib;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtrib;
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le mot de pass ne doit pas dépasser 255 caractères")
+     */
+
+     /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierengagement")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $engagement;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierengagement;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtengagement;
+    
+     /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierJustificatifeligibilite")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $justificatifeligibilite;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierJustificatifeligibilite;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtJustificatifeligibilite;
+
+    /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierDossierpresentation")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $dossierpresentation;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierDossierpresentation;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtDossierpresentation;
+    
+    
+    /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierBudgetprevisionnel")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $budgetprevisionnel;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierBudgetprevisionnel;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtBudgetprevisionnel;
+
+
+    /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierAttestationvigilance")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $attestationvigilance;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierAttestationvigilance;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtAttestationvigilance;
+
+
+    /**
+     * le fichier à télécharger
+     * 
+     *@Vich\UploadableField(mapping="documents", fileNameProperty="nomFichierDeclarationaide")
+     * @Assert\File(mimeTypes="application/pdf",mimeTypesMessage="uniquement les documents pdf sont autorisé")
+     * @var File|null
+     */
+    private $declarationaide;
+    /**
+     * @var  string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="Le nom du fichier est trop long")
+     */
+    private $nomFichierDeclarationaide;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAtDeclarationaide;
+
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(max=255,maxMessage="Le mot de pass ne doit pas dépasser 255 caractères")
      */
     private $motpassehass;
-
+      
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email(message="L'adresse mail que vous avez indiqué n'est pas valide")
@@ -1412,44 +1684,554 @@ class Projet implements UserInterface
         return $this;
     }
 
-    public function getNomFichier()
+    public function getNomFichierCourrierdemande()
     {
-        return $this->nomFichier;
+        return $this->nomFichierCourrierdemande;
     }
 
-    public function setNomFichier( $nomFichier): self
+    public function setNomFichierCourrierdemande( $nomFichierCourrierdemande): self
     {
-        $this->nomFichier = $nomFichier;
+        $this->nomFichierCourieldemande = $nomFichierCourrierdemande;
 
         return $this;
     }
-    public function getFile()
+    public function getCourrierdemande()
     {
-        return $this->file;
+        return $this->courrierdemande;
     }
 
-    public function setFile( $file): self
+    public function setCourrierdemande( $courrierdemande): self
     {
-        $this->file = $file;
-        if (null !== $file) {
+        $this->courrierdemande = $courrierdemande;
+        if (null !== $courrierdemande) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedAtCourrierdemande = new \DateTimeImmutable();
         }
         return $this;
     }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAtCourrierdemande(): ?\DateTimeInterface
     {
-        return $this->updatedAt;
+        return $this->updatedAtCourrierdemande;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function setUpdatedAtCourrierdemande(?\DateTimeInterface $updatedAtCourrierdemande): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->updatedAtCourrierdemande = $updatedAtCourrierdemande;
 
         return $this;
     }
+  // 2
+  public function getNomFichierDossierartistique()
+    {
+        return $this->nomFichierDossierartistique;
+    }
+
+    public function setNomFichierDossierartistique( $nomFichierDossierartistique): self
+    {
+        $this->nomFichierDossierartistique = $nomFichierDossierartistique;
+
+        return $this;
+    }
+    public function getDossierartistique()
+    {
+        return $this->dossierartistique;
+    }
+
+    public function setDossierartistique( $dossierartistique): self
+    {
+        $this->dossierartistique = $dossierartistique;
+        if (null !== $dossierartistique) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAtDossierartistique = new \DateTimeImmutable();
+        }
+        return $this;
+    }
+    public function getUpdatedAtDossierartistique(): ?\DateTimeInterface
+    {
+        return $this->updatedAtDossierartistique;
+    }
+
+    public function setUpdatedAtDossierartistique(?\DateTimeInterface $updatedAtDossierartistique): self
+    {
+        $this->updatedAtDossierartistique = $updatedAtDossierartistique;
+
+        return $this;
+    }
+
+   // 3
+
+   public function getNomFichierDevisPrevisionnel()
+   {
+       return $this->nomFichierDevisPrevisionnel;
+   }
+
+   public function setNomFichierDevisPrevisionnel( $nomFichierDevisPrevisionnel): self
+   {
+       $this->nomFichierDevisPrevisionnel = $nomFichierDevisPrevisionnel;
+
+       return $this;
+   }
+   public function getDevisPrevisionnel()
+   {
+       return $this->devisPrevisionnel;
+   }
+
+   public function setDevisPrevisionnel( $devisPrevisionnel): self
+   {
+       $this->devisPrevisionnel = $devisPrevisionnel;
+       if (null !== $devisPrevisionnel) {
+           // It is required that at least one field changes if you are using doctrine
+           // otherwise the event listeners won't be called and the file is lost
+           $this->updatedAtDevisPrevisionnel = new \DateTimeImmutable();
+       }
+       return $this;
+   }
+   public function getUpdatedAtDevisPrevisionnel(): ?\DateTimeInterface
+   {
+       return $this->updatedAtDevisPrevisionnel;
+   }
+
+   public function setUpdatedAtDevisPrevisionnel(?\DateTimeInterface $updatedAtDevisPresionnel): self
+   {
+       $this->updatedAtDevisPresionnel = $updatedAtDevisPresionnel;
+
+       return $this;
+   }
+   // 4
+    
+   public function getNomFichierPlanFinancement()
+   {
+       return $this->nomFichierPlanFinancement;
+   }
+
+   public function setNomFichierPlanFinancement( $nomFichierPlanFinancement): self
+   {
+       $this->nomFichierPlanFinancement = $nomFichierPlanFinancement;
+
+       return $this;
+   }
+   public function getPlanFinancement()
+   {
+       return $this->planFinancement;
+   }
+
+   public function setPlanFinancement( $planFinancement): self
+   {
+       $this->planFinancement = $planFinancement;
+       if (null !== $planFinancement) {
+           // It is required that at least one field changes if you are using doctrine
+           // otherwise the event listeners won't be called and the file is lost
+           $this->updatedAtPlanFinancement = new \DateTimeImmutable();
+       }
+       return $this;
+   }
+   public function getUpdatedAtPlanFinancement(): ?\DateTimeInterface
+   {
+       return $this->updatedAtPlanFinancement;
+   }
+
+   public function setUpdatedAtPlanFinancement(?\DateTimeInterface $updatedAtPlanFinancement): self
+   {
+       $this->updatedAtPlanFinancement = $updatedAtPlanFinancement;
+
+       return $this;
+   }
+   
+   // 5
+   public function getNomFichierContrat()
+   {
+       return $this->nomFichierContrat;
+   }
+
+   public function setNomFichierContrat( $nomFichierContrat): self
+   {
+       $this->nomFichierContrat = $nomFichierContrat;
+
+       return $this;
+   }
+   public function getContrat()
+   {
+       return $this->contrat;
+   }
+
+   public function setContrat( $contrat): self
+   {
+       $this->contrat = $contrat;
+       if (null !== $contrat) {
+           // It is required that at least one field changes if you are using doctrine
+           // otherwise the event listeners won't be called and the file is lost
+           $this->updatedAtContrat = new \DateTimeImmutable();
+       }
+       return $this;
+   }
+   public function getUpdatedAtContrat(): ?\DateTimeInterface
+   {
+       return $this->updatedAtContrat;
+   }
+
+   public function setUpdatedAtContrat(?\DateTimeInterface $updatedAtContrat): self
+   {
+       $this->updatedAtContrat = $updatedAtContrat;
+
+       return $this;
+   }
+  // 6
+
+    public function getNomFichierJustificatifdiffusion()
+    {
+        return $this->nomFichierJustificatifdiffusion;
+    }
+    
+    public function setNomFichierJustificatifdiffusion( $nomFichierJustificatifdiffusion): self
+    {
+         $this->nomFichierJustificatifdiffusion = $nomFichierJustificatifdiffusion;
+    
+         return $this;
+     }
+     public function getJustificatifdiffusion()
+     {
+         return $this->justificatifdiffusion;
+     }
+    
+     public function setJustificatifdiffusion( $justificatifdiffusion): self
+     {
+         $this->justificatifdiffusion = $justificatifdiffusion;
+         if (null !== $justificatifdiffusion) {
+             // It is required that at least one field changes if you are using doctrine
+             // otherwise the event listeners won't be called and the file is lost
+             $this->updatedAtJustificatifdiffusion = new \DateTimeImmutable();
+         }
+         return $this;
+     }
+     public function getUpdatedAtJustificatifdiffusion(): ?\DateTimeInterface
+     {
+         return $this->updatedAtJustificatifdiffusion;
+     }
+    
+     public function setUpdatedAtJustificatifdiffusion(?\DateTimeInterface $updatedAtJustificatifdiffusion): self
+     {
+         $this->updatedAtJustificatifdiffusion = $updatedAtJustificatifDiffusion;
+    
+         return $this;
+     }
+    
+    // 7
+    public function getNomFichierfinsee()
+    {
+        return $this->nomFichierfinsee;
+    }
+    
+    public function setNomFichierfinsee( $nomFichierfinsee): self
+    {
+         $this->nomFichierfinsee = $nomFichierfinsee;
+    
+         return $this;
+     }
+     public function getFinsee()
+     {
+         return $this->finsee;
+     }
+    
+     public function setFinsee( $finsee): self
+     {
+         $this->finsee = $finsee;
+         if (null !== $finsee) {
+             // It is required that at least one field changes if you are using doctrine
+             // otherwise the event listeners won't be called and the file is lost
+             $this->updatedAtfinsee = new \DateTimeImmutable();
+         }
+         return $this;
+     }
+     public function getUpdatedAtfinsee(): ?\DateTimeInterface
+     {
+         return $this->updatedAtfinsee;
+     }
+    
+     public function setUpdatedAtfinsee(?\DateTimeInterface $updatedAtfinsee): self
+     {
+         $this->updatedAtfinsee = $updatedAtfinsee;
+    
+         return $this;
+     }
+    
+    // 8
+    public function getNomFichierrib()
+    {
+        return $this->nomFichierrib;
+    }
+    
+    public function setNomFichierrib( $nomFichierrib): self
+    {
+         $this->nomFichierrib = $nomFichierrib;
+    
+         return $this;
+     }
+     public function getRib()
+     {
+         return $this->rib;
+     }
+    
+     public function setRib( $rib): self
+     {
+         $this->rib = $rib;
+         if (null !== $rib) {
+             // It is required that at least one field changes if you are using doctrine
+             // otherwise the event listeners won't be called and the file is lost
+             $this->updatedAtrib = new \DateTimeImmutable();
+         }
+         return $this;
+     }
+     public function getUpdatedAtrib(): ?\DateTimeInterface
+     {
+         return $this->updatedAtrib;
+     }
+    
+     public function setUpdatedAtrib(?\DateTimeInterface $updatedAtrib): self
+     {
+         $this->updatedAtrib = $updatedAtrib;
+    
+         return $this;
+     }
+    
+    // 9
+
+     public function getNomFichierengagement()
+     {
+         return $this->nomFichierengagement;
+     }
+     
+     public function setNomFichierengagement( $nomFichierengagement): self
+     {
+          $this->nomFichierengagement = $nomFichierengagement;
+     
+          return $this;
+      }
+      public function getEngagement()
+      {
+          return $this->engagement;
+      }
+     
+      public function setEngagement( $engagement): self
+      {
+          $this->engagement = $engagement;
+          if (null !== $engagement) {
+              // It is required that at least one field changes if you are using doctrine
+              // otherwise the event listeners won't be called and the file is lost
+              $this->updatedAtengagement = new \DateTimeImmutable();
+          }
+          return $this;
+      }
+      public function getUpdatedAtengagement(): ?\DateTimeInterface
+      {
+          return $this->updatedAtengagement;
+      }
+     
+      public function setUpdatedAtengagement(?\DateTimeInterface $updatedAtengagement): self
+      {
+          $this->updatedAtengagement = $updatedAtengagement;
+     
+          return $this;
+      }
+
+      // 10
+     
+    public function getNomFichierJustificatifeligibilite()
+    {
+        return $this->nomFichierJustificatifeligibilite;
+    }
+    
+    public function setNomFichierJustificatifeligibilite( $nomFichierJustificatifeligibilite): self
+    {
+         $this->nomFichierJustificatifeligibilite = $nomFichierJustificatifeligibilite;
+    
+         return $this;
+     }
+     public function getJustificatifeligibilite()
+     {
+         return $this->justificatifeligibilite;
+     }
+    
+     public function setJustificatifeligibilite( $justificatifeligibilite): self
+     {
+         $this->justificatifeligibilite = $justificatifeligibilite;
+         if (null !== $justificatifeligibilite) {
+             // It is required that at least one field changes if you are using doctrine
+             // otherwise the event listeners won't be called and the file is lost
+             $this->updatedAtJustificatifeligibilite = new \DateTimeImmutable();
+         }
+         return $this;
+     }
+     public function getUpdatedAtJustificatifeligibilite(): ?\DateTimeInterface
+     {
+         return $this->updatedAtJustificatifeligibilite;
+     }
+    
+     public function setUpdatedAtJustificatifeligibilite(?\DateTimeInterface $updatedAtJustificatifeligibilite): self
+     {
+         $this->updatedAtJustificatifeligibilite = $updatedAtJustificatifeligibilite;
+    
+         return $this;
+     }
+    
+      // 11
+        
+    public function getNomFichierDossierpresentation()
+    {
+        return $this->nomFichierDossierpresentation;
+    }
+    
+    public function setNomFichierDossierpresentation( $nomFichierDossierpresentation): self
+    {
+         $this->nomFichierDossierpresentation = $nomFichierDossierpresentation;
+    
+         return $this;
+     }
+     public function getDossierpresentation()
+     {
+         return $this->dossierpresentation;
+     }
+    
+     public function setDossierpresentation( $dossierpresentation): self
+     {
+         $this->dossierpresentation = $dossierpresentation;
+         if (null !== $dossierpresentation) {
+             // It is required that at least one field changes if you are using doctrine
+             // otherwise the event listeners won't be called and the file is lost
+             $this->updatedAtDossierpresentation = new \DateTimeImmutable();
+         }
+         return $this;
+     }
+     public function getUpdatedAtDossierpresentation(): ?\DateTimeInterface
+     {
+         return $this->updatedAtDossierpresentation;
+     }
+    
+     public function setUpdatedAtDossierpresentation(?\DateTimeInterface $updatedAtDossierpresentation): self
+     {
+         $this->updatedAtDossierpresentation = $updatedAtDossierpresentation;
+    
+         return $this;
+     }
+    
+     // 12 
+     
+    public function getNomFichierBudgetprevisionnel()
+    {
+        return $this->nomFichierBudgetprevisionnel;
+    }
+    
+    public function setNomFichierBudgetprevisionnel( $nomFichierBudgetprevisionnel): self
+    {
+         $this->nomFichierBudgetprevisionnel = $nomFichierBudgetprevisionnel;
+    
+         return $this;
+     }
+     public function getBudgetprevisionnel()
+     {
+         return $this->budgetprevisionnel;
+     }
+    
+     public function setBudgetprevisionnel( $budgetprevisionnel): self
+     {
+         $this->budgetprevisionnel = $budgetprevisionnel;
+         if (null !== $budgetprevisionnel) {
+             // It is required that at least one field changes if you are using doctrine
+             // otherwise the event listeners won't be called and the file is lost
+             $this->updatedAtBudgetprevisionnel = new \DateTimeImmutable();
+         }
+         return $this;
+     }
+     public function getUpdatedAtBudgetprevisionnel(): ?\DateTimeInterface
+     {
+         return $this->updatedAtBudgetprevisionnel;
+     }
+    
+     public function setUpdatedAtBudgetprevisionnel(?\DateTimeInterface $updatedAtBudgetprevisionnel): self
+     {
+         $this->updatedAtBudgetprevisionnel = $updatedAtBudgetprevisionnel;
+    
+         return $this;
+     }
+    // 13
+    public function getNomFichierDeclarationaide()
+    {
+        return $this->nomFichierDeclarationaide;
+    }
+    
+    public function setNomFichierDeclarationaide( $nomFichierDeclarationaide): self
+    {
+         $this->nomFichierDeclarationaide = $nomFichierDeclarationaide;
+    
+         return $this;
+     }
+     public function getDeclarationaide()
+     {
+         return $this->declarationaide;
+     }
+    
+     public function setDeclarationaide( $declarationaide): self
+     {
+         $this->declarationaide = $declarationaide;
+         if (null !== $declarationaide) {
+             // It is required that at least one field changes if you are using doctrine
+             // otherwise the event listeners won't be called and the file is lost
+             $this->updatedAtDeclarationaide = new \DateTimeImmutable();
+         }
+         return $this;
+     }
+     public function getUpdatedAtDeclarationaide(): ?\DateTimeInterface
+     {
+         return $this->updatedAtDeclarationaide;
+     }
+    
+     public function setUpdatedAtDeclarationaide(?\DateTimeInterface $updatedAtDeclarationaide): self
+     {
+         $this->updatedAtDeclarationaide = $updatedAtDeclarationaide;
+    
+         return $this;
+     }
+    
+     // 14 
+     
+    public function getNomFichierAttestationvigilance()
+    {
+        return $this->nomFichierAttestationvigilance;
+    }
+    
+    public function setNomFichierAttestationvigilance( $nomFichierAttestationvigilance): self
+    {
+         $this->nomFichierAttestationvigilance = $nomFichierAttestationvigilance;
+    
+         return $this;
+     }
+     public function getAttestationvigilance()
+     {
+         return $this->attestationvigilance;
+     }
+    
+     public function setAttestationvigilance( $attestationvigilance): self
+     {
+         $this->attestationvigilance = $attestationvigilance;
+         if (null !== $attestationvigilance) {
+             // It is required that at least one field changes if you are using doctrine
+             // otherwise the event listeners won't be called and the file is lost
+             $this->updatedAtAttestationvigilance = new \DateTimeImmutable();
+         }
+         return $this;
+     }
+     public function getUpdatedAtAttestationvigilance(): ?\DateTimeInterface
+     {
+         return $this->updatedAtAttestationvigilance;
+     }
+    
+     public function setUpdatedAtAttestationvigilance(?\DateTimeInterface $updatedAtAttestationvigilance): self
+     {
+         $this->updatedAtAttestationvigilance = $updatedAtAttestationvigilance;
+    
+         return $this;
+     }
 
     public function getMotpassehass(): ?string
     {

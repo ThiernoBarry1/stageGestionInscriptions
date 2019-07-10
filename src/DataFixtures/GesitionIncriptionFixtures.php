@@ -237,7 +237,7 @@ class GesitionIncriptionFixtures extends Fixture
                  ->setPleniere(new DateTime('2018-12-18'))
                  ->setFondsAide($programmeDeveloppementSp);
         $manager->persist($session1);
-        $programmeDeveloppementSp->setNom("Programme de développement des structures de production")
+        $programmeDeveloppementSp->setNom("Soutien structurel aux développement des sociétés de production")
                                  ->addSession($session1);
         $manager->persist($programmeDeveloppementSp);
         $manager->flush();

@@ -22,6 +22,7 @@ input[id^="registration_typeAideLm"],
 input[id^="registration_deposant"],
 input[id^="registration_genre"],
 input[id^="registration_typeFilm"],
+
 #registration_premierFilm_0
 {
     margin-right:5px;
@@ -36,7 +37,9 @@ input[id^="registration_typeFilm"],
 {
     margin-top:30px;
 }
-
+#registration_typeFilm_0{
+    margin-left:10px;
+}
 hr
 {
     background-color:navy;
@@ -69,4 +72,44 @@ hr
 }
 #registration_premierFilm_0{
     margin-left: 15px;
+}
+
+.custom-file {
+    float: left;
+    width: 40%;
+}
+
+.vich-file {
+    height: 20px;
+}
+
+.vich-file a{
+    z-index: 3;
+    position: relative;
+    left: 300px;
+    top: -38px;
+}
+
+.vich-file .form-check-label{
+    padding-top: 4px;
+}
+
+.vich-file .form-check-input{
+    z-index: 2;
+    margin-top: 10px;
+}
+
+
+.custom-file-label {
+    opacity: 0;
+}
+
+.custom-file-input {
+    z-index: 1;
+    margin-top: 2px;
+    opacity: 1;
+}
+
+.form-check-input {
+    margin-left: -1.01rem;
 }

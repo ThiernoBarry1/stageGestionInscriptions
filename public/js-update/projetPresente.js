@@ -21,7 +21,7 @@ jQuery(document).ready(function() {
     });
 
     // simuler l'ajout de trois ProjetPresentes
-    if($('div#projetPresentes .form-group').length == 0){
+    if($('div#projetPresentes .form-group').length == 0 && $('.prototypeProjetPresente').is(':visible')){
         $addProjetPresenteButton.click();
         $addProjetPresenteButton.click();
         $addProjetPresenteButton.click();
@@ -50,23 +50,23 @@ jQuery(document).ready(function() {
 
 function addProjetPresente($collectionProjetPresentes, $newLinkDiv) {
     // Get the data-prototype explained earlier
-    var prototype = $collectionProjetPresentes.data('prototype');
+    var prototypeProjetPresente = $collectionProjetPresentes.data('prototype');
 
-    var arr = prototype.split('<div class="form-group">');
+    var arr = prototypeProjetPresente.split('<div class="form-group">');
 
     // get the new index
     var index = $collectionProjetPresentes.data('index');
 
-    var newForm = prototype;
+    var newFormProjetPresente = prototypeProjetPresente;
 
-    newForm = newForm.replace(/__name__/g, index);
-    newForm = newForm.replace(/<label/g, '<label style="color:#000;"');
+    newFormProjetPresente = newFormProjetPresente.replace(/__name__/g, index);
+    newFormProjetPresente = newFormProjetPresente.replace(/<label/g, '<label style="color:#000;"');
 
     // increase the index with one for the next item
     $collectionProjetPresentes.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormDivProjetPresente = $('<div class="projetPresentes"></div>').append(newForm);
+    var $newFormDivProjetPresente = $('<div class="projetPresentes"></div>').append(newFormProjetPresente);
 
     $newLinkDiv.before($newFormDivProjetPresente);
 

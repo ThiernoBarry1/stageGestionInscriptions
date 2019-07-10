@@ -31,7 +31,7 @@ jQuery(document).ready(function() {
     });
    
    // simuler l'ajout d'un auteur/realisateur
-    if($('div#auteurRealisateurs .form-group').length == 0){
+    if($('div#auteurRealisateurs .form-group').length == 0 && $('.prototypeAuteurRealisateur').is(':visible')){
         $addAuteurButton.click();
     }
     
@@ -48,6 +48,7 @@ jQuery(document).ready(function() {
 
     
 // permet de masquer ou afficher les champs pourcentage
+displayPourcentage();
 
 if($('#registration_deposant_0').is(':checked'))
 {

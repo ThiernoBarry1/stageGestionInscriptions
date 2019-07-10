@@ -1,22 +1,23 @@
 $(document).ready(function()
 {     
  
-  calculDevisPrevisionnel('.ht input','.input-totalDEHtTotalPartiel');
-  calculDevisPrevisionnel('.htNormandie input','.input-totalDNTotalPartiel');
-  calculDevisPrevisionnel('.depenseFrance input','.input-totalDFTotalPartiel');
-  calculDevisPrevisionnel('.coutDefinitif input','.input-totalCDTotalPartiel');
+  calculDevisPrevisionnel('.ht input','.input-totalDEHtTotalPartiel','.input-totalHtTotalGeneral','.partielHT input');
+  calculDevisPrevisionnel('.depenseFrance input','.input-DFTotalPartiel','.input-totalGeneralFrance','.partielDepenseFrance input');
+  calculDevisPrevisionnel('.htNormandie input','.input-totalDNTotalPartiel','.input-totalHtNormandieTotalGeneral','.partielNormandie input');
+  calculDevisPrevisionnel('.coutDefinitif input','.input-totalCDTotalPartiel','.input-totalCoutDefinitif','.partielCoutDefinitif input');
   
-  calculDevisPrevisionnel('.partielHT input','.input-totalHtTotalGeneral');
+ calculDevisPrevisionnel('.partielHT input','.input-totalHtTotalGeneral');
   calculDevisPrevisionnel('.partielDepenseFrance input','.input-totalGeneralFrance');
-  calculDevisPrevisionnel('.partielNormandie input','.input-totalHtNormandieTotalGeneral');
+ calculDevisPrevisionnel('.partielNormandie input','.input-totalHtNormandieTotalGeneral');
   calculDevisPrevisionnel('.partielCoutDefinitif input','.input-totalCoutDefinitif');
+
   /**
    * permet d'effectue le calcul de devis prévisionnel 
    * cette méthode traite le cas montant Ht et dont rn région Normandie
    * @param {String} selecteurInput 
    * @param {String} selecteurInputTotal 
    */
-   function calculDevisPrevisionnel(selecteurInput,selecteurInputTotal){
+   function calculDevisPrevisionnel(selecteurInput,selecteurInputTotal,selecteurTotalGeneral="",selecteurInputsFraisImp=""){
       $(selecteurInput).on('change',function(){
          if(isNaN($(this).val())) {
             $(this).css('background-color','#f11');
@@ -24,13 +25,41 @@ $(document).ready(function()
             $(this).css('background-color','#FFFFFF');
          }else{
             var TOTAL = 0;
-            calculMontantTotal(TOTAL,selecteurInput,selecteurInputTotal);
+            if( selecteurTotalGeneral != "")
+               calculMontantTotalPartiel(TOTAL,selecteurInput,selecteurInputTotal,selecteurTotalGeneral,selecteurInputsFraisImp);
+            else
+              calculMontantTotal(TOTAL,selecteurInput,selecteurInputTotal);
          }
       });
    }
    
    
    /**
+    * permet de calculer le montant total à chaque fois qu'on saisie une 
+    * valeur dans un champ input.
+    * 
+    * @param {integer} Total 
+    * @param {string} selecteurInputs 
+    * @param {sting} selecteurInputMontantTotal 
+    */
+   function calculMontantTotalPartiel(totalPartiel,selecteurInputs,selecteurInputMontantTotal,selecteurTotalGeneral,selecteurInputsFraisImp){
+      var pInit = totalPartiel;
+      $('.row').find(selecteurInputs).each(function(){
+         var valeur_saisiePartiel = $(this).val();
+         totalPartiel = totalPartiel + +valeur_saisiePartiel;
+     });
+
+     $(selecteurInputMontantTotal).val(totalPartiel);
+     $('.row').find(selecteurInputsFraisImp).each(function(){
+        var valeur_saisieFraisImp = $(this).val();
+        pInit = pInit + +valeur_saisieFraisImp;
+     });
+
+     if( selecteurTotalGeneral != "") {
+        $(selecteurTotalGeneral).val(pInit);
+     }
+   }
+    /**
     * permet de calculer le montant total à chaque fois qu'on saisie une 
     * valeur dans un champ input.
     * 
@@ -45,7 +74,6 @@ $(document).ready(function()
      });
      $(selecteurInputMontantTotal).val(Total);
    }
-
    /**
     * permet de gérer la saisie de la virgule dans les inputs
     * 

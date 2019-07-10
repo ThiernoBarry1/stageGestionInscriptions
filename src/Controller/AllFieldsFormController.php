@@ -72,7 +72,7 @@ class AllFieldsFormController extends AbstractController
             $token = md5(uniqid(true));
             $projet->setMotpassehass($token);
             $date = new DateTime();
-            $projet->setUpdatedAt($date);
+            $projet->setModifiedAt($date);
             $token_date = $date->getTimestamp();
             $projet->setTokenDate($token_date);
             $manager->persist($projet);
