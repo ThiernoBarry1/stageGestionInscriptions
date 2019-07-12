@@ -14,7 +14,7 @@ jQuery(document).ready(function() {
     // add the "add a contact" anchor and div to the tags ul
     $collectionProducteurs.append($newLinkDivProd);
 
-    if(!$('.producteur').length) addProducteurForm($collectionProducteurs, $newLinkDivProd);
+    if(!$('.producteur').length != 0) addProducteurForm($collectionProducteurs, $newLinkDivProd);
 
 });
 

@@ -28,24 +28,31 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AllFieldsFormController extends AbstractController
 {
   
-    /**
-     * permet d'afficher le formulaire de saisie selon la commission.
-     * 
-     * @Route("/fonds-d-aide/{idSession}/", name="all_fields_form_new")
-     * @Route("/fonds-d-aide/{mail}/{token}/{token_date}", name="all_fields_form")
-     * @param  integer $idSession
-     * @param  integer $idProjet
-     * @param ObjectManager $manager
-     * @return Response
-     */
-    public function registration(ProjetRepository $projetRepo, SessionRepository $sessionRepo,$mail=null,$token=null,$token_date=null,$idSession=null,ObjectManager $manager, 
+   /**
+    * permet d'afficher le formulaire de saisie selon la commission.
+    * 
+    * @Route("/fonds-d-aide/{idSession}/", name="all_fields_form_new")
+    * @Route("/fonds-d-aide/{mail}/{token}/{token_date}", name="all_fields_form") function
+    *
+    * @param ProjetRepository $projetRepo
+    * @param SessionRepository $sessionRepo
+    * @param string $mail
+    * @param string $token
+    * @param integer $token_date
+    * @param integer $idSession
+    * @param ObjectManager $manager
+    * @param Request $request
+    * @param \Swift_Mailer $mailer
+    * @return void
+    */
+    public function registration(ProjetRepository $projetRepo, SessionRepository $sessionRepo,$mail='',$token='',$token_date=0,$idSession=null,ObjectManager $manager, 
                                 Request $request, \Swift_Mailer $mailer)
     {
         $projet = $projetRepo->findOneByCriteres($mail,$token,$token_date);   
         if(empty($projet)){
-            // s'il n'existe pas de projet mais il y'a bien un mail, un token et un token_date 
+            // s'il n'existe pas de projet mais il y'a bien un mail, un token ou un token_date 
             // j'affiche une page d'erreur.
-            if( $mail != '' && $token != '' && $token_date != 0)
+            if( $mail != '' || $token != '' || $token_date != 0)
             {
                 return  $this->render('information/displayError.html.twig',
                                                                       [
@@ -60,7 +67,13 @@ class AllFieldsFormController extends AbstractController
             $idSession = $projet->getSession()->getId();
         }
         $session = $sessionRepo->findOneById($idSession);
-
+        if( $session == null ){
+            return  $this->render('information/displayError.html.twig',
+                                                                      [
+                                                                          'date_error'=> false
+                                                                      ]
+                                      );
+        }
         $fondsAide = $session->getFondsAide();
         $whichChoice = $fondsAide->getId();
         $allFieldsForm =  $this->createForm(RegistrationType::class,$projet);
@@ -110,7 +123,7 @@ class AllFieldsFormController extends AbstractController
                     ->setBody($this->renderView('emails/registration.html.twig',['mail'=>$mail,'token'=>$token,'token_date'=>$token_date]),'text/html');
             /*$mailer->send($message);
 
-           // traitement generation du fichier pdf
+           // traitement génération du fichier pdf
     
             $pdf = new FPDF();
 
@@ -171,15 +184,13 @@ class AllFieldsFormController extends AbstractController
     }
 
     /**
-     * permet d'afficher un message de confirmations d'enregistement des données
+     * permet d'afficher un message de confirmation d'enregistement des données
      * à partir d'un formulaire.
      *
      *@Route("/fonds-d-aide-message/",name="information_save")
      *
-     * @param WhichCommissionChoice $choice
-     * @param Integer $idSession
-     * @param Integer $idProjet
-     *
+     * @param ProjetRepository $projetRepo
+     * @param Request $request
      * @return Response
      */
     public function displayInformationSave(ProjetRepository $projetRepo, Request $request)

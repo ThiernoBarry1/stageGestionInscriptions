@@ -16,6 +16,10 @@ class ConnectControlController extends AbstractController
     /**
      * permet de simuler une connection d'un candidat.
      * @Route("/fonds-d-aide-connection/",name="applicant_connect")
+     *
+     * @param ProjetRepository $projetRepo
+     * @param Request $request
+     * @param SessionRepository $sessionRepo
      * @return Response
      */
      public function connect(ProjetRepository $projetRepo,Request $request, SessionRepository $sessionRepo)
@@ -61,6 +65,10 @@ class ConnectControlController extends AbstractController
      * 
      *@Route("/fonds-d-aide-new_message/",name="new_mail")
      *
+     * @param ProjetRepository $projetRepo
+     * @param Request $request
+     * @param \Swift_Mailer $mailer
+     * @param ObjectManager $manager
      * @return void
      */
     public function newMessage(ProjetRepository $projetRepo,Request $request, \Swift_Mailer $mailer, ObjectManager $manager)

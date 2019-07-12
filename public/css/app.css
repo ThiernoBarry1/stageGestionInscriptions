@@ -16,7 +16,14 @@ label[for^="registration_projetDejaPresenteFondsAide_0"]
     margin-right: 15px;
 }
 
-
+img.aide{
+    width: 18pt;
+    height: 18pt;
+}
+img{
+    border:0;
+    vertical-align: middle;
+}
 
 input[id^="registration_projetDejaPresenteFondsAide"],
 input[id^="registration_depotProjetCollectivite"],

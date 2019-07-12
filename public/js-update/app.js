@@ -368,7 +368,15 @@ if($('.genreProjetProductionCourtMFA').is(':visible') )
 }
 
 // gestion du popover
-$('[data-toggle="popover"]').popover(); 
+$('[data-toggle="popover"]').popover();
+
+// soumettre le formulaire 
+$('.valider').on('click',function(){
+   jQuery.ajax(
+      url="{{path('all_fields_form',{'mail':mail,'token':token,'token_date':token_date})}}"
+   );
+})
+// 
 });
 
 
