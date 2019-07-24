@@ -14,7 +14,8 @@
    <div class="container">
       <h4 class="text-center mt-3"> FONDS D’AIDE A LA CREATION ET A LA PRODUCTION </h4>
       <h4 class="text-center mt-3"> CINEMA, AUDIOVISUEL ET MULTIMEDIA </h4>
-      <h5 class="text-center">Région Normandie/CNC, en association avec Normandie Images</h4>
+      <h5 class="text-center">Région Normandie/CNC</h5>
+         <h5  class="text-center"> en association avec Normandie Images</h4>
       <h5 class="text-center my-3 bg-info text-white">{{ fondsAide.nom}}</h4>
       {{ form_start(allFieldsForm) }}
    {%  if fondsAide.id != 9 %}
@@ -53,14 +54,14 @@
             {% else %}
                <div class="row genreProjet">
                   
-                  <div class="col-6 custom-control custom-radio"">
+                  <div class="col-6 custom-control custom-radio">
                      {% for genre in allFieldsForm.genre %}
                         {% if loop.index > 1 %}
                              {{ form_widget(genre) }}{{form_label(genre,null,{'label_attr':{'class':'genre'}})}}
                         {% endif %}
                     {% endfor %}
                   </div>
-                  <div class="col-6 genrePrecisionAutre"style="display:none;">
+                  <div class="col-6 genrePrecisionAutre" style="display:none;">
                         <label for="precision">Précisez</label>
                      {{ form_row(allFieldsForm.genrePrecisionAutre,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }} 
                   </div>
@@ -70,7 +71,7 @@
          <div class="row my-2">
             {% if fondsAide.id == 2 or fondsAide.id == 7  or fondsAide.id == 6 %}
                 <div class="col-6 typeFilm">
-                   {% for film in allFieldsForm.typeFilm %}
+                   {% for typeFilm in allFieldsForm.typeFilm %}
                         {% if loop.index > 1 %}
                              {{ form_widget(typeFilm) }}{{form_label(typeFilm,null)}}
                         {% endif %}
@@ -115,7 +116,7 @@
             <div class="row my-3">
                {{form_row(allFieldsForm.premierFilm,{'label':false})}}
             <a href="#" class="info">
-                <img src="/../img/aide.png" alt="imageHelp" class="aide"  data-toggle="popover" title="Information" data-popover-position="bottom"  data-content="Prémier film de l'auteur realisateur, produit par une société de production"/>
+                <img src="/../img/aide.png" alt="imageHelp" class="aide"  data-toggle="popover" title="Information" data-popover-position="bottom"  data-content="Premier film de l'auteur realisateur, produit par une société de production"/>
             </a>
             </div>
         {% endif %}
@@ -505,7 +506,7 @@
             <div class="row ml-2">
                {% for typeAideDoc in allFieldsForm.typeAideDoc %}
                   {% if loop.index > 1 %}
-                       {{ form_widget(typeAideDoc) }}{{form_label(genre,null)}}
+                       {{ form_widget(typeAideDoc) }}{{form_label(typeAideDoc,null)}}
                   {% endif %}
               {% endfor %}
             </div>
@@ -1003,7 +1004,7 @@
        <div id="test"></div>
       <div class="row my-3">
          <div class="col-6">
-            <label for="depotProjetCollectivite">Projet déposé auprès d'autres collectivités territoriales ? </label>
+            <label for="depotProjetCollectivite">Projet déposé auprès d'autres collectivités territoriales  </label>
             <div class="row ml-2">
                {% for depotProjetCollectivite in allFieldsForm.depotProjetCollectivite %}
                   {% if loop.index > 1 %}
@@ -1032,37 +1033,47 @@
             <label for="projetDejaPresenteFondsAideDate"> À quelle date  ?</label>
              {{ form_row(allFieldsForm.projetDejaPresenteFondsAideDate,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'date'}}) }} 
             <label for="projetDejaPresenteFondsAideTypeAide">Pour quel type d'aide ?</label>
-             <div class="row ml-2">
-                {% for projetDejaPresenteFondsAideTypeAide in allFieldsForm.projetDejaPresenteFondsAideTypeAide %}
-                   {% if loop.index > 1 %}
-                      {{ form_widget(projetDejaPresenteFondsAideTypeAide) }}{{form_label(projetDejaPresenteFondsAideTypeAide,null)}}
-                   {% endif %}
-               {% endfor %}
-             </div>
+            {{ form_row(allFieldsForm.projetDejaPresenteFondsAideTypeAide,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
          </div>
       </div>
       <hr>
-
-   {% endif %}
+      {% endif %}
       <fieldset class="border  p-2">
-         <legend class="w-auto h6">Téléchargement des fichiers</legend>
-         <div class="input-group mt-3">
-            <div class="row">
-               <div class="col-6">
-                  <span class="input-group-text" >Courrier de demande</span>
-               </div>
-               <div class="col-6">
-                  <div class="custom-file">
-                      {{ form_row(allFieldsForm.courrierdemande, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                  </div>
+         <legend class="w-auto h6">Téléchargement des pièces du dossier</legend>
+         {#<div class="input-group mt-3">
+               <div class="row">
+               <div class="col">
+                  <span  >Courrier de demande</span>
                </div>
             </div>
-         </div>
+            <div class="custom-file">
+               <div class="row">
+                  {% for courrierdemande in allFieldsForm.courrierdemande %}
+                     <div class="col">
+                             {{ form_widget(courrierdemande) }}{{form_label(courrierdemande,null)}}
+                     </div>
+                     {% endfor %}
+               </div>
+               </div>
+               #}
+               <div class="input-group mt-3">
+                  <div class="row">
+                     <div class="col-6">
+                        <span  >Courrier de demande</span>
+                     </div>
+                     <div class="col-6">
+                           <div class="custom-file ">
+                              {{ form_row(allFieldsForm.courrierdemande, {'label':false,'attr':{'class':'custom-file-input'}}) }}
+                          </div>
+                     </div>
+                  </div>
+               </div>
+         <hr class="auteurRealisateur">
          {% if fondsAide.id == 9 %}
             <div class="input-group mt-3">
                <div class="row">
                   <div class="col-6">
-                     <span class="input-group-text" >Dossier présentation</span>
+                     <span  >Dossier de présentation</span>
                    </div>
                    <div class="col-6">
                       <div class="custom-file ">
@@ -1071,10 +1082,11 @@
                    </div>
                </div>  
             </div>
+            <hr class="auteurRealisateur">
             <div class="input-group mt-3">
                <div class="row">
                   <div class="col-6">
-                     <span class="input-group-text" >Budget prévisionnel</span>
+                     <span  >Budget prévisionnel</span>
                    </div>
                    <div class="col-6">
                       <div class="custom-file ">
@@ -1083,10 +1095,11 @@
                    </div>
                </div>  
             </div>
+            <hr class="auteurRealisateur">
             <div class="input-group mt-3">
                   <div class="row">
                      <div class="col-6">
-                        <span class="input-group-text">Attestation de vigilance</span>
+                        <span >Attestation de vigilance</span>
                       </div>
                       <div class="col-6">
                          <div class="custom-file ">
@@ -1095,10 +1108,11 @@
                       </div>
                   </div>  
             </div>
+            <hr class="auteurRealisateur">
             <div class="input-group mt-3">
                <div class="row">
                   <div class="col-6">
-                     <span class="input-group-text">Declaration relatives aux autres aides</span>
+                     <span >Declaration relatives aux autres aides</span>
                    </div>
                    <div class="col-6">
                       <div class="custom-file">
@@ -1107,12 +1121,19 @@
                    </div>
                </div>  
             </div>
+            <hr class="auteurRealisateur">
          {% endif %}
          {% if fondsAide.id != 9 %}
             <div class="input-group mt-3">
                <div class="row">
                   <div class="col-6">
-                    <span class="input-group-text" >Dossier artistique</span>
+                     {%if fondsAide.id == 4 or fondsAide.id == 5 or fondsAide.id == 7 %}
+                        <span>Dossier artistique : synopsis et scénario, notes d'intention du réalisateur et du producteur, CV du (des) réalisateur(s) et du (des) auteur(s) le cas échéant, présentation de la structure de production</span>
+                    {% elseif fondsAide.id == 3 or fondsAide.id == 8 or fondsAide.id == 2 %}
+                         <span >Dossier artistique : synopsis et présentation du projet, notes d'intention du réalisateur et du producteur, CV du (des) réalisateur(s) et du (des) auteur(s) le cas échéant, présentation de la structure de production</span>
+                     {% else %}
+                         <span ><strong>Dossier artistique :</strong> synopsis et traitement (écriture) ou scénario (réécriture), notes d'intention du réalisateur et du producteur le cas échéant, CV du (des) réalisateur(s) et du (des) auteur(s) le cas échéant, présentation de la structure de production le cas échéant</span>
+                    {% endif %}
                   </div>
                   <div class="col-6">  
                      <div class="custom-file">
@@ -1121,11 +1142,11 @@
                   </div>
                </div>
             </div>
-         
+            <hr class="auteurRealisateur">
             <div class="input-group mt-3">
                <div class="row">
                   <div class="col-6">
-                    <span class="input-group-text" >Devis previsionnel</span>
+                    <span  >Devis previsionnel</span>
                   </div>
                   <div class="col-6">
                      <div class="custom-file">
@@ -1134,10 +1155,18 @@
                   </div>
                </div>
             </div>
+            <hr class="auteurRealisateur">
             <div class="input-group mt-3">
                   <div class="row">
                      <div class="col-6">
-                        <span class="input-group-text" >Contrat.s</span>
+                        {%if fondsAide.id == 4 or fondsAide.id == 8 or fondsAide.id == 5 or fondsAide.id == 6 or fondsAide.id == 7  %}
+                           <span><strong>Contrat(s) :</strong> contrat(s)  de cession de droits d’auteur(s), et, le cas échéant, contrat de cession pour adaptation, contrat de coproduction</span>
+                       {% elseif fondsAide.id == 1 or fondsAide.id == 2 %}
+                            <span ><strong>Contrat(s) :</strong> le cas échéant, contrat(s)  de cession de droits d’auteur(s), contrat de cession pour adaptation, contrat de coproduction</span>
+                        {% else %}
+                            <span ><strong>Contrat(s) :</strong> contrat(s)  de cession de droits d’auteur(s) ou contrat(s) d’artiste(s) et, le cas échéant, contrat de cession pour adaptation, contrat de coproduction
+                              </span>
+                       {% endif %}
                      </div>
                      <div class="col-6">
                         <div class="custom-file">
@@ -1147,10 +1176,11 @@
                   </div>
                </div>
          {% endif %}
+         <hr class="auteurRealisateur">
          <div class="input-group mt-3">
             <div class="row">
                <div class="col-6">
-                 <span class="input-group-text" >Plan de financement</span>
+                 <span  >Plan de financement</span>
                </div>
                <div class="col-6">
                   <div class="custom-file">
@@ -1159,11 +1189,12 @@
                </div>
             </div>
          </div>
-        {% if fondsAide.id == 1 %}
+         {% if fondsAide.id == 1 %}
+         <hr class="auteurRealisateur">
             <div class="input-group mt-3">
                <div class="row">
                   <div class="col">
-                     <span class="input-group-text" >Justificatif attestant la diffusion</span>
+                     <span  >Justificatif attestant la diffusion</span>
                    </div>
                    <div class="col">
                       <div class="custom-file ">
@@ -1173,10 +1204,11 @@
                </div>  
             </div>
          {% endif %}
+         <hr class="auteurRealisateur">
          <div class="input-group mt-3">
                <div class="row">
                   <div class="col-6">
-                     <span class="input-group-text" >Fiche Inseee récente</span>
+                     <span  >Fiche Inseee récente</span>
                    </div>
                    <div class="col-6">
                       <div class="custom-file ">
@@ -1185,10 +1217,11 @@
                    </div>
                </div>  
             </div>
+            <hr class="auteurRealisateur">
             <div class="input-group mt-3">
                   <div class="row">
                      <div class="col-6">
-                        <span class="input-group-text" >RIB</span>
+                        <span  >RIB</span>
                       </div>
                       <div class="col-6">
                          <div class="custom-file ">
@@ -1198,10 +1231,11 @@
                   </div>  
                </div>
             {% if fondsAide.id == 5 %}
+            <hr class="auteurRealisateur">
                <div class="input-group mt-3">
                   <div class="row">
                      <div class="col-6">
-                        <span class="input-group-text" >Engagement écris du prémier financeur</span>
+                        <span  >Engagement écris du prémier financeur</span>
                       </div>
                       <div class="col-6">
                          <div class="custom-file ">
@@ -1211,11 +1245,12 @@
                   </div>  
                </div>
             {% endif %}
+            <hr class="auteurRealisateur">
             {% if fondsAide.id == 1 or fondsAide.id == 2 or fondsAide.id == 3 %}
                <div class="input-group mt-3">
                   <div class="row">
                      <div class="col-6">
-                        <span class="input-group-text" >Justificatif attestant des critères d'éligibilté</span>
+                        <span  >Justificatif attestant des critères d'éligibilté</span>
                       </div>
                       <div class="col-6">
                          <div class="custom-file ">
@@ -1230,7 +1265,7 @@
          <div class="form-group my-3">
            <div class="row">
               <label for="mailUtilisateur">Courriel pour le retour au formulaire</label>
-              <smal class="form-text text-muted"> Si vous souhaitez revenir au formulaire, nous allons vous envoyé un lien sécurisé.
+              <smal class="form-text text-muted"> Si vous souhaitez revenir au formulaire, nous allons vous envoyer un lien sécurisé.
                 Merci d'indiquer ci-dessous le mail à partir duquel vous soutez recevoir le lien.</smal>
                <div class="col-6">
                   {{ form_errors(allFieldsForm.mailUtilisateur) }}

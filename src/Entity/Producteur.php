@@ -72,7 +72,7 @@ class Producteur
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Length(min=50,maxMessage="Le nom de la ville ne doit pas dépasser 50 caratères")
+     * @Assert\Length(max=50,maxMessage="Le nom de la ville ne doit pas dépasser 50 caratères")
      */
     private $ville;
 
@@ -90,7 +90,7 @@ class Producteur
 
     /**
      * @ORM\Column(type="string", length=60, nullable=true)
-     * @Assert\Length(min=60,maxMessage="Le nom de la ville ne doit pas dépasser 60 caratères")
+     * @Assert\Length(max=60,maxMessage="Le nom de la ville ne doit pas dépasser 60 caratères")
      */
     private $villeBureau;
 

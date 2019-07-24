@@ -103,7 +103,10 @@ $(document).ready(function()
 verifieNonSelectionne('#registration_genre_0','.genrePrecisionAutre');
 verifieNonSelectionne('#registration_genre_1','.genrePrecisionAutre');
 verifieNonSelectionne('#registration_genre_2','.genrePrecisionAutre');
-
+if($('#registration_genre_3').is(':checked'))
+{
+   voir('.genrePrecisionAutre');
+}
  $('#registration_genre_0,#registration_genre_1,#registration_genre_2').click( function()
   {
    cacher('.genrePrecisionAutre'); 
@@ -354,7 +357,6 @@ function longMax(element, max){
 	if(value.length > max){
       element.value = value.substr(0, max);
       alert("Vous devez pas saisir plus de 500 caractères ");
-      $('label[for="synopsis"]').css('color','red');
 	}
 }
 // masquer ou afficher les deux autres radio button partie genre

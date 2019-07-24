@@ -64,7 +64,7 @@ class Projet implements UserInterface
     private $adaptationOeuvre;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=55, nullable=true)
      */
     private $deposant;
 
@@ -863,6 +863,7 @@ class Projet implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProjetPresente",cascade={"persist"}, mappedBy="projet", orphanRemoval=true)
+     * @Assert\Valid()
      */
     private $projetPresentes;
 
@@ -970,12 +971,12 @@ class Projet implements UserInterface
         return $this;
     }
 
-    public function getDeposant(): ?bool
+    public function getDeposant()
     {
         return $this->deposant;
     }
 
-    public function setDeposant(bool $deposant): self
+    public function setDeposant( $deposant): self
     {
         $this->deposant = $deposant;
 
@@ -1691,7 +1692,7 @@ class Projet implements UserInterface
 
     public function setNomFichierCourrierdemande( $nomFichierCourrierdemande): self
     {
-        $this->nomFichierCourieldemande = $nomFichierCourrierdemande;
+        $this->nomFichierCourrierdemande = $nomFichierCourrierdemande;
 
         return $this;
     }

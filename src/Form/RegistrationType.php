@@ -131,8 +131,8 @@ class RegistrationType extends ConfigurationFildsType
             ->add('deposant',ChoiceType::class,
                                                 [
                                                   'choices'  => [
-                                                    'Le producteur' => true, 
-                                                    'auteur.s/réalisateur.s' => false,
+                                                    'Le producteur' => 'Le producteur', 
+                                                    'Le.s auteur.s/réalisateur.s' => 'Le.s auteur.s/réalisateur.s',
                                                   ],
                                                   'expanded' => true,
                                                   'required' => false,
@@ -175,8 +175,8 @@ class RegistrationType extends ConfigurationFildsType
                ->add('typeAideLm',ChoiceType::class,
                                                     [
                                                       'choices'  => [
-                                                        'Écriture' => 'ecriture',
-                                                        'Réécriture' => 'reecriture',
+                                                        'Écriture' => 'écriture',
+                                                        'Réécriture' => 'réécriture',
                                                       ],
                                                       'expanded' => true,
                                                       'required' => false,
@@ -187,8 +187,8 @@ class RegistrationType extends ConfigurationFildsType
                     )
             ->add('typeAideDoc',ChoiceType::class, [
                                                       'choices'  => [
-                                                      'Écriture' => 'ecriture',
-                                                      'Développement' => 'developpement',
+                                                      'Écriture' => 'écriture',
+                                                      'Développement' => 'développement',
                                                       ],
                                                       'expanded' => true,
                                                       'required' => false,
@@ -315,122 +315,58 @@ class RegistrationType extends ConfigurationFildsType
             ->add('mailUtilisateur',EmailType::class)
             ->add('courrierdemande',VichFileType::class,[  
                                                'required' => false,
-                                               'allow_delete' => true,
-                                               'download_uri' => true,
-                                               'delete_label' => 'Supprimer le fichier existant ?',
-                                               'download_label' => 'Voir le fichier',
-          
                                               ]
                  ) 
             ->add('dossierartistique',VichFileType::class,[  
                                                          'required' => false,
-                                                         'allow_delete' => true,
-                                                         'download_uri' => true,
-                                                         'delete_label' => 'Supprimer le fichier existant ?',
-                                                         'download_label' => 'Voir le fichier',
-
                                                         ]
                 ) 
              ->add('devisPrevisionnel',VichFileType::class,[  
                                                           'required' => false,
-                                                          'allow_delete' => true,
-                                                          'download_uri' => true,
-                                                          'delete_label' => 'Supprimer le fichier existant ?',
-                                                          'download_label' => 'Voir le fichier',
-
                                                         ]
                    ) 
              ->add('planFinancement',VichFileType::class,[  
                                                        'required' => false,
-                                                       'allow_delete' => true,
-                                                       'download_uri' => true,
-                                                       'delete_label' => 'Supprimer le fichier existant ?',
-                                                       'download_label' => 'Voir le fichier',
                                                      ]
                   )   
             ->add('contrat',VichFileType::class,[  
                                                        'required' => false,
-                                                       'allow_delete' => true,
-                                                       'download_uri' => true,
-                                                       'delete_label' => 'Supprimer le fichier existant ?',
-                                                       'download_label' => 'Voir le fichier',
-
                                                      ]
                 ) 
             ->add('justificatifdiffusion',VichFileType::class,[  
                                                       'required' => false,
-                                                      'allow_delete' => true,
-                                                      'download_uri' => true,
-                                                      'delete_label' => 'Supprimer le fichier existant ?',
-                                                      'download_label' => 'Voir le fichier',
-                                                      
                                                      ]
                 )  
            ->add('finsee',VichFileType::class,[  
                                                     'required' => false,
-                                                    'allow_delete' => true,
-                                                    'download_uri' => true,
-                                                    'delete_label' => 'Supprimer le fichier existant ?',
-                                                    'download_label' => 'Voir le fichier',
                                                   ]
                  ) 
            ->add('rib',VichFileType::class,[  
                                                'required' => false,
-                                               'allow_delete' => true,
-                                               'download_uri' => true,
-                                               'delete_label' => 'Supprimer le fichier existant ?',
-                                               'download_label' => 'Voir le fichier',
                                             ]
                ) 
            ->add('engagement',VichFileType::class,[  
                                                     'required' => false,
-                                                    'allow_delete' => true,
-                                                    'download_uri' => true,
-                                                    'delete_label' => 'Supprimer le fichier existant ?',
-                                                    'download_label' => 'Voir le fichier',
                                                   ]
                 )
             ->add('justificatifeligibilite',VichFileType::class,[  
                                                'required' => false,
-                                               'allow_delete' => true,
-                                               'download_uri' => true,
-                                               'delete_label' => 'Supprimer le fichier existant ?',
-                                               'download_label' => 'Voir le fichier',
-
                                               ]
                 )  
             ->add('dossierpresentation',VichFileType::class,[  
                                                         'required' => false,
-                                                        'allow_delete' => true,
-                                                        'download_uri' => true,
-                                                        'delete_label' => 'Supprimer le fichier existant ?',
-                                                        'download_label' => 'Voir le fichier',
-
                                                       ]
                 ) 
             ->add('budgetprevisionnel',VichFileType::class,[  
                                                       'required' => false,
-                                                      'allow_delete' => true,
-                                                      'download_uri' => true,
-                                                      'delete_label' => 'Supprimer le fichier existant ?',
-                                                      'download_label' => 'Voir le fichier',
                                                     ]
                )  
             ->add('attestationvigilance',VichFileType::class,[  
                                                      'required' => false,
-                                                     'allow_delete' => true,
-                                                     'download_uri' => true,
-                                                     'delete_label' => 'Supprimer le fichier existant ?',
-                                                     'download_label' => 'Voir le fichier',
-
                                                      ]
                 )   
             ->add('declarationaide',VichFileType::class,[  
                                                     'required' => false,
-                                                    'allow_delete' => true,
-                                                    'download_uri' => true,
-                                                    'delete_label' => 'Supprimer le fichier existant ?',
-                                                    'download_label' => 'Voir le fichier',
                                                    ]
                 )  
             ->add('enregistrer',SubmitType::class)
