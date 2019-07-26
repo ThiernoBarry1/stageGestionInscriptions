@@ -18,36 +18,43 @@ class AuteurRealisateur
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(max=50,maxMessage="merci de saisir moins de 50 caractères")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
+     * @Assert\Length(max=100,maxMessage="merci de saisir moins de 100 caractères")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=150, nullable=true)
+     * @Assert\Length(max=150,maxMessage="merci de saisir moins de 150 caractères")
      */
     private $pseudonyme;
 
     /**
      * @ORM\Column(type="string", length=60, nullable=true)
+     * @Assert\Length(max=60,maxMessage="merci de saisir moins de 60 caractères")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string", length=6, nullable=true)
+     * @Assert\Length(max=5,maxMessage="merci de saisir moins de 5 caractères")
      */
     private $codePostal;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(max=50,maxMessage="merci de saisir moins de 50 caractères")
      */
     private $ville;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $telephoneMobile;
 

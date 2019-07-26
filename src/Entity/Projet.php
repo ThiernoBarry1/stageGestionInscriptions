@@ -25,7 +25,7 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(max=255,maxMessage="Merci de saisir mois de 255 caractères pour le titre")
+     * @Assert\Length(max=255,maxMessage="merci de saisir mois de 255 caractères pour le titre")
      */
     private $titre;
 
@@ -36,13 +36,13 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(max=255,maxMessage="Merci de saisir mois de 255 caractères")
+     * @Assert\Length(max=255,maxMessage="merci de saisir mois de 255 caractères")
      */
     private $formatTournage;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(max=255,maxMessage="Merci de saisir mois de 255 caractères")
+     * @Assert\Length(max=255,maxMessage="merci de saisir mois de 255 caractères")
      */
     private $formatDefinitif;
 
@@ -54,7 +54,7 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\Length(max=600,maxMessage="le synopsis ne dois pas dépasser {{ value }} caractères")
+     * @Assert\Length(max=500,maxMessage="le synopsis ne dois pas dépasser 500 caractères")
      */
     private $synopsis;
 
@@ -92,12 +92,13 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
-     * * @Assert\Length(max=20,maxMessage="Merci de saisir mois de 20 caractères")
+     * * @Assert\Length(max=20,maxMessage="merci de saisir mois de 20 caractères")
      */
     private $typeAideDoc;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moin de 255 caractères")
      */
     private $mtBudget;
 
@@ -108,16 +109,19 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moin de 255 caractères")
      */
     private $datePreparation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *  @Assert\Length(max=255,maxMessage="merci de saisir moin de 255 caractères")
      */
     private $dateTournage;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moin de 255 caractères")
      */
     private $dateDiffusion;
 
@@ -311,6 +315,7 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime(message="Cette date n'est pas une date valide")
      */
     private $adaptationOeuvreDfc;
 
@@ -328,19 +333,19 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\DateTime(message="Cette date n'est pas une date valide")
+     * @Assert\DateTime(message="cette date n'est pas une date valide")
      */
     private $modifiedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * 
+     * @Assert\DateTime(message="cette date n'est pas une date valide")
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=25,nullable=true)
-     * @Assert\Length(max=255,maxMessage="Merci de saisir moins de 255 caractères")
+     * @Assert\Length(max=25,maxMessage="merci de saisir moins de 25 caractères")
      */
     private $typeFilm;
 
@@ -722,24 +727,23 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $productionTv;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $preachatTv;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=10, nullable=true)
+     * @Assert\Length(max=10,maxMessage="merci de saisir moins de 10 caractères")
      */
     private $nombreEpisode;
 
-    /**
-     * @ORM\Column(type="array",nullable=true)
-     */
-    private $validerEtTransmettreCandidature;
-
+   
     /**
      * @ORM\Column(type="array",nullable=true)
      */
@@ -807,7 +811,7 @@ class Projet implements UserInterface
     private $imprevusCoutDefinitif;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $totalGeneralCoutDefinitif;
 
@@ -853,11 +857,13 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $salariePermenentEqtemps;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $salarieIntermittentth;
 
@@ -869,6 +875,7 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $mtTotalProgrammeDeveloppement;
 

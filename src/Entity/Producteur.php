@@ -19,11 +19,13 @@ class Producteur
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $nature;
 
@@ -114,12 +116,13 @@ class Producteur
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * 
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $telephoneMobilePersonneChargee;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $telephoneFixePersonneChargee;
 
@@ -131,11 +134,13 @@ class Producteur
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $telephoneMobileProducteur;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $telephoneFixeProducteur;
 

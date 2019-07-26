@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjetPresenteRepository")
@@ -18,26 +19,31 @@ class ProjetPresente
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="le titre ne doit pas dépasser 255 caractères")
      */
     private $titre;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins 255 caractères")
      */
     private $auteurrealisateur;
 
     /**
      * @ORM\Column(type="string", length=15, nullable=true)
+     * 
      */
     private $genre;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(max=20,maxMessage="merci de saisir moins 20 caractères")
      */
     private $dureeEnvisagee;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     *  @Assert\Length(max=50,maxMessage="merci de saisir moins 50 caractères")
      */
     private $coutPrevisionnel;
 
@@ -48,6 +54,7 @@ class ProjetPresente
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *  @Assert\Length(max=255,maxMessage="merci de saisir moins 255 caractères")
      */
     private $precisionAutre;
 

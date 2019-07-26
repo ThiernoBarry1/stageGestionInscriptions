@@ -28,7 +28,6 @@ class ProjetPresenteType extends AbstractType
                                                 'expanded' => true,
                                                 'required' => false,
                                                 'multiple' => false,
-                                                'data'=>'fiction'
                                             ]
                 )
             ->add('dureeEnvisagee',TextType::class,
