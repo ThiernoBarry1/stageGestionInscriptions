@@ -153,9 +153,9 @@
           </div>
       {% endif %}
       </fieldset>
-      <hr class="production">
-    {% endif %}
-      <fieldset class="border p-3 production">
+      {% endif %}
+      <fieldset class="border p-3 production-fildset">
+         <hr class="production">
          <legend class="w-auto h6"> Production </legend>
           <div id="producteurs" data-prototype="{{ form_widget(allFieldsForm.producteurs.vars.prototype)|e('html_attr') }}">
             {% for producteur in allFieldsForm.producteurs%}

@@ -77,6 +77,7 @@ class AuteurRealisateur
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $pourcentageAuteurRealisateur;
 

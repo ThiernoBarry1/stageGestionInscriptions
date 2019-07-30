@@ -41,12 +41,13 @@ class ConnectControlController extends AbstractController
              $dateSecond = $diff/60;
              $mail =  $projet->getMailUtilisateur();
              $token_bd = $projet->getMotpassehass();
-             if ( $mail === $mail && $token === $token_bd && $dateSecond <= 10)
+             $DEADLINE = 10;
+             if ( $mail === $mail && $token === $token_bd && $dateSecond <= $DEADLINE)
              {
                  $token_date = $projet->getTokenDate();
                  return $this->redirectToRoute('all_fields_form',['mail'=>$mail,'token'=>$token,'token_date'=>$token_date]);
              }else{
-                 if($dateSecond > 10) {
+                 if($dateSecond > $DEADLINE) {
                      $DATE_ERROR = true;
                  } else {
                      $DATE_ERROR = false;

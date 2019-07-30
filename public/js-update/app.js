@@ -128,16 +128,16 @@ if($('#registration_genre_3').is(':checked'))
  });
  // traitement projet déposé par 
  
-verifieSelectionneProjetDepose('#registration_deposant_0','.production');
+verifieSelectionneProjetDepose('#registration_deposant_0','.production-fildset');
 verifierSelectionnePorjetDeposeMbudget('#registration_deposant_0','.montant-budget');
 
  $('#registration_deposant_0').click(function(){
-   voir('.production');
+   voir('.production-fildset');
    voir('.montant-budget');
  });
  $('#registration_deposant_1').click(function(){
-   cacher('.production');
-   effacerDonneeInput('.production input','#registration_deposant_0');
+   cacher('.production-fildset');
+   effacerDonneeInput('.production-fildset input','#registration_deposant_0');
    voir('.auteurRealisateurs');
    // il faut cacher le champ montant budget pour le cas de auteur/realisateur
    cacher('.montant-budget');
@@ -227,7 +227,7 @@ function autorisationSelection(selecteurClick,selecteurClick1,selecteurRadio)
       });
  }
  /**
-  * Partie concerne tous les traitement où un clique sur le checkbox "oui" permet
+  * Partie concerne tous les traitements où un clique sur le checkbox "oui" permet
   * d'afficher la div
   * 
   * @param {String} selecteurVoir 
@@ -373,7 +373,6 @@ if($('.genreProjetProductionCourtMFA').is(':visible') )
 $('[data-toggle="popover"]').popover();
 
 
-// 
 });
 
 

@@ -47,7 +47,11 @@ jQuery(document).ready(function() {
     });
 
     
-// permet de masquer ou afficher les champs pourcentage
+/* permet de masquer ou afficher les champs pourcentage
+le but c'est d'afficher les champs % si  et seulement si les deux condition sont remplies:
+-le boutton "le producteur" est coché 
+-il ya au moins deux auteur.s/realisateur.s 
+*/
 displayPourcentage();
 
 if($('#registration_deposant_0').is(':checked'))
@@ -72,9 +76,11 @@ $('#registration_deposant_1').click(function()
 
 function displayPourcentage()
 {
-    const count = $('.nombreAuteurRealisateurTheme').length + $('.nombreAuteurRealisateurBoucle').length;
-    if( count <= 1  || $('.production').is(':visible'))
+   const count = +$('.nombreAuteurRealisateurTheme').length + +$('.nombreAuteurRealisateurBoucle').length;
+    alert(count);
+   if( count <= 1  || $('.production-fildset').is(':visible'))
     {
+        alert('okiii');
        $('.pourcentageAuteurRealisateur').hide();
     }else
     {

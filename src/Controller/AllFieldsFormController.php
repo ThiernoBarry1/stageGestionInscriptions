@@ -32,7 +32,7 @@ class AllFieldsFormController extends AbstractController
     * permet d'afficher le formulaire de saisie selon la commission.
     * 
     * @Route("/fonds-d-aide/{idSession}/", name="all_fields_form_new")
-    * @Route("/fonds-d-aide/{mail}/{token}/{token_date}", name="all_fields_form") function
+    * @Route("/fonds-d-aide/{mail}/{token}/{token_date}", name="all_fields_form") 
     *
     * @param ProjetRepository $projetRepo
     * @param SessionRepository $sessionRepo
@@ -50,14 +50,14 @@ class AllFieldsFormController extends AbstractController
     {
         $projet = $projetRepo->findOneByCriteres($mail,$token,$token_date);   
         if(empty($projet)){
-            // s'il n'existe pas de projet mais il y'a bien un mail, un token ou un token_date 
+            // s'il n'existe pas de projet mais il y a bien un mail, un token ou un token_date 
             // j'affiche une page d'erreur.
             if( $mail != '' || $token != '' || $token_date != 0)
             {
                 return  $this->render('information/displayError.html.twig',
-                                                                      [
-                                                                          'date_error'=> false
-                                                                      ]
+                        [
+                            'date_error'=> false
+                        ]
                                       );
             }else {
                 //c'est ça prémière connection
@@ -283,8 +283,7 @@ class AllFieldsFormController extends AbstractController
     }
 
     /**
-     * permet d'afficher un message de confirmation d'enregistement des données
-     * à partir d'un formulaire.
+     * permet d'afficher un message de confirmation d'enregistement.
      *
      *@Route("/fonds-d-aide-message/",name="information_save")
      *
