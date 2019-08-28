@@ -372,7 +372,14 @@ if($('.genreProjetProductionCourtMFA').is(':visible') )
 // gestion du popover
 $('[data-toggle="popover"]').popover();
 
-
+$('.valider').click(function(){
+   $('#registration_whoIsSubmitted').val('valider');
+   $('form[name="registration"]').submit();
+})
+$('.sauvegarder').click(function(){
+   $('#registration_whoIsSubmitted').val('sauvegarder');
+   $('form[name="registration_sauvegarde"]').submit();
+})
 });
 
 

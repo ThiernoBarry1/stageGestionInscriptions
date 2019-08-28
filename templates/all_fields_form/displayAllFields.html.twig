@@ -43,27 +43,22 @@
          {% if fondsAide.id != 2  and fondsAide.id  != 3 and fondsAide.id != 8 and fondsAide.id != 6 %}
             {% if fondsAide.id == 4  or fondsAide.id == 7 %}
                <div class="row genreProjetProductionCourtMFA">
-                  <div class="col-6 custom-control custom-radio">
                         {% for genre in allFieldsForm.genre %}
                         {% if loop.index > 1 %}
                              {{ form_widget(genre) }}{{form_label(genre,null,{'label_attr':{'class':'genre'}})}}
                         {% endif %}
                     {% endfor %}
-                  </div>
                </div>
             {% else %}
                <div class="row genreProjet">
-                  
-                  <div class="col-6 custom-control custom-radio">
                      {% for genre in allFieldsForm.genre %}
                         {% if loop.index > 1 %}
-                             {{ form_widget(genre) }}{{form_label(genre,null,{'label_attr':{'class':'genre'}})}}
+                             {{ form_widget(genre) }} {{form_label(genre,null,{'label_attr':{'class':'genre'}})}}
                         {% endif %}
-                    {% endfor %}
-                  </div>
+                     {% endfor %}
                   <div class="col-6 genrePrecisionAutre" style="display:none;">
                         <label for="precision">Précisez</label>
-                     {{ form_row(allFieldsForm.genrePrecisionAutre,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }} 
+                        {{ form_row(allFieldsForm.genrePrecisionAutre,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }} 
                   </div>
                </div>
             {% endif %}
@@ -375,7 +370,7 @@
         <div id="auteurRealisateurs"  class="prototypeAuteurRealisateur" data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
             {%  for auteur in allFieldsForm.auteurRealisateurs %}
                 <div class="form-group nombreAuteurRealisateurBoucle">
-                    <div class="form-group typePersonne mt-2">
+                    <div class=" row form-group typePersonne mt-2">
                         {% for typePersonne in auteur.typePersonne %}
                            {% if loop.index > 1 %}
                                 {{ form_widget(typePersonne) }}{{form_label(typePersonne,null)}}
@@ -515,7 +510,7 @@
       {% if fondsAide.id == 1 or fondsAide.id == 2 %}
          <div class="form-group my-2 montant-budget">
             <label for="montant-budget"></label>
-            {{ form_row(allFieldsForm.mtBudget,{'label':false,'attr':{'class':'form-control-sm '}})}}
+            {{ form_row(allFieldsForm.mtBudget,{'label':false,'attr':{'class':'form-control-sm w-50'}})}}
          </div>
       {% endif %}
       {% if fondsAide.id == 1  %}
@@ -592,7 +587,7 @@
             <hr>
             <fieldset class="border p-3"> 
                 <legend class="w-auto h6">Devis prévisionnel HT résumé faisant apparaître la part des dépenses en région</legend>
-                <label for="telechargementFichier"> Si besoin, vous pouvez télécharger le devis détaillé type ici</label>
+                <label for="telechargementFichier"> Si besoin, vous pouvez télécharger le devis détaillé type <a href="/telechargement/devis.pdf">ici </a></label>
                 <div class="row">
                    <div class="col droitArtistique">
                       <label class="mt-4">1. Droits artistiques</label> 
@@ -1040,86 +1035,25 @@
       {% endif %}
       <fieldset class="border  p-2">
          <legend class="w-auto h6">Téléchargement des pièces du dossier</legend>
-         {#<div class="input-group mt-3">
-               <div class="row">
-               <div class="col">
-                  <span  >Courrier de demande</span>
-               </div>
+            <div>
+               {{ form_row(allFieldsForm.courrierdemande, {'label':'Courrier de demande'}) }}
             </div>
-            <div class="custom-file">
-               <div class="row">
-                  {% for courrierdemande in allFieldsForm.courrierdemande %}
-                     <div class="col">
-                             {{ form_widget(courrierdemande) }}{{form_label(courrierdemande,null)}}
-                     </div>
-                     {% endfor %}
-               </div>
-               </div>
-               #}
-               <div class="input-group mt-3">
-                  <div class="row">
-                     <div class="col-6">
-                        <span  >Courrier de demande</span>
-                     </div>
-                     <div class="col-6">
-                           <div class="custom-file ">
-                              {{ form_row(allFieldsForm.courrierdemande, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                          </div>
-                     </div>
-                  </div>
-               </div>
          <hr class="auteurRealisateur">
          {% if fondsAide.id == 9 %}
-            <div class="input-group mt-3">
-               <div class="row">
-                  <div class="col-6">
-                     <span  >Dossier de présentation</span>
-                   </div>
-                   <div class="col-6">
-                      <div class="custom-file ">
-                          {{ form_row(allFieldsForm.dossierpresentation, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                      </div>
-                   </div>
-               </div>  
+            <div>
+               {{ form_row(allFieldsForm.dossierpresentation, {'label':'Dossier de présentation'}) }}
             </div>
             <hr class="auteurRealisateur">
-            <div class="input-group mt-3">
-               <div class="row">
-                  <div class="col-6">
-                     <span  >Budget prévisionnel</span>
-                   </div>
-                   <div class="col-6">
-                      <div class="custom-file ">
-                          {{ form_row(allFieldsForm.budgetprevisionnel, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                      </div>
-                   </div>
-               </div>  
+            <div>
+               {{ form_row(allFieldsForm.budgetprevisionnel, {'label':'Budget prévisionnel'}) }}
             </div>
             <hr class="auteurRealisateur">
-            <div class="input-group mt-3">
-                  <div class="row">
-                     <div class="col-6">
-                        <span >Attestation de vigilance</span>
-                      </div>
-                      <div class="col-6">
-                         <div class="custom-file ">
-                             {{ form_row(allFieldsForm.attestationvigilance, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                         </div>
-                      </div>
-                  </div>  
+            <div>
+               {{ form_row(allFieldsForm.attestationvigilance, {'label':'Attestation de vigilance'}) }}
             </div>
             <hr class="auteurRealisateur">
-            <div class="input-group mt-3">
-               <div class="row">
-                  <div class="col-6">
-                     <span >Declaration relatives aux autres aides</span>
-                   </div>
-                   <div class="col-6">
-                      <div class="custom-file">
-                          {{ form_row(allFieldsForm.declarationaide, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                      </div>
-                   </div>
-               </div>  
+            <div>
+               {{ form_row(allFieldsForm.declarationaide, {'label':'Declaration relatives aux autres aides'}) }}
             </div>
             <hr class="auteurRealisateur">
          {% endif %}
@@ -1136,24 +1070,15 @@
                     {% endif %}
                   </div>
                   <div class="col-6">  
-                     <div class="custom-file">
-                         {{ form_row(allFieldsForm.dossierartistique, {'label':false,'attr':{'class':'custom-file-input'}}) }}
+                     <div>
+                         {{ form_row(allFieldsForm.dossierartistique, {'label':false}) }}
                      </div>
                   </div>
                </div>
             </div>
             <hr class="auteurRealisateur">
-            <div class="input-group mt-3">
-               <div class="row">
-                  <div class="col-6">
-                    <span  >Devis previsionnel</span>
-                  </div>
-                  <div class="col-6">
-                     <div class="custom-file">
-                         {{ form_row(allFieldsForm.devisPrevisionnel, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                     </div>
-                  </div>
-               </div>
+            <div>
+               {{ form_row(allFieldsForm.devisPrevisionnel, {'label':'Devis previsionnel'}) }}
             </div>
             <hr class="auteurRealisateur">
             <div class="input-group mt-3">
@@ -1169,95 +1094,41 @@
                        {% endif %}
                      </div>
                      <div class="col-6">
-                        <div class="custom-file">
-                            {{ form_row(allFieldsForm.contrat, {'label':false,'attr':{'class':'custom-file-input'}}) }}
+                        <div>
+                            {{ form_row(allFieldsForm.contrat, {'label':false}) }}
                         </div>
                      </div>
                   </div>
                </div>
          {% endif %}
          <hr class="auteurRealisateur">
-         <div class="input-group mt-3">
-            <div class="row">
-               <div class="col-6">
-                 <span  >Plan de financement</span>
-               </div>
-               <div class="col-6">
-                  <div class="custom-file">
-                      {{ form_row(allFieldsForm.planFinancement, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                  </div>
-               </div>
-            </div>
+         <div>
+            {{ form_row(allFieldsForm.planFinancement, {'label':'Plan de financement'}) }}
          </div>
          {% if fondsAide.id == 1 %}
          <hr class="auteurRealisateur">
-            <div class="input-group mt-3">
-               <div class="row">
-                  <div class="col">
-                     <span  >Justificatif attestant la diffusion</span>
-                   </div>
-                   <div class="col">
-                      <div class="custom-file ">
-                          {{ form_row(allFieldsForm.justificatifdiffusion, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                      </div>
-                   </div>
-               </div>  
+            <div>
+               {{ form_row(allFieldsForm.justificatifdiffusion, {'label':'Justificatif attestant la diffusion'}) }}
             </div>
          {% endif %}
          <hr class="auteurRealisateur">
-         <div class="input-group mt-3">
-               <div class="row">
-                  <div class="col-6">
-                     <span  >Fiche Inseee récente</span>
-                   </div>
-                   <div class="col-6">
-                      <div class="custom-file ">
-                          {{ form_row(allFieldsForm.finsee, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                      </div>
-                   </div>
-               </div>  
+            <div>
+               {{ form_row(allFieldsForm.finsee, {'label':'Fiche Inseee récente'}) }}
             </div>
             <hr class="auteurRealisateur">
-            <div class="input-group mt-3">
-                  <div class="row">
-                     <div class="col-6">
-                        <span  >RIB</span>
-                      </div>
-                      <div class="col-6">
-                         <div class="custom-file ">
-                             {{ form_row(allFieldsForm.rib, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                         </div>
-                      </div>
-                  </div>  
+               <div>
+                  {{ form_row(allFieldsForm.rib, {'label':'RIB'}) }}
                </div>
             {% if fondsAide.id == 5 %}
             <hr class="auteurRealisateur">
-               <div class="input-group mt-3">
-                  <div class="row">
-                     <div class="col-6">
-                        <span  >Engagement écris du prémier financeur</span>
-                      </div>
-                      <div class="col-6">
-                         <div class="custom-file ">
-                             {{ form_row(allFieldsForm.engagement, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                         </div>
-                      </div>
-                  </div>  
+               <div>
+                  {{ form_row(allFieldsForm.engagement, {'label':'Engagement écris du prémier financeur'}) }}
                </div>
             {% endif %}
             <hr class="auteurRealisateur">
             {% if fondsAide.id == 1 or fondsAide.id == 2 or fondsAide.id == 3 %}
-               <div class="input-group mt-3">
-                  <div class="row">
-                     <div class="col-6">
-                        <span  >Justificatif attestant des critères d'éligibilté</span>
-                      </div>
-                      <div class="col-6">
-                         <div class="custom-file ">
-                             {{ form_row(allFieldsForm.justificatifeligibilite, {'label':false,'attr':{'class':'custom-file-input'}}) }}
-                         </div>
-                      </div>
-                  </div>  
+               <div>
+                  {{ form_row(allFieldsForm.justificatifeligibilite, {'label':'Justificatif attestant des critères d\'éligibilité'}) }}
                </div>
             {% endif %}
             
@@ -1268,23 +1139,18 @@
               <smal class="form-text text-muted"> Si vous souhaitez revenir au formulaire, nous allons vous envoyer un lien sécurisé.
                 Merci d'indiquer ci-dessous le mail à partir duquel vous soutez recevoir le lien.</smal>
                <div class="col-6">
-                  {{ form_errors(allFieldsForm.mailUtilisateur) }}
+                 {{ form_errors(allFieldsForm.mailUtilisateur) }}
                  {{ form_widget(allFieldsForm.mailUtilisateur,{'label':false,'attr':{'class':'form-control-sm w-100 my-3'} })}}
                </div>
            </div>
        </div>
-       
-      <div class="form-group enregistrer mt-4">
-            {{ form_widget(allFieldsForm._token)}}
-         {{ form_widget(allFieldsForm.enregistrer,{'label':'Enregistrer','attr':{'class':'btn btn-success'}})}}
-      </div>
-     {#
+         {{ form_widget(allFieldsForm.whoIsSubmitted,{'label':false,type:"hidden",'attr':{'value':''}})}}
       <div class="submitButton">
          {{ form_widget(allFieldsForm._token)}}
          <button type="button" class="btn btn-primary valider">  Valider</button>
          <button type="button" class="btn btn-primary sauvegarder">  Sauvegarder</button>
       </div>
-     #}
+     
       {{ form_end(allFieldsForm,{'render_rest':false}) }}
    </div>
 {% endblock %}

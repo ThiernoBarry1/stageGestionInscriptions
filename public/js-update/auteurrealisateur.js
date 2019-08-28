@@ -5,8 +5,8 @@ var $addAuteurButton = $('<button type="button" id="ajoutAuteur-realisateur" cla
 var $newLinkDiv = $('<div class=""></div>').append($addAuteurButton);
 
 var $newpourcentage;
-var $str = '<div class="row my-3" id="blockPourcentage_registration_auteurRealisateurs___name__"><div class="col-auto"><label id="para_registration_auteurRealisateurs___name__"></label></div><div class="col"><div class="row"><div><input type="text" id="registration_auteurRealisateurs___name___pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][__name__][pourcentageAuteurRealisateur]" class="form-control-sm" style="width:3rem" /></div><span>%</span></div></div></div>';
-
+//var $str = '<div class="row my-3" id="blockPourcentage_registration_auteurRealisateurs___name__"><div class="col-auto"><label id="para_registration_auteurRealisateurs___name__" style="color:#000;"></label></div><div class="col"><div class="row"><div><input type="text" id="registration_auteurRealisateurs___name___pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][__name__][pourcentageAuteurRealisateur]" class="form-control-sm" style="width:3rem" /></div><span>%</span></div></div></div>';
+var $str = '<div class="row my-3" id="blockPourcentage_registration_auteurRealisateurs___name__"><div class="col-auto"><label id="para_registration_auteurRealisateurs___name__"></label></div><div class="col"><div class="row"><div class="form-group"><input type="text" id="registration_auteurRealisateurs___name___pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][__name__][pourcentageAuteurRealisateur]" class="form-control-sm form-control" style="width:3rem" /></div><span>%</span></div></div></div>';
 
 jQuery(document).ready(function() {
     
@@ -40,7 +40,7 @@ jQuery(document).ready(function() {
     // handle the removal, just for this example
     $('.remove-auteur').click(function(e) {
         e.preventDefault();
-        $(this).parent().parent().parent().remove();
+        $(this).parent().parent().parent().parent().remove();
         $($(this).attr('data-target')).remove();
         displayPourcentage();
         return false;
@@ -77,10 +77,9 @@ $('#registration_deposant_1').click(function()
 function displayPourcentage()
 {
    const count = +$('.nombreAuteurRealisateurTheme').length + +$('.nombreAuteurRealisateurBoucle').length;
-    alert(count);
+  
    if( count <= 1  || $('.production-fildset').is(':visible'))
     {
-        alert('okiii');
        $('.pourcentageAuteurRealisateur').hide();
     }else
     {
@@ -119,7 +118,7 @@ function addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentag
     // Replace '__name__' in the prototype's HTML to
     // instead be a number based on how many items we have
 
-
+    console.log(newForm);
     newForm = newForm.replace($str, '');
 
     newForm = newForm.replace(/__name__/g, index);
@@ -144,7 +143,7 @@ function addAuteurForm($collectionAuteurRealisateur, $newLinkDiv, $newpourcentag
     $('.remove-auteur').click(function (e) {
         e.preventDefault();
 
-        $(this).parent().parent().parent().remove();
+        $(this).parent().parent().parent().parent().remove();
         $($(this).attr('data-target')).remove();
         displayPourcentage();
         return false;

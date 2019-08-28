@@ -58,6 +58,11 @@ class Session
      */
     private $projets;
 
+    /**
+     * @ORM\Column(type="string", length=4, nullable=true)
+     */
+    private $annee_attribution_aide;
+
     public function __construct()
     {
         $this->projets = new ArrayCollection();
@@ -179,6 +184,18 @@ class Session
                 $projet->setSession(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAnneeAttributionAide(): ?string
+    {
+        return $this->annee_attribution_aide;
+    }
+
+    public function setAnneeAttributionAide(?string $annee_attribution_aide): self
+    {
+        $this->annee_attribution_aide = $annee_attribution_aide;
 
         return $this;
     }

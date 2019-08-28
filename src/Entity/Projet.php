@@ -59,7 +59,7 @@ class Projet implements UserInterface
     private $synopsis;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=3, nullable=true)
      */
     private $adaptationOeuvre;
 
@@ -259,7 +259,7 @@ class Projet implements UserInterface
     private $totalGeneralTotalHtNormandie;
 
     /**
-     * @ORM\Column(type="boolean",nullable=true)
+     * @ORM\Column(type="string",  length=3,nullable=true)
      */
     private $financementAcquis;
 
@@ -269,7 +269,7 @@ class Projet implements UserInterface
     private $financementAcquisPrecision;
 
     /**
-     * @ORM\Column(type="boolean",nullable=true)
+     * @ORM\Column(type="string", length=3,nullable=true)
      */
     private $depotProjetCollectivite;
 
@@ -279,7 +279,7 @@ class Projet implements UserInterface
     private $depotProjetCollectivitePrecision;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string",length=3, nullable=true)
      */
     private $projetDejaPresenteFondsAide;
 
@@ -659,7 +659,7 @@ class Projet implements UserInterface
     private $motpassehass;
       
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Email(message="L'adresse mail que vous avez indiqué n'est pas valide")
      */
     private $mailUtilisateur;
@@ -879,6 +879,17 @@ class Projet implements UserInterface
      */
     private $mtTotalProgrammeDeveloppement;
 
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     * @Assert\Length(max=10,maxMessage="merci de saisir moins de 10 caractères")
+     */
+    private $whoIsSubmitted;
+
+    /**
+     * @ORM\Column(type="string", length=15, nullable=true)
+     */
+    private $status;
+
     
 
     public function __construct()
@@ -966,12 +977,12 @@ class Projet implements UserInterface
         return $this;
     }
 
-    public function getAdaptationOeuvre(): ?bool
+    public function getAdaptationOeuvre(): ?string
     {
         return $this->adaptationOeuvre;
     }
 
-    public function setAdaptationOeuvre(bool $adaptationOeuvre): self
+    public function setAdaptationOeuvre(string $adaptationOeuvre): self
     {
         $this->adaptationOeuvre = $adaptationOeuvre;
 
@@ -1456,12 +1467,12 @@ class Projet implements UserInterface
         return $this->totalGeneralTotalHtNormandie;
     }
 
-    public function getFinancementAcquis(): ?bool
+    public function getFinancementAcquis(): ?string
     {
         return $this->financementAcquis;
     }
 
-    public function setFinancementAcquis(bool $financementAcquis): self
+    public function setFinancementAcquis(string $financementAcquis): self
     {
         $this->financementAcquis = $financementAcquis;
 
@@ -1481,12 +1492,12 @@ class Projet implements UserInterface
     }
 
 
-    public function getDepotProjetCollectivite(): ?bool
+    public function getDepotProjetCollectivite(): ?string
     {
         return $this->depotProjetCollectivite;
     }
 
-    public function setDepotProjetCollectivite(bool $depotProjetCollectivite): self
+    public function setDepotProjetCollectivite(string $depotProjetCollectivite): self
     {
         $this->depotProjetCollectivite = $depotProjetCollectivite;
 
@@ -1505,12 +1516,12 @@ class Projet implements UserInterface
         return $this;
     }
 
-    public function getProjetDejaPresenteFondsAide(): ?bool
+    public function getProjetDejaPresenteFondsAide(): ?string
     {
         return $this->projetDejaPresenteFondsAide;
     }
 
-    public function setProjetDejaPresenteFondsAide(?bool $projetDejaPresenteFondsAide): self
+    public function setProjetDejaPresenteFondsAide(?string $projetDejaPresenteFondsAide): self
     {
         $this->projetDejaPresenteFondsAide = $projetDejaPresenteFondsAide;
 
@@ -2801,6 +2812,30 @@ class Projet implements UserInterface
      public function setMtTotalProgrammeDeveloppement(?string $mtTotalProgrammeDeveloppement): self
      {
          $this->mtTotalProgrammeDeveloppement = $mtTotalProgrammeDeveloppement;
+
+         return $this;
+     }
+
+     public function getWhoIsSubmitted(): ?string
+     {
+         return $this->whoIsSubmitted;
+     }
+
+     public function setWhoIsSubmitted(?string $whoIsSubmitted): self
+     {
+         $this->whoIsSubmitted = $whoIsSubmitted;
+
+         return $this;
+     }
+
+     public function getStatus(): ?string
+     {
+         return $this->status;
+     }
+
+     public function setStatus(?string $status): self
+     {
+         $this->status = $status;
 
          return $this;
      }

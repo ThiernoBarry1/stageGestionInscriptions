@@ -37,11 +37,11 @@ input[id^="registration_typeAideLm"],
 input[id^="registration_deposant"],
 input[id^="registration_genre"],
 input[id^="registration_typeFilm"],
-
-#registration_premierFilm_0
+#registration_premierFilm_0,.form-check-label
 {
-    margin-right:5px;
+    margin-right:15px;
 }
+
 
 
 
@@ -73,9 +73,7 @@ hr
 .lienRetourForm{
     float:left;
 }
-.lienFermer{
-    float:right;
-}
+
 .decalageLegend
 {
     margin-top: 120px;
@@ -96,13 +94,13 @@ hr
 .vich-file a{
     z-index: 3;
     position: relative;
-    left: 300px;
+    left: 320px;
     top: -38px;
 }
 
-.vich-file .form-check-label{
+/*.vich-file .form-check-label{
     padding-top: 4px;
-}
+}*/
 
 .vich-file .form-check-input{
     z-index: 2;
@@ -129,8 +127,8 @@ div.submitButton {
 }
 div.submitButton>.sauvegarder {
     margin-left: 65%;
-    margin-bottom: 30px;
 }
+
 .enregistrer>button
 {
     margin-left:auto;
