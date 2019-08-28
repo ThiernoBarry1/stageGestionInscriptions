@@ -99,7 +99,7 @@ class RegistrationType extends ConfigurationFildsType
             ->add('synopsis',TextareaType::class,[ 'required'=>false])
             ->add('premierFilm',ChoiceType::class,[
                                                                           'choices'  => [
-                                                                              'Prémier film' => 'premier film',
+                                                                              'Premier film' => 'premier film',
                                                                        
                                                                           ],
                                                                           'expanded' => true,
@@ -155,14 +155,14 @@ class RegistrationType extends ConfigurationFildsType
                                                                   'allow_delete'=>true,
                                                                 ]
                     )
-                 ->add('documentAudioVisuels',CollectionType::class,
+              ->add('documentAudioVisuels',CollectionType::class,
                                                                     [
                                                                       'entry_type'=>DocumentsAudioVisuelsType::class,
                                                                       'allow_add'=>true,
                                                                       'allow_delete'=>true,
                                                                     ]
                       )
-                ->add('projetPresentes',CollectionType::class,
+              ->add('projetPresentes',CollectionType::class,
                                                                    [
                                                                      'entry_type'=>ProjetPresenteType::class,
                                                                      'allow_add'=>true,

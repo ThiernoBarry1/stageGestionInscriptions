@@ -83,7 +83,7 @@
             <div class="row ml-2">
                <div class="col-4">
                   <div class="row">
-                     <label for="nombreEpisode" class="nombreEpisode">Nombre d'épisode</label>
+                     <label for="nombreEpisode" class="nombreEpisode">Nombre d'épisodes</label>
                      {{ form_widget(allFieldsForm.nombreEpisode,{'label':false,'attr':{'class':'form-control-sm w-50'}}) }}
                   </div>
                </div>
@@ -131,7 +131,7 @@
             {{ form_row(allFieldsForm.adaptationOeuvreToa,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
             <label for="adapdationOuevreDacp">Droits d'adaption cedés par</label>
             {{ form_row(allFieldsForm.adaptationOeuvreDacp,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-            <label for="adapdationOuevreDfc">Date de fin de session</label>
+            <label for="adapdationOuevreDfc">Date de fin de cession</label>
             {{ form_row(allFieldsForm.adaptationOeuvreDfc,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
          </div>
       </div>
@@ -147,10 +147,10 @@
              </div>
           </div>
       {% endif %}
-      </fieldset>
-      {% endif %}
+   </fieldset>
+   {% endif %}
+   <hr class="production production-fildset">
       <fieldset class="border p-3 production-fildset">
-         <hr class="production">
          <legend class="w-auto h6"> Production </legend>
           <div id="producteurs" data-prototype="{{ form_widget(allFieldsForm.producteurs.vars.prototype)|e('html_attr') }}">
             {% for producteur in allFieldsForm.producteurs%}
@@ -587,7 +587,7 @@
             <hr>
             <fieldset class="border p-3"> 
                 <legend class="w-auto h6">Devis prévisionnel HT résumé faisant apparaître la part des dépenses en région</legend>
-                <label for="telechargementFichier"> Si besoin, vous pouvez télécharger le devis détaillé type <a href="/telechargement/devis.pdf">ici </a></label>
+                <label for="telechargementFichier"> Si besoin, vous pouvez télécharger le devis détaillé type <a href="/telechargement/devis_previsionnel.xlsx">ici </a></label>
                 <div class="row">
                    <div class="col droitArtistique">
                       <label class="mt-4">1. Droits artistiques</label> 

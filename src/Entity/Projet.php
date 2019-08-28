@@ -745,7 +745,7 @@ class Projet implements UserInterface
 
    
     /**
-     * @ORM\Column(type="array",nullable=true)
+     * @ORM\Column(type="json_array",nullable=true)
      */
     
     private $premierFilm;
@@ -890,6 +890,7 @@ class Projet implements UserInterface
      */
     private $status;
 
+    
     
 
     public function __construct()
@@ -2485,12 +2486,12 @@ class Projet implements UserInterface
          return $this;
      }
 
-     public function getPremierFilm(): ?array
+     public function getPremierFilm()
      {
          return $this->premierFilm;
      }
 
-     public function setPremierFilm(?array $premierFilm): self
+     public function setPremierFilm(): self
      {
          $this->premierFilm = $premierFilm;
 
@@ -2839,5 +2840,7 @@ class Projet implements UserInterface
 
          return $this;
      }
+
+     
  
 }

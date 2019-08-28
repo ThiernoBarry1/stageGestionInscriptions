@@ -129,40 +129,8 @@ class AllFieldsFormController extends AbstractController
                     ->setTo($mail)
                     ->setBody($this->renderView('emails/registration.html.twig',['mail'=>$mail,'token'=>$token,'token_date'=>$token_date]),'text/html');
             //$mailer->send($message);
-            $generePdf->getPdf($projet,$token);
-           // traitement génération du fichier pdf
-           /*
-           // Configure Dompdf according to your needs
-            $pdfOptions = new Options();
-            $pdfOptions->set('defaultFont', 'Arial');
-            
-            // Instantiate Dompdf with our options
-            $dompdf = new Dompdf($pdfOptions);
-            
-            $html = $this->render('all_fields_form/displayAllFields.html.twig', [
-                'allFieldsForm' => $allFieldsForm->createView(),
-                'whichChoice' => $whichChoice,
-                'fondsAide' => $fondsAide,
-            ]);
-            // Load HTML to Dompdf
-            $dompdf->loadHtml($html);
-             
-             // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-             $dompdf->setPaper('A4', 'portrait');
-     
-             // Render the HTML as PDF
-             $dompdf->render();
-     
-             // Store PDF Binary Data
-             $output = $dompdf->output();
-             // In this case, we want to write the file in the public directory
-             $publicDirectory= $this->getParameter('kernel.project_dir') . '/public/pdf';
-             // e.g /var/www/project/public/mypdf.pdf
-             $pdfFilepath =  $publicDirectory . '/mypdf.pdf';
-             
-             // Write file to the desired path
-             file_put_contents($pdfFilepath, $output);*/
-             return $this->redirectToRoute('information_save',['mail'=>$mail,'token'=>$token,'token_date'=>$token_date]);
+            $generePdf->getPdf($projet,$token,$fondsAide);
+            return $this->redirectToRoute('information_save',['mail'=>$mail,'token'=>$token,'token_date'=>$token_date]);
                  
         }
         

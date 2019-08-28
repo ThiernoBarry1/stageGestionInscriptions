@@ -33,7 +33,7 @@ class AuteurRealisateurType extends ConfigurationFildsType
                                             [
                                                 'choices'  => [
                                                     'Auteur réalisateur'=>'Auteur réalisateur',
-                                                    'Auteur'=>'Scénariste',
+                                                    'Scénariste'=>'Scénariste',
                                                     'Réalisateur'=>'Réalisateur'
                                                 ],
                                                 'expanded' => true,
