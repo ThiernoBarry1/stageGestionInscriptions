@@ -98,30 +98,30 @@ class Projet implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(max=255,maxMessage="merci de saisir moin de 255 caractères")
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $mtBudget;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json_array", nullable=true)
      */
     private $liensEligibilite;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(max=255,maxMessage="merci de saisir moin de 255 caractères")
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $datePreparation;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *  @Assert\Length(max=255,maxMessage="merci de saisir moin de 255 caractères")
+     *  @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $dateTournage;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(max=255,maxMessage="merci de saisir moin de 255 caractères")
+     * @Assert\Length(max=255,maxMessage="merci de saisir moins de 255 caractères")
      */
     private $dateDiffusion;
 
@@ -1112,12 +1112,12 @@ class Projet implements UserInterface
         return $this;
     }
 
-    public function getLiensEligibilite(): ?array
+    public function getLiensEligibilite()
     {
         return $this->liensEligibilite;
     }
 
-    public function setLiensEligibilite(?array $liensEligibilite): self
+    public function setLiensEligibilite( $liensEligibilite): self
     {
         $this->liensEligibilite = $liensEligibilite;
 
@@ -2491,7 +2491,7 @@ class Projet implements UserInterface
          return $this->premierFilm;
      }
 
-     public function setPremierFilm(): self
+     public function setPremierFilm($premierFilm): self
      {
          $this->premierFilm = $premierFilm;
 

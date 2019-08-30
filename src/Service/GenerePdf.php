@@ -7,7 +7,7 @@ use App\Repository\FondsAideRepository;
 use App\Repository\ProjetRepository;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
-class GenerePdf 
+class GenerePdf extends FPDF
 {   
    
     public function getPdf(Projet $projet,$token,$fondsAide)
@@ -43,23 +43,25 @@ class GenerePdf
          }
       }
       $producteurs = '';
+      $dossierSuiviPar = '';
       foreach($projet->getProducteurs() as $producteur){
           $producteurs .= $producteur->getPrenomProducteur() .' '.$producteur->getNomProducteur(). ' '.$producteur->getNom().' ;';
-      }
+          $dossierSuiviPar .= $producteur->getPrenomPersonneChargee().' '.$producteur->getNomPersonneChargee().' ;';
+        }
       $pdf->setTextColor(0,0,0);
-      if($auteurs !== '  ; '){
-          $pdf->Cell(15,7,mb_convert_encoding('Auteur.s: ', "Windows-1252", "UTF-8"),0,0);
+      if($auteurs !== '  ; ' && $auteurs !== '' ){
+          $pdf->Cell(18,7,mb_convert_encoding('Auteur.s: ', "Windows-1252", "UTF-8"),0,0);
           $pdf->setTextColor(0,0,128);
           $pdf->MultiCell(0,7,mb_convert_encoding($auteurs, "Windows-1252", "UTF-8"),0,1);
           $pdf->setTextColor(0,0,0);
       }
-      if($realisateur !== '  ; '){
+      if($realisateur !== '  ; ' && $realisateur !== ''){
         $pdf->Cell(24,7,mb_convert_encoding('Réalisateur.s: ', "Windows-1252", "UTF-8"),0,0);
         $pdf->setTextColor(0,0,128);
         $pdf->MultiCell(0,7,mb_convert_encoding($realisateur, "Windows-1252", "UTF-8"),0,1);
         $pdf->setTextColor(0,0,0);
       }
-      if($scenaristes !== '  ; '){
+      if($scenaristes !== '  ; ' && $scenaristes !== ''){
         $pdf->Cell(24,7,mb_convert_encoding('Scénariste.s: ', "Windows-1252", "UTF-8"),0,0);
         $pdf->setTextColor(0,0,128);
         $pdf->MultiCell(0,7,mb_convert_encoding($scenaristes, "Windows-1252", "UTF-8"),0,1);
@@ -70,6 +72,13 @@ class GenerePdf
           $pdf->setTextColor(0,0,128);
           $pdf->MultiCell(0,7,mb_convert_encoding($producteurs, "Windows-1252", "UTF-8"),0,1);
           $pdf->setTextColor(0,0,0);
+      }
+      if($dossierSuiviPar !== '  ;')
+      {
+        $pdf->Cell(30,7,mb_convert_encoding('Dossier suivi par: ', "Windows-1252", "UTF-8"),0,0);
+        $pdf->setTextColor(0,0,128);
+        $pdf->MultiCell(0,7,mb_convert_encoding($dossierSuiviPar, "Windows-1252", "UTF-8"),0,1);
+        $pdf->setTextColor(0,0,0);
       }
       $pdf->ln();
       if($projet->getDuree() != null){
@@ -94,19 +103,19 @@ class GenerePdf
       if($projet->getPremierFilm() != null ){
         $pdf->Cell(25,7,mb_convert_encoding('Premier film: ', "Windows-1252", "UTF-8"),0,0);
         $pdf->setTextColor(0,0,128);
-        $pdf->MultiCell(0,7,mb_convert_encoding($projet->getPremierFilm(), "Windows-1252", "UTF-8"),1,1);
+        $pdf->MultiCell(0,7,mb_convert_encoding(json_decode($projet->getPremierFilm()), "Windows-1252", "UTF-8"),1,1);
         $pdf->setTextColor(0,0,0);
     }
-      $pdf->Ln(2);
-      //$pdf->SetXY(0,$y);
+      $pdf->Ln();
       if($projet->getSynopsis() != null){
           $pdf->Cell(20,7,mb_convert_encoding('Synopsis: ', "Windows-1252", "UTF-8"),0,0);
+          $pdf->setTextColor(0,0,128);
           $pdf->MultiCell(0,7,mb_convert_encoding($projet->getSynopsis(), "Windows-1252", "UTF-8"),0,1);
           $pdf->setTextColor(0,0,0);
       }
       $pdf->ln();
 
-      if($projet->getAdaptationOeuvre()){
+      if($projet->getAdaptationOeuvre() !== "non" && $projet->getAdaptationOeuvreDfc() != null ){
           $pdf->Cell(20,7,mb_convert_encoding('Adaptation:  ',"Windows-1252", "UTF-8"),0,0);
           $pdf->setTextColor(0,0,128);
           $pdf->MultiCell(0,7,date_format($projet->getAdaptationOeuvreDfc(),'d-m-Y'),0,1);
@@ -114,7 +123,7 @@ class GenerePdf
       }
       $pdf->ln();
 
-     if($projet->getDocumentAudioVisuels() != null)
+     if(!$projet->getDocumentAudioVisuels()->isEmpty())
         $pdf->Cell(0,7,mb_convert_encoding('Documents audiovisuels joints: ', "Windows-1252", "UTF-8"),0,1);
       foreach($projet->getDocumentAudioVisuels() as $document)
       {
@@ -142,7 +151,7 @@ class GenerePdf
           $pdf->MultiCell(0,7,mb_convert_encoding($projet->getDeposant(), "Windows-1252", "UTF-8"),0,1);
           $pdf->setTextColor(0,0,0);
       }
-     // $pdf->Cell(40,7,mb_convert_encoding('Lien.s d\éligibilité : '.$projet->getLiensEligibilite()),0,1);
+     //$pdf->Cell(40,7,mb_convert_encoding('Lien.s d\éligibilité : '.$projet->getLiensEligibilite()),0,1);
      if($projet->getNombreJoursTournage() != null){
          $pdf->Cell(52,7,mb_convert_encoding('Nombre de jours de tournage sur le territoire: ', "Windows-1252", "UTF-8"),0,0);
          $pdf->setTextColor(0,0,128);
@@ -172,12 +181,26 @@ class GenerePdf
       $pdf->ln();
 
       if($projet->getMtBudget() != null){
-          $pdf->Cell(45,7,mb_convert_encoding('Montant total du budget  : ', "Windows-1252", "UTF-8"),0,0);
+          $pdf->Cell(45,7,mb_convert_encoding('Montant total du budget: ', "Windows-1252", "UTF-8"),0,0);
           $pdf->setTextColor(0,0,128);
           $pdf->MultiCell(0,7,mb_convert_encoding($projet->getMtBudget().' euros', "Windows-1252", "UTF-8"),0,1);
           $pdf->setTextColor(0,0,0);
+      }else{
+          if( $projet->getTotalGeneralCoutDefinitif() != null)
+          {
+            $pdf->Cell(43,7,mb_convert_encoding('Montant total du budget: ', "Windows-1252", "UTF-8"),0,0);
+            $pdf->setTextColor(0,0,128);
+            $pdf->MultiCell(0,7,mb_convert_encoding($projet->getTotalGeneralCoutDefinitif().' euros', "Windows-1252", "UTF-8"),0,1);
+            $pdf->setTextColor(0,0,0);
+          }
       }
-      
+      if($projet->getTotalGeneralTotalHtNormandie() != null){
+        $pdf->Cell(65,7,mb_convert_encoding('Montant des depenses sur le territoire: ', "Windows-1252", "UTF-8"),0,0);
+        $pdf->setTextColor(0,0,128);
+        $pdf->MultiCell(0,7,mb_convert_encoding($projet->getTotalGeneralTotalHtNormandie().' euros', "Windows-1252", "UTF-8"),0,1);
+        $pdf->setTextColor(0,0,0);
+      }
+
       if($projet->getFinancementAcquisPrecision() != null){
           $pdf->Cell(38,7,mb_convert_encoding('Financement acquis : ', "Windows-1252", "UTF-8"),0,0);
           $pdf->setTextColor(0,0,128);
@@ -185,25 +208,29 @@ class GenerePdf
           $pdf->setTextColor(0,0,0);
       }
       if($projet->getMontantSollicite() != null){
-        $pdf->Cell(35,7,mb_convert_encoding('Montant demandé : ', "Windows-1252", "UTF-8"),0,0);
+        $pdf->Cell(35,7,mb_convert_encoding('Montant sollicité : ', "Windows-1252", "UTF-8"),0,0);
         $pdf->setTextColor(0,0,128);
         $pdf->MultiCell(0,7,mb_convert_encoding($projet->getMontantSollicite(), "Windows-1252", "UTF-8"),0,1);
         $pdf->setTextColor(0,0,0);
     }
       $pdf->ln();
-      if($projet->getDepotProjetCollectivite()){
+      if($projet->getDepotProjetCollectivite() !== "non" ){
           $pdf->Cell(95,7,mb_convert_encoding('Projet déposé auprès d\'autre collectivités territoriales : ', "Windows-1252", "UTF-8"),0,0);
           $pdf->setTextColor(0,0,128);
           $pdf->MultiCell(0,7,mb_convert_encoding($projet->getDepotProjetCollectivitePrecision(), "Windows-1252", "UTF-8"),0,1);
           $pdf->setTextColor(0,0,0);
       }
-      if($projet->getProjetDejaPresenteFondsAide()){
+      if($projet->getProjetDejaPresenteFondsAide() !== "non"){
           $pdf->Cell(68,7,mb_convert_encoding('Projet déjà présenté à la Normandie : ', "Windows-1252", "UTF-8"),0,0);
           $pdf->setTextColor(0,0,128);
           $pdf->MultiCell(0,7,mb_convert_encoding($projet->getProjetDejaPresenteFondsAideTypeAide().'/'.$projet->getProjetDejaPresenteFondsAideDate(), "Windows-1252", "UTF-8"),0,1);
           $pdf->setTextColor(0,0,0);
       }
-      $pdf->Output('F','pdf/'.$token.'.pdf');
+
+    
+     
+    $pdf->Output('F','pdf/'.$token.'.pdf');
+ 
     }
    
 }

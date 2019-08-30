@@ -99,7 +99,7 @@ class RegistrationType extends ConfigurationFildsType
             ->add('synopsis',TextareaType::class,[ 'required'=>false])
             ->add('premierFilm',ChoiceType::class,[
                                                                           'choices'  => [
-                                                                              'Premier film' => 'premier film',
+                                                                              'Premier film' => 'oui',
                                                                        
                                                                           ],
                                                                           'expanded' => true,
